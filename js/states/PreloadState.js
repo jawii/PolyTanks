@@ -6,6 +6,14 @@ PolyTank.PreloadState = {
 		//background
 		this.load.image('blackbackground', 'assets/images/blackbackground.png');
 
+		//load tileset
+		this.load.image('gameTiles', 'assets/images/tiles_spritesheet.png');
+		this.load.tilemap('level', 'assets/images/tilemap.json', null, Phaser.Tilemap.TILED_JSON);
+		
+		//guis
+		this.load.image('panel_blue', 'assets/images/panel_blue.png');
+		this.load.image('panel_red', 'assets/images/panel_red.png');
+
 		//load turrets
 		this.load.image('turret1', 'assets/images/turret1.png');
 		this.load.image('turret2', 'assets/images/turret2.png');

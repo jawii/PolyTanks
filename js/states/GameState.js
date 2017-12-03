@@ -16,15 +16,10 @@ PolyTank.GameState = {
     this.WIDTH = this.game.world.width;
     this.HEIGHT = this.game.world.height;
 
-
-    //generate framearrays
-    this.turretTextures = Phaser.Animation.generateFrameNames('tanks_turret', 1, 4, '.png');
-    this.smokeTextures = Phaser.Animation.generateFrameNames('tank_explosion', 11, 12, '.png')
-    
-
+    //turrets spesifications
     this.playerOne = {
       angleSpeed: 0.5,
-      bulletSpeed: 300,
+      bulletSpeed: 200,
       fireRate: 300,
       bulletAmount: 20,
       turretLeftKey: Phaser.Keyboard.G,
@@ -36,20 +31,27 @@ PolyTank.GameState = {
     }
     this.playerTwo = {
       angleSpeed: 1.0,
-      bulletSpeed: 100,
+      bulletSpeed: 200,
       fireRate: 1500,
       bulletAmount: 50,
       turretLeftKey: Phaser.Keyboard.LEFT,
       turretRightKey: Phaser.Keyboard.RIGHT,
       fireButton: Phaser.KeyCode.SPACEBAR,
-      bulletType: "bullet3",
+      bulletType: "bullet5",
       bulletScale: 0.2,
       turretType: 'turret4'
     }
 
+    //first is for weaponFlames and second for turret weapon position
+    this.turretOffsets = {
+      'turret1': [-2, 30],
+      'turret2': [-2.25, 30],
+      'turret3': [-1.75, 30],
+      'turret4': [-1, 0]
+    }
 
-
-
+    //load level
+    this.loadLevel();
 
   },
 
@@ -60,18 +62,14 @@ PolyTank.GameState = {
   },
   //executed after everything is loaded
   create: function() {
-    //create moving background
-    this.background = this.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'blackbackground');
-    this.background.autoScroll(0, 15);
-
-
+    
     //create turret pipes
-    this.playerOneTurret = this.game.add.sprite(250, this.HEIGHT - 100, this.playerOne.turretType);
+    this.playerOneTurret = this.game.add.sprite(200, this.HEIGHT - 125, this.playerOne.turretType);
     this.playerOneTurret.anchor.setTo(0, 0.5);
     this.playerOneTurret.angle= -90;
     this.playerOneTurret.scale.setTo(0.6);
 
-    this.playerTwoTurret = this.game.add.sprite(this.WIDTH - 250, this.HEIGHT - 100, this.playerTwo.turretType);
+    this.playerTwoTurret = this.game.add.sprite(this.WIDTH - 200, this.HEIGHT - 125, this.playerTwo.turretType);
     this.playerTwoTurret.angle= -90;
     this.playerTwoTurret.anchor.setTo(0, 0.5);
     this.playerTwoTurret.scale.setTo(0.6);
@@ -118,9 +116,17 @@ PolyTank.GameState = {
     //   this.weaponTwo.fire();
     // }, this);
 
+    //hardcode barrell
+    this.barrel = this.game.add.sprite(200, 200, 'barrelGreen')
+    this.barrel.scale.setTo(0.5);
+    this.barrel.anchor.setTo(0.5);
+    this.game.physics.arcade.enable(this.barrel);
+    this.barrel.enableBody = true;
+
   },
   update: function() {
     //this.testTurret.angle += 2;
+    this.game.physics.arcade.overlap(this.weaponOne.bullets, this.barrel, this.damageBarrel, null, this, this.weaponOne);
 
     //PLAYER ONE CONTROLS
     if (this.leftKeyOne.isDown && this.playerOneTurret.angle > -175){
@@ -166,7 +172,9 @@ PolyTank.GameState = {
     weapon = this.game.add.weapon(player.bulletAmount, player.bulletType);
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon.bulletSpeed = player.bulletSpeed;
-    weapon.trackSprite(sprite, 50, 0, true);
+    var offset = this.turretOffsets[sprite.key][1];
+    console.log(offset);
+    weapon.trackSprite(sprite, sprite.texture.height + offset, 0, true);
     weapon.fireRate = player.fireRate;
     weapon.bullets.setAll('scale.x', player.bulletScale);
     weapon.bullets.setAll('scale.y', player.bulletScale);
@@ -175,15 +183,11 @@ PolyTank.GameState = {
     weapon.bulletRotateToVelocity = true;
 
     return weapon;
-
-    //generate bullet animation
-    //var frames = Phaser.Animation.generateFrameNames('tank_bulletFly', 1, 1, ".png");
-    //this.weaponOne.bullets.enableBody = true;
-    //this.weaponOne.bulletGravity.y = 100;
   },
   createGui: function(){
 
     //create GUI texture
+
 
     //create Buttons
 
@@ -192,17 +196,19 @@ PolyTank.GameState = {
     //increase Damage and texture
 
   },
-  weaponFlames: function(sprite){
+  weaponFlames: function(bullet, weapon){
 
     //var weapon = this.weapon
     //add bullet animation on fire
     //add a sprite for animate fire effect
     var x = this.trackedSprite.position.x;
     var y = this.trackedSprite.position.y;
+    var key = this.trackedSprite.key
+    var offset = PolyTank.GameState.turretOffsets[this.trackedSprite.key][0];
     var gunEffectSprite = this.game.add.sprite(x, y, 'shotThin');
-    gunEffectSprite.anchor.setTo(0.5, -2);
+    gunEffectSprite.anchor.setTo(0.5, offset);
     gunEffectSprite.scale.setTo(1);
-    gunEffectSprite.angle = sprite.angle - 90;
+    gunEffectSprite.angle = bullet.angle - 90;
 
     this.game.sound.play('gunshot1');
     //tween sprite and destroy it oncomplete
@@ -212,6 +218,37 @@ PolyTank.GameState = {
       gunEffectSprite.destroy();
     },this)
 
+  },
+  loadLevel: function(){
+    //create tilemap object
+    this.map = this.add.tilemap('level');
+
+    //join the tile images to json data
+    this.map.addTilesetImage("UIpackSheet_transparent", 'gameTiles');
+
+    //create tile layers
+    this.backgroundLayer = this.map.createLayer('backgroundLayer');
+    this.collisionLayer = this.map.createLayer('collisionLayer');
+    this.collisionLayer.alpha = 0.8;
+
+    //collision layer should be collisionlayer
+    this.map.setCollisionBetween(1, 160, true, 'collisionLayer');
+
+    //resize the world to fit the layer
+    this.collisionLayer.resizeWorld();
+
+    //create moving background
+    this.background = this.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'blackbackground');
+    this.background.autoScroll(0, 15);
+
+    //send background to the back
+    this.game.world.sendToBack(this.background);
+  },
+  damageBarrel: function(sprite, bullet){
+    //sprite is the barrel and bullet is the bullet
+    sprite.damage(1);
+    console.log(sprite.health);
+    bullet.destroy();
   }
   
 
