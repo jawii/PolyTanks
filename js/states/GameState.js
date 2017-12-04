@@ -18,6 +18,7 @@ PolyTank.GameState = {
 
     //turrets spesifications
     this.playerOne = {
+      money: 20,
       angleSpeed: 0.5,
       bulletSpeed: 200,
       fireRate: 300,
@@ -31,6 +32,7 @@ PolyTank.GameState = {
       bulletDamage: 5
     }
     this.playerTwo = {
+      money: 100,
       angleSpeed: 1.0,
       bulletSpeed: 200,
       fireRate: 1500,
@@ -115,12 +117,21 @@ PolyTank.GameState = {
 
 
     //first barrels
-    var barrelData = {
-      asset: 'barrelGreen',
-      health: 10
+    var crateData1 = {
+      asset: 'crateWood',
+      health: 10,
+      text: "3x + 5",
+      isCorrectValue: false
     };
-    this.barrels = this.add.group()
-    this.barrel = this.createBarrel(200, 200, barrelData);
+    var crateData2 = {
+      asset: 'crateWood',
+      health: 5,
+      text: "3x",
+      isCorrectValue: true
+    }
+    this.crates = this.add.group()
+    this.crate = this.createCrate(200, 200, crateData1);
+    this.crate = this.createCrate(450, 50, crateData2);
     
     
 
@@ -128,8 +139,8 @@ PolyTank.GameState = {
 
   },
   update: function() {
-    this.game.physics.arcade.overlap(this.weaponOne.bullets, this.barrels, this.damageBarrel, null, { this: this, 'player': this.playerOne});
-    this.game.physics.arcade.overlap(this.weaponTwo.bullets, this.barrels, this.damageBarrel, null, { this: this, 'player': this.playerTwo});
+    this.game.physics.arcade.overlap(this.weaponOne.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerOne});
+    this.game.physics.arcade.overlap(this.weaponTwo.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerTwo});
 
     //this.game.physics.arcade.collide(sprite, sprite2, function, null, { this: this, var1: "Var1", var2: "Var2" }); 
     //PLAYER ONE CONTROLS
@@ -249,19 +260,21 @@ PolyTank.GameState = {
     this.game.world.sendToBack(this.background);
   },
   //there is too much arguments :)
-  damageBarrel: function(bullet, sprite, player){
+  damageCrate: function(bullet, sprite){
+    //console.log(bullet);
+    //console.log(sprite);
     sprite.damage(this.player.bulletDamage);
-    bullet.destroy();
+    bullet.kill();
   },
 
-  createBarrel: function(x, y, data){
+  createCrate: function(x, y, data){
 
     //look for dead element
-    var newElement = this.barrels.getFirstDead();
+    var newElement = this.crates.getFirstDead();
 
     if(!newElement){
-      newElement = new PolyTank.Barrel(this, x, y, data);
-      this.barrels.add(newElement);
+      newElement = new PolyTank.Crate(this, x, y, data);
+      this.crates.add(newElement);
     }
     else{
       newElement.reset(x, y, data);

@@ -49,6 +49,9 @@ PolyTank.PreloadState = {
 		this.load.image('shotRed', 'assets/images/shotRed.png');
 		this.load.image('shotThin', 'assets/images/shotThin.png');
 
+		//healthbar
+		this.load.image('healthbar', 'assets/images/healthbar.png');
+
 		//load sounds
 		this.load.audio('shoot_laser1', ['assets/audio/shoot_laser1.mp3', 'assets/audio/shoot_laser1.ogg']);
 		this.load.audio('gunshot1', ['assets/audio/gunshot1.mp3', 'assets/audio/gunshot1.ogg']);
