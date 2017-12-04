@@ -27,7 +27,8 @@ PolyTank.GameState = {
       fireButton: Phaser.KeyCode.CONTROL,
       bulletType: "bullet6",
       bulletScale: 0.2,
-      turretType: 'turret3'
+      turretType: 'turret3',
+      bulletDamage: 5
     }
     this.playerTwo = {
       angleSpeed: 1.0,
@@ -39,7 +40,8 @@ PolyTank.GameState = {
       fireButton: Phaser.KeyCode.SPACEBAR,
       bulletType: "bullet5",
       bulletScale: 0.2,
-      turretType: 'turret4'
+      turretType: 'turret4',
+      bulletDamage: 1
     }
 
     //first is for weaponFlames and second for turret weapon position
@@ -111,23 +113,25 @@ PolyTank.GameState = {
     this.weaponOne.onFire.add(this.weaponFlames, this.weaponOne, this.playerOneTurret);
     this.weaponTwo.onFire.add(this.weaponFlames, this.weaponTwo, this.playerTwoTurret);
 
-    //fire when firebutton is pressed
-    // this.playerTwoFireButton.onDownCallback(function(){
-    //   this.weaponTwo.fire();
-    // }, this);
 
-    //hardcode barrell
-    this.barrel = this.game.add.sprite(200, 200, 'barrelGreen')
-    this.barrel.scale.setTo(0.5);
-    this.barrel.anchor.setTo(0.5);
-    this.game.physics.arcade.enable(this.barrel);
-    this.barrel.enableBody = true;
+    //first barrels
+    var barrelData = {
+      asset: 'barrelGreen',
+      health: 10
+    };
+    this.barrels = this.add.group()
+    this.barrel = this.createBarrel(200, 200, barrelData);
+    
+    
+
+    
 
   },
   update: function() {
-    //this.testTurret.angle += 2;
-    this.game.physics.arcade.overlap(this.weaponOne.bullets, this.barrel, this.damageBarrel, null, this, this.weaponOne);
+    this.game.physics.arcade.overlap(this.weaponOne.bullets, this.barrels, this.damageBarrel, null, { this: this, 'player': this.playerOne});
+    this.game.physics.arcade.overlap(this.weaponTwo.bullets, this.barrels, this.damageBarrel, null, { this: this, 'player': this.playerTwo});
 
+    //this.game.physics.arcade.collide(sprite, sprite2, function, null, { this: this, var1: "Var1", var2: "Var2" }); 
     //PLAYER ONE CONTROLS
     if (this.leftKeyOne.isDown && this.playerOneTurret.angle > -175){
       this.playerOneTurret.angle -= this.playerOne.angleSpeed;
@@ -173,7 +177,7 @@ PolyTank.GameState = {
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon.bulletSpeed = player.bulletSpeed;
     var offset = this.turretOffsets[sprite.key][1];
-    console.log(offset);
+    //console.log(offset);
     weapon.trackSprite(sprite, sprite.texture.height + offset, 0, true);
     weapon.fireRate = player.fireRate;
     weapon.bullets.setAll('scale.x', player.bulletScale);
@@ -244,11 +248,26 @@ PolyTank.GameState = {
     //send background to the back
     this.game.world.sendToBack(this.background);
   },
-  damageBarrel: function(sprite, bullet){
-    //sprite is the barrel and bullet is the bullet
-    sprite.damage(1);
-    console.log(sprite.health);
+  //there is too much arguments :)
+  damageBarrel: function(bullet, sprite, player){
+    sprite.damage(this.player.bulletDamage);
     bullet.destroy();
+  },
+
+  createBarrel: function(x, y, data){
+
+    //look for dead element
+    var newElement = this.barrels.getFirstDead();
+
+    if(!newElement){
+      newElement = new PolyTank.Barrel(this, x, y, data);
+      this.barrels.add(newElement);
+    }
+    else{
+      newElement.reset(x, y, data);
+    }
+
+    return newElement;
   }
   
 
