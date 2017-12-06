@@ -14,19 +14,32 @@ PolyTank.Crate = function(state, x, y, data){
 	this.game.physics.arcade.enable(this);
     this.enableBody = true;
 
+    //WHAT TO DO HERE??
+    this.reset(x, y, data);
+
+    
+
+};
+
+PolyTank.Crate.prototype = Object.create(Phaser.Sprite.prototype);
+PolyTank.Crate.prototype.constructor = PolyTank.Crate;
+
+PolyTank.Crate.prototype.reset = function(x, y, data) {
+	Phaser.Sprite.prototype.reset.call(this, x, y, data.health);
+    
     //create label text from data
     var style = {
-    	font: "25px Arial",
-    	fontWeight: 'normal',
-    	fill: '#000',
-    	//wordWrap: true
+        font: "25px Arial",
+        fontWeight: 'normal',
+        fill: '#000',
+        //wordWrap: true
     }
 
     this.labelText = this.game.add.text(0, 0, data.text, style);
     this.labelText.anchor.setTo(0.5);
     
 
-	//increase with if text is wider
+    //increase with if text is wider
     //this.addChild(this.labelText)
     this.width = Math.max(this.labelText.width + 25, this.width);
 
@@ -58,23 +71,12 @@ PolyTank.Crate = function(state, x, y, data){
     bg.color: background color
     bar.color: color of the actual bar
     animationDuration: control the animation when the bar value is changed
-    flipped: if true the bar will change size from left to right*/
-
-    //WHAT TO DO HERE??
-    this.reset(x, y, data);
-
-    
-
-};
-
-PolyTank.Crate.prototype = Object.create(Phaser.Sprite.prototype);
-PolyTank.Crate.prototype.constructor = PolyTank.Crate;
-
-PolyTank.Crate.prototype.reset = function(x, y, data) {
-	Phaser.Sprite.prototype.reset.call(this, x, y, data.health);
+    flipped: if true the bar will change size from left to right
+    */
 
 	//apply velocity
-	this.body.velocity.x = 20;
+    var randomVelocity = Math.random();
+	this.body.velocity.x = Math.max(70 * Math.random(), 20);
     this.body.bounce.x = 1;
     this.body.collideWorldBounds = true;
 };
@@ -102,6 +104,7 @@ PolyTank.Crate.prototype.kill = function(data){
 
 	if(this.data.isCorrectValue){
 		console.log("right crate destroyed")
+        PolyTank.GameState.moveNextLevel = true;
 	}
 	else{
 		console.log("you destroyed wrong crate")
@@ -109,6 +112,23 @@ PolyTank.Crate.prototype.kill = function(data){
 
     //destroy healthbar
     this.healthBar.kill();
+
+    //particles 
+    var emitter = this.game.add.emitter(this.x, this.y, 100);
+    emitter.makeParticles('panel_light_particles');
+    emitter.gravity = 0;
+    //emitter.maxParticleSpeed = 300;
+    //emitter.maxParticleSpeed = 20;
+    emitter.start(true, 500, null, 10);
+
+    this.game.time.events.add(700, function(){
+        emitter.destroy();
+    }, this);
+
+    PolyTank.GameState.currentEnemyIndex += 1;
+    console.log(PolyTank.GameState.currentEnemyIndex);
+
+
 };
 
 PolyTank.Crate.prototype.update = function(){
@@ -121,5 +141,10 @@ PolyTank.Crate.prototype.update = function(){
     this.healthBar.setPosition(this.x, this.y - 32);
 
 
+    this.game.physics.arcade.collide(this, PolyTank.GameState.crates, function(){
+        console.log("Collide");
+        //this.body.velocity.x *= -1;
+
+    }, null, this);
 
 }

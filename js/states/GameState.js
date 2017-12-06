@@ -20,8 +20,8 @@ PolyTank.GameState = {
     this.playerOne = {
       money: 20,
       angleSpeed: 0.5,
-      bulletSpeed: 200,
-      fireRate: 300,
+      bulletSpeed: 300,
+      fireRate: 500,
       bulletAmount: 20,
       turretLeftKey: Phaser.Keyboard.G,
       turretRightKey: Phaser.Keyboard.H,
@@ -29,13 +29,13 @@ PolyTank.GameState = {
       bulletType: "bullet6",
       bulletScale: 0.2,
       turretType: 'turret3',
-      bulletDamage: 5
+      bulletDamage: 20
     }
     this.playerTwo = {
       money: 100,
       angleSpeed: 1.0,
-      bulletSpeed: 200,
-      fireRate: 1500,
+      bulletSpeed: 400,
+      fireRate: 500,
       bulletAmount: 50,
       turretLeftKey: Phaser.Keyboard.LEFT,
       turretRightKey: Phaser.Keyboard.RIGHT,
@@ -43,7 +43,7 @@ PolyTank.GameState = {
       bulletType: "bullet5",
       bulletScale: 0.2,
       turretType: 'turret4',
-      bulletDamage: 1
+      bulletDamage: 20
     }
 
     //first is for weaponFlames and second for turret weapon position
@@ -54,8 +54,7 @@ PolyTank.GameState = {
       'turret4': [-1, 0]
     }
 
-    //load level
-    this.loadLevel();
+    
 
   },
 
@@ -68,12 +67,12 @@ PolyTank.GameState = {
   create: function() {
     
     //create turret pipes
-    this.playerOneTurret = this.game.add.sprite(200, this.HEIGHT - 125, this.playerOne.turretType);
+    this.playerOneTurret = this.game.add.sprite(150, this.HEIGHT - 122, this.playerOne.turretType);
     this.playerOneTurret.anchor.setTo(0, 0.5);
     this.playerOneTurret.angle= -90;
     this.playerOneTurret.scale.setTo(0.6);
 
-    this.playerTwoTurret = this.game.add.sprite(this.WIDTH - 200, this.HEIGHT - 125, this.playerTwo.turretType);
+    this.playerTwoTurret = this.game.add.sprite(this.WIDTH - 150, this.HEIGHT - 122, this.playerTwo.turretType);
     this.playerTwoTurret.angle= -90;
     this.playerTwoTurret.anchor.setTo(0, 0.5);
     this.playerTwoTurret.scale.setTo(0.6);
@@ -119,51 +118,62 @@ PolyTank.GameState = {
     //this.playerOneFireButton.onDown.add(this.fireWeapon, null, 1,  {'weapon': this.weaponOne});
     //this.playerTwoFireButton.onDown.add(this.fireWeapon, null, 1,  {'weapon': this.weaponTwo});
 
+    this.taskData = JSON.parse(this.game.cache.getText('taskData'));
+    
+    //random yLocations for crates
+    this.yLocs = []
 
-    //first barrels
-    var crateData1 = {
-      asset: 'panel_light',
-      health: 20,
-      text: "3x + 5",
-      isCorrectValue: false
-    };
-    var crateData2 = {
-      asset: 'panel_light',
-      health: 10,
-      text: "7x + 5y + z",
-      isCorrectValue: false
-    }
-    var crateData3 = {
-      asset: 'panel_light',
-      health: 55,
-      text: "-4x + 8",
-      isCorrectValue: false
-    }
-    var crateData4 = {
-      asset: 'panel_light',
-      health: 55,
-      text: "-10",
-      isCorrectValue: false
-    }
-    var crateData5 = {
-      asset: 'panel_light',
-      health: 55,
-      text: "x - 1",
-      isCorrectValue: false
-    }
-    this.crates = this.add.group()
-    this.createCrate(200, 200, crateData1);
-    this.createCrate(450, 50, crateData2);
-    this.createCrate(600, 300, crateData3);
-    this.createCrate(600, 120, crateData4);
-    this.createCrate(100, 60, crateData5);
     
 
+    //first barrels
+    // var crateData1 = {
+    //   asset: 'panel_light',
+    //   health: 20,
+    //   text: "3x + 5",
+    //   isCorrectValue: false
+    // };
+    // var crateData2 = {
+    //   asset: 'panel_light',
+    //   health: 10,
+    //   text: "7x + 5y + z",
+    //   isCorrectValue: false
+    // }
+    // var crateData3 = {
+    //   asset: 'panel_light',
+    //   health: 55,
+    //   text: "-4x + 8",
+    //   isCorrectValue: false
+    // }
+    // var crateData4 = {
+    //   asset: 'panel_light',
+    //   health: 55,
+    //   text: "-10",
+    //   isCorrectValue: false
+    // }
+    // var crateData5 = {
+    //   asset: 'panel_light',
+    //   health: 55,
+    //   text: "x - 1",
+    //   isCorrectValue: false
+    // }
+    this.crates = this.add.group()
+    // this.createCrate(null, null, crateData1);
+    // this.createCrate(null, null, crateData2);
+    // this.createCrate(null, null, crateData3);
+    // this.createCrate(null, null, crateData4);
+    // this.createCrate(null, null, crateData5);
+
+    this.currentTaskid = "taskaaa"
+    this.currentEnemyIndex = 0;
+    this.moveNextLevel = false;
+    //load level
+    this.loadLevel();
 
   },
   update: function() {
     this.game.physics.arcade.overlap(this.weaponOne.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerOne});
     this.game.physics.arcade.overlap(this.weaponTwo.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerTwo});
+
 
     //this.game.physics.arcade.collide(sprite, sprite2, function, null, { this: this, var1: "Var1", var2: "Var2" }); 
     //PLAYER ONE CONTROLS
@@ -258,6 +268,10 @@ PolyTank.GameState = {
 
   },
   loadLevel: function(){
+
+    //create yLocs for crates
+    this.yLocs = this.resetYlocations();
+
     //create tilemap object
     this.map = this.add.tilemap('level');
 
@@ -281,6 +295,8 @@ PolyTank.GameState = {
 
     //send background to the back
     this.game.world.sendToBack(this.background);
+
+    this.scheduleNextTask(this.currentTaskid);
   },
   //there is too much arguments :)
   damageCrate: function(bullet, sprite){
@@ -290,7 +306,12 @@ PolyTank.GameState = {
     bullet.kill();
   },
 
-  createCrate: function(x, y, data){
+  createCrate: function(givenX, givenY, data){
+
+    //create random place in game area
+    var x = this.game.rnd.integerInRange(0, this.game.width);
+
+    var y = this.yLocs.pop();
 
     //look for dead element
     var newElement = this.crates.getFirstDead();
@@ -305,11 +326,64 @@ PolyTank.GameState = {
 
     return newElement;
   },
-  //NOT WORKING BECAUSE weapon dont shoot when you keep key pressed on down
-  // fireWeapon: function(key, weapon){
-  //   weapon.weapon.fire();
 
-  // }
+  createTask: function(taskID){
+
+    console.log(taskID);
+
+    //reset defined yLocs
+    this.yLocs = this.resetYlocations();
+
+    //create question
+    var style = {
+        font: "30px Arial",
+        fontWeight: 'normal',
+        fill: '#000',
+        //wordWrap: true
+    }
+    //update task question
+      var question = this.taskData[taskID].question;
+      var questionText = this.game.add.text(this.game.width/2 - 50, 535, question, style);
+    
+    //create crates
+    var crates = this.taskData[taskID].crates;
+    console.log(crates)
+    for (var i = 0; i < crates.length ; i ++)
+      this.createCrate(null, null, crates[i]);
+    },
+
+  resetYlocations: function(){
+    var array = [];
+    
+    for (var i = 1 ; i < 7 ; i ++){
+      array.push(i * 55)
+    }
+
+    //randomize order
+
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  },
+  scheduleNextTask: function(taskID){
+
+    this.createTask(taskID);
+
+
+  }
   
 
 };
