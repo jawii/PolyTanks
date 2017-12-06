@@ -115,27 +115,50 @@ PolyTank.GameState = {
     this.weaponOne.onFire.add(this.weaponFlames, this.weaponOne, this.playerOneTurret);
     this.weaponTwo.onFire.add(this.weaponFlames, this.weaponTwo, this.playerTwoTurret);
 
+    //create shooting  NO SHOOTING WHEN PRESSED DOWN
+    //this.playerOneFireButton.onDown.add(this.fireWeapon, null, 1,  {'weapon': this.weaponOne});
+    //this.playerTwoFireButton.onDown.add(this.fireWeapon, null, 1,  {'weapon': this.weaponTwo});
+
 
     //first barrels
     var crateData1 = {
-      asset: 'crateWood',
-      health: 10,
+      asset: 'panel_light',
+      health: 20,
       text: "3x + 5",
       isCorrectValue: false
     };
     var crateData2 = {
-      asset: 'crateWood',
-      health: 5,
-      text: "3x",
-      isCorrectValue: true
+      asset: 'panel_light',
+      health: 10,
+      text: "7x + 5y + z",
+      isCorrectValue: false
+    }
+    var crateData3 = {
+      asset: 'panel_light',
+      health: 55,
+      text: "-4x + 8",
+      isCorrectValue: false
+    }
+    var crateData4 = {
+      asset: 'panel_light',
+      health: 55,
+      text: "-10",
+      isCorrectValue: false
+    }
+    var crateData5 = {
+      asset: 'panel_light',
+      health: 55,
+      text: "x - 1",
+      isCorrectValue: false
     }
     this.crates = this.add.group()
-    this.crate = this.createCrate(200, 200, crateData1);
-    this.crate = this.createCrate(450, 50, crateData2);
-    
+    this.createCrate(200, 200, crateData1);
+    this.createCrate(450, 50, crateData2);
+    this.createCrate(600, 300, crateData3);
+    this.createCrate(600, 120, crateData4);
+    this.createCrate(100, 60, crateData5);
     
 
-    
 
   },
   update: function() {
@@ -281,7 +304,12 @@ PolyTank.GameState = {
     }
 
     return newElement;
-  }
+  },
+  //NOT WORKING BECAUSE weapon dont shoot when you keep key pressed on down
+  // fireWeapon: function(key, weapon){
+  //   weapon.weapon.fire();
+
+  // }
   
 
 };
