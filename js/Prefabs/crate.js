@@ -103,11 +103,10 @@ PolyTank.Crate.prototype.kill = function(data){
 
 
 	if(this.data.isCorrectValue){
-		console.log("right crate destroyed")
+		//console.log("right crate destroyed")
         PolyTank.GameState.moveNextLevel = true;
-	}
-	else{
-		console.log("you destroyed wrong crate")
+
+        //TODO Score points and some 
 	}
 
     //destroy healthbar
@@ -125,8 +124,8 @@ PolyTank.Crate.prototype.kill = function(data){
         emitter.destroy();
     }, this);
 
-    PolyTank.GameState.currentEnemyIndex += 1;
-    console.log(PolyTank.GameState.currentEnemyIndex);
+    
+    //console.log(PolyTank.GameState.currentEnemyIndex);
 
 
 };

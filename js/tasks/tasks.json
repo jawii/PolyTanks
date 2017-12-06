@@ -31,7 +31,9 @@
 		    }
 		]
 	},
+
 	"taskaab": 
+
 	{
 		"question": "2x + 2x",
 		"level": "1",
@@ -43,19 +45,19 @@
 		      "text": "4x",
 		      "isCorrectValue": true
 		    },
-	    {
+	    	{
 		      "asset": "panel_light",
 		      "health": 55,
 		      "text": "4",
 		      "isCorrectValue": false	
 		    },
-	    {
+	    	{
 		      "asset": "panel_light",
 		      "health": 55,
 		      "text": "3x",
 		      "isCorrectValue": false	
 		    },
-	    {
+	    	{
 		      "asset": "panel_light",
 		      "health": 55,
 		      "text": "x^2",

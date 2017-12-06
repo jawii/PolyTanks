@@ -163,8 +163,10 @@ PolyTank.GameState = {
     // this.createCrate(null, null, crateData4);
     // this.createCrate(null, null, crateData5);
 
-    this.currentTaskid = "taskaaa"
-    this.currentEnemyIndex = 0;
+    this.questionText = "";
+    this.tasksIDs = ["taskaab", "taskaaa"];
+    this.currentTaskid = ""
+    //console.log(this.crateAmountInTask);
     this.moveNextLevel = false;
     //load level
     this.loadLevel();
@@ -199,6 +201,17 @@ PolyTank.GameState = {
       this.weaponTwo.fire();
       //this.fireWeapon(this.weaponTwo, this.playerTwoTurret);
     }  
+
+    //check if all correct enemy destroyed
+    if(this.moveNextLevel){
+     
+      //clear the board
+      this.clearTask();
+
+      this.scheduleNextTask();
+      this.moveNextLevel = false;
+    }
+
     
   },
 
@@ -296,7 +309,7 @@ PolyTank.GameState = {
     //send background to the back
     this.game.world.sendToBack(this.background);
 
-    this.scheduleNextTask(this.currentTaskid);
+    this.scheduleNextTask(this);
   },
   //there is too much arguments :)
   damageCrate: function(bullet, sprite){
@@ -329,7 +342,7 @@ PolyTank.GameState = {
 
   createTask: function(taskID){
 
-    console.log(taskID);
+    console.log("Task ID: " + taskID);
 
     //reset defined yLocs
     this.yLocs = this.resetYlocations();
@@ -342,12 +355,12 @@ PolyTank.GameState = {
         //wordWrap: true
     }
     //update task question
-      var question = this.taskData[taskID].question;
-      var questionText = this.game.add.text(this.game.width/2 - 50, 535, question, style);
+    var question = this.taskData[taskID].question;
+    this.questionText = this.game.add.text(this.game.width/2 - 50, 535, question, style);
     
     //create crates
     var crates = this.taskData[taskID].crates;
-    console.log(crates)
+    //console.log(crates)
     for (var i = 0; i < crates.length ; i ++)
       this.createCrate(null, null, crates[i]);
     },
@@ -378,11 +391,21 @@ PolyTank.GameState = {
 
     return array;
   },
-  scheduleNextTask: function(taskID){
+  scheduleNextTask: function(){
+    //console.log("Tasks: " + this.tasksIDs);
+
+    //TODO: CHECK WHEN YOU CANNOT POP (TASKS EMPTY)
+    this.currentTaskid = this.tasksIDs.pop();
+    var taskID = this.currentTaskid
 
     this.createTask(taskID);
 
 
+  },
+  
+  clearTask: function(){
+    this.crates.killAll();
+    this.questionText.text = "";
   }
   
 
