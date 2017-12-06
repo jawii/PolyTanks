@@ -16,8 +16,9 @@ PolyTank.GameState = {
     this.WIDTH = this.game.world.width;
     this.HEIGHT = this.game.world.height;
 
-    //turrets spesifications
+    //turrets spescifications
     this.playerOne = {
+      score: 0,
       money: 20,
       angleSpeed: 0.5,
       bulletSpeed: 300,
@@ -29,9 +30,10 @@ PolyTank.GameState = {
       bulletType: "bullet6",
       bulletScale: 0.2,
       turretType: 'turret3',
-      bulletDamage: 20
+      bulletDamage: 200
     }
     this.playerTwo = {
+      score: 0,
       money: 100,
       angleSpeed: 1.0,
       bulletSpeed: 400,
@@ -173,6 +175,7 @@ PolyTank.GameState = {
 
   },
   update: function() {
+    //this.game.physics.arcade.overlap(this.weaponOne.bullets, this.crates, this.damageCrate, null, this);
     this.game.physics.arcade.overlap(this.weaponOne.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerOne});
     this.game.physics.arcade.overlap(this.weaponTwo.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerTwo});
 
@@ -312,10 +315,21 @@ PolyTank.GameState = {
     this.scheduleNextTask(this);
   },
   //there is too much arguments :)
-  damageCrate: function(bullet, sprite){
-    //console.log(bullet);
+  damageCrate: function(bullet, sprite, player){
+    //console.log(arguments);
     //console.log(sprite);
-    sprite.damage(this.player.bulletDamage);
+    //console.log(this.player);
+    //PASS THE DAMAGE METHOD FOR SPRITE BECAUSE NOW YOU CAN PASS PLAYER TO KILL METHOD
+    if (sprite.alive) {
+      sprite.health -= this.player.bulletDamage;
+      sprite.healthBar.setPercent((sprite.health / sprite.data.health) * 100);
+
+        if(sprite.health <= 0)
+        {
+          sprite.kill(this, this.player); 
+        }
+    }
+  //sprite.damage(this.player.bulletDamage, this.player);
     bullet.kill();
   },
 
@@ -357,6 +371,8 @@ PolyTank.GameState = {
     //update task question
     var question = this.taskData[taskID].question;
     this.questionText = this.game.add.text(this.game.width/2 - 50, 535, question, style);
+    
+    //var tween = this.game.add.tween(this.questionText).to({scaleTo: 0.5}, 2000, Phaser.Easing.Linear.None, true, 0, 1000, false);
     
     //create crates
     var crates = this.taskData[taskID].crates;
@@ -406,6 +422,12 @@ PolyTank.GameState = {
   clearTask: function(){
     this.crates.killAll();
     this.questionText.text = "";
+  },
+
+  //IMPLENT THIS
+  countDownTimer: function(){
+    //this.game.time.create()
+
   }
   
 

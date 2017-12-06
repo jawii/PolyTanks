@@ -61,19 +61,6 @@ PolyTank.Crate.prototype.reset = function(x, y, data) {
     };
     this.healthBar = new HealthBar(this.game, barConfig);
 
-    //this.myHealthBar.height = this.heigth;
-
-    /*
-    width
-    height
-    x: initial x position
-    y: initial y position
-    bg.color: background color
-    bar.color: color of the actual bar
-    animationDuration: control the animation when the bar value is changed
-    flipped: if true the bar will change size from left to right
-    */
-
 	//apply velocity
     var randomVelocity = Math.random();
 	this.body.velocity.x = Math.max(70 * Math.random(), 20);
@@ -81,35 +68,30 @@ PolyTank.Crate.prototype.reset = function(x, y, data) {
     this.body.collideWorldBounds = true;
 };
 
-PolyTank.Crate.prototype.damage = function(amount){
+PolyTank.Crate.prototype.damage = function(amount, player){
 	Phaser.Sprite.prototype.damage.call(this, amount);
 
 	//console.log("Damaged");
+    this.player = player;
+    console.log(this.player);
 
 	//update healthbar
-    this.healthBar.setPercent((this.health / this.data.health) * 100);
+    //this.healthBar.setPercent((this.health / this.data.health) * 100);
 
 
 	//add particle emitter for hit
 
 };
 
-PolyTank.Crate.prototype.kill = function(data){
+PolyTank.Crate.prototype.kill = function(data, player){
 
 	Phaser.Sprite.prototype.kill.call(this);
 
-	//destroy label and health bars
-	this.labelText.destroy();
-
-
-	if(this.data.isCorrectValue){
-		//console.log("right crate destroyed")
-        PolyTank.GameState.moveNextLevel = true;
-
-        //TODO Score points and some 
-	}
-
-    //destroy healthbar
+    //get the score
+    this.player = player
+	
+    //destroy label and health bars
+    this.labelText.destroy();
     this.healthBar.kill();
 
     //particles 
@@ -118,15 +100,32 @@ PolyTank.Crate.prototype.kill = function(data){
     emitter.gravity = 0;
     //emitter.maxParticleSpeed = 300;
     //emitter.maxParticleSpeed = 20;
-    emitter.start(true, 500, null, 10);
+    emitter.start(true, 1750, null, 10);
 
-    this.game.time.events.add(700, function(){
+    this.game.time.events.add(1750, function(){
         emitter.destroy();
     }, this);
 
     
-    //console.log(PolyTank.GameState.currentEnemyIndex);
+    this.scoreTextStyle = {
+        font: '40px Arial',
+        fill: '#00ff19'
+    };
+    
 
+    if(this.data.isCorrectValue){
+        var scoreText = this.game.add.text(this.game.world.width/2, this.game.world.height/4, "", this.scoreTextStyle);
+        PolyTank.GameState.moveNextLevel = true;
+        this.player.score += 1;
+        scoreText.anchor.setTo(0.5);
+        scoreText.text = "FOUND IT";
+
+        this.game.add.tween(scoreText).to({fontSize: 90}, 1000, null, true);
+
+
+        //add tween to scoreText
+
+    }
 
 };
 
@@ -141,7 +140,7 @@ PolyTank.Crate.prototype.update = function(){
 
 
     this.game.physics.arcade.collide(this, PolyTank.GameState.crates, function(){
-        console.log("Collide");
+        //console.log("Collide");
         //this.body.velocity.x *= -1;
 
     }, null, this);
