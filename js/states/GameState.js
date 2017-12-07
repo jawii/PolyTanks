@@ -7,7 +7,10 @@ PolyTank.GameState = {
   init: function() {
 
     //use all the area, don't distort scale
-    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;    
+    this.game.scale.pageAlignHorizontally = true;    
+    this.game.scale.pageAlignVeritcally = true;    
+    this.game.scale.refresh();
     
     //initiate physics system
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -18,26 +21,29 @@ PolyTank.GameState = {
 
     //turrets spescifications
     this.playerOne = {
+      playerName: "Bob",
       score: 0,
       money: 20,
       angleSpeed: 0.5,
-      bulletSpeed: 300,
+      bulletSpeed: 200,
       fireRate: 500,
       bulletAmount: 20,
       turretLeftKey: Phaser.Keyboard.G,
       turretRightKey: Phaser.Keyboard.H,
       fireButton: Phaser.KeyCode.CONTROL,
-      bulletType: "bullet6",
+      bulletType: "bullet3",
       bulletScale: 0.2,
-      turretType: 'turret3',
-      bulletDamage: 200
+      turretType: 'turret1',
+      bulletDamage: 3,
+      guiTextPos: {x: 230, y: 530}
     }
     this.playerTwo = {
+      playerName: "Helen",
       score: 0,
       money: 100,
       angleSpeed: 1.0,
       bulletSpeed: 400,
-      fireRate: 500,
+      fireRate: 100,
       bulletAmount: 50,
       turretLeftKey: Phaser.Keyboard.LEFT,
       turretRightKey: Phaser.Keyboard.RIGHT,
@@ -45,7 +51,8 @@ PolyTank.GameState = {
       bulletType: "bullet5",
       bulletScale: 0.2,
       turretType: 'turret4',
-      bulletDamage: 20
+      bulletDamage: 3,
+      guiTextPos: {x: 400, y: 600}
     }
 
     //first is for weaponFlames and second for turret weapon position
@@ -96,10 +103,6 @@ PolyTank.GameState = {
     this.playersBody.add(this.playerOneBody);
     this.playersBody.add(this.playerTwoBody);
 
-
-    //create GUI
-    this.createGui();
-
     //create keys
     //playerOne
     this.leftKeyOne = this.game.input.keyboard.addKey(this.playerOne.turretLeftKey);
@@ -125,53 +128,28 @@ PolyTank.GameState = {
     //random yLocations for crates
     this.yLocs = []
 
-    
-
-    //first barrels
-    // var crateData1 = {
-    //   asset: 'panel_light',
-    //   health: 20,
-    //   text: "3x + 5",
-    //   isCorrectValue: false
-    // };
-    // var crateData2 = {
-    //   asset: 'panel_light',
-    //   health: 10,
-    //   text: "7x + 5y + z",
-    //   isCorrectValue: false
-    // }
-    // var crateData3 = {
-    //   asset: 'panel_light',
-    //   health: 55,
-    //   text: "-4x + 8",
-    //   isCorrectValue: false
-    // }
-    // var crateData4 = {
-    //   asset: 'panel_light',
-    //   health: 55,
-    //   text: "-10",
-    //   isCorrectValue: false
-    // }
-    // var crateData5 = {
-    //   asset: 'panel_light',
-    //   health: 55,
-    //   text: "x - 1",
-    //   isCorrectValue: false
-    // }
+    //crates group
     this.crates = this.add.group()
-    // this.createCrate(null, null, crateData1);
-    // this.createCrate(null, null, crateData2);
-    // this.createCrate(null, null, crateData3);
-    // this.createCrate(null, null, crateData4);
-    // this.createCrate(null, null, crateData5);
 
     this.questionText = "";
-    this.tasksIDs = ["taskaab", "taskaaa"];
+    this.tasksIDs = ["taskaab", "taskaaa", "taskabb", "taskbbb"];
     this.currentTaskid = ""
     //console.log(this.crateAmountInTask);
     this.moveNextLevel = false;
+    
+    //timers 
+    this.countDownTime = this.game.time.create(true);
+
     //load level
     this.loadLevel();
+    //create GUI
+    this.createGui(this.playerOne);
+    this.createGui(this.playerTwo);
+
+    //let the playerkill be true, clearTask method kills players so there it's false
+    this.playerKill = true;
+
+
 
   },
   update: function() {
@@ -248,12 +226,36 @@ PolyTank.GameState = {
 
     return weapon;
   },
-  createGui: function(){
+  createGui: function(player){
 
-    //create GUI texture
+    
+    //console.log(player);
+    //create GUI texture1
 
+    //money
 
-    //create Buttons
+    //score
+    var scoreTextStyle = {
+      boundsAlignV:"top",
+      fill: "black",
+      font: "bold 14px Arial",
+      maxLines: 0,
+      shadowBlur:0,
+      shadowColor: "rgba(0,0,0,0)",
+      shadowOffsetX: 0,
+      shadowOffsetY: 0,
+      stroke: "black",
+      strokeThickness: 0,
+      tabs: 0,
+      wordWrap:false,
+      wordWrapWidth:100
+      }
+    var scoreText = this.game.add.text(player.guiTextPos.x, player.guiTextPos.y, "SCORE", scoreTextStyle);
+    scoreText.anchor.setTo(0.5);
+    //console.log(scoreText);
+    //money
+    var moneyText = this.game.add.text(scoreText.x, scoreText.y, "Money")
+
 
     //increase fireRate
 
@@ -297,7 +299,7 @@ PolyTank.GameState = {
     //create tile layers
     this.backgroundLayer = this.map.createLayer('backgroundLayer');
     this.collisionLayer = this.map.createLayer('collisionLayer');
-    this.collisionLayer.alpha = 0.8;
+    this.collisionLayer.alpha = 0.7;
 
     //collision layer should be collisionlayer
     this.map.setCollisionBetween(1, 160, true, 'collisionLayer');
@@ -306,11 +308,15 @@ PolyTank.GameState = {
     this.collisionLayer.resizeWorld();
 
     //create moving background
-    this.background = this.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'blackbackground');
-    this.background.autoScroll(0, 15);
+    this.backgroundSprite = this.add.tileSprite(0, 0, 1025, 1025, 'background6');
+    //this.background.anchor = 0.7
+    this.backgroundSprite.scale.y = 0.8;
+    //this.backgroundSprite.width = this.game.world.width;
+    //this.backgroundSprite.height = this.game.world.height;
+    this.backgroundSprite.autoScroll(3, 0);
 
     //send background to the back
-    this.game.world.sendToBack(this.background);
+    this.game.world.sendToBack(this.backgroundSprite);
 
     this.scheduleNextTask(this);
   },
@@ -322,7 +328,7 @@ PolyTank.GameState = {
     //PASS THE DAMAGE METHOD FOR SPRITE BECAUSE NOW YOU CAN PASS PLAYER TO KILL METHOD
     if (sprite.alive) {
       sprite.health -= this.player.bulletDamage;
-      sprite.healthBar.setPercent((sprite.health / sprite.data.health) * 100);
+      sprite.healthBar.setPercent((sprite.health / sprite.maxHealth) * 100);
 
         if(sprite.health <= 0)
         {
@@ -343,7 +349,7 @@ PolyTank.GameState = {
     //look for dead element
     var newElement = this.crates.getFirstDead();
 
-    if(!newElement){
+    if(!newElement || this.crates.children.length < 10){
       newElement = new PolyTank.Crate(this, x, y, data);
       this.crates.add(newElement);
     }
@@ -354,31 +360,21 @@ PolyTank.GameState = {
     return newElement;
   },
 
-  createTask: function(taskID){
+  createTask: function(timer, game, taskID){
 
-    console.log("Task ID: " + taskID);
-
+    //console.log("Task ID: " + taskID);
+    //this.game = this;
+    //console.log(arguments);
     //reset defined yLocs
-    this.yLocs = this.resetYlocations();
-
-    //create question
-    var style = {
-        font: "30px Arial",
-        fontWeight: 'normal',
-        fill: '#000',
-        //wordWrap: true
-    }
-    //update task question
-    var question = this.taskData[taskID].question;
-    this.questionText = this.game.add.text(this.game.width/2 - 50, 535, question, style);
+    game.yLocs = game.resetYlocations();
     
-    //var tween = this.game.add.tween(this.questionText).to({scaleTo: 0.5}, 2000, Phaser.Easing.Linear.None, true, 0, 1000, false);
+    //var tween = game.game.add.tween(game.questionText).to({scaleTo: 0.5}, 2000, Phaser.Easing.Linear.None, true, 0, 1000, false);
     
     //create crates
-    var crates = this.taskData[taskID].crates;
+    var crates = game.taskData[taskID].crates;
     //console.log(crates)
     for (var i = 0; i < crates.length ; i ++)
-      this.createCrate(null, null, crates[i]);
+      var crate = game.createCrate(null, null, crates[i]);
     },
 
   resetYlocations: function(){
@@ -408,25 +404,83 @@ PolyTank.GameState = {
     return array;
   },
   scheduleNextTask: function(){
-    //console.log("Tasks: " + this.tasksIDs);
 
-    //TODO: CHECK WHEN YOU CANNOT POP (TASKS EMPTY)
-    this.currentTaskid = this.tasksIDs.pop();
-    var taskID = this.currentTaskid
-
-    this.createTask(taskID);
-
-
+    //console.log(this.tasksIDs.length);
+    if (this.tasksIDs.length > 0){
+      this.currentTaskid = this.tasksIDs.pop();
+      var taskID = this.currentTaskid;
+      this.countDownTimer();
+      this.countDownTime.onComplete.add(this.createTask, null, 0, this, taskID)
+    }
+    else{
+      console.log("No Tasks");
+      //TODO GO TO GAME OVER SCREEN
+    }
+  },
+  updateTaskQuestion: function(taskID){
+    //create question
+    var style = {
+        font: "34px Arial",
+        fontWeight: 'normal',
+        fill: '#ff0000',
+        wordWrap: false
+    }
+    var question = this.taskData[taskID].question;
+    this.questionText = this.game.add.text(this.game.width/2 - 50, 535, question, style);
+    this.questionText.alpha = 0.1;
+    this.game.add.tween(this.questionText).from( { y: -200 }, 2000, Phaser.Easing.Bounce.Out, true);
+    this.game.add.tween(this.questionText).to( { alpha: 1 }, 2000, "Linear", true);
   },
   
   clearTask: function(){
+    this.playerKill = false;
     this.crates.killAll();
+    this.playerKill = true;
+
     this.questionText.text = "";
   },
 
   //IMPLENT THIS
   countDownTimer: function(){
     //this.game.time.create()
+    //autodestroy
+    this.countDownTime = this.game.time.create(true);
+
+    var style = { 
+      font: "64px Arial", 
+      fill: "#0037ff", 
+      align: "center" 
+    };
+
+    var counter = 0;
+
+    var text = this.game.add.text(this.game.world.centerX, this.game.world.centerY - 100, "", style);
+    text.anchor.setTo(0.5, 0.5);
+    this.countDownTime.start();
+    this.countDownTime.loop(1000, function(){
+       counter++;
+       //text.setText(counter);
+       if (counter == 2){
+        text.setText("New Mission");
+        this.updateTaskQuestion(this.currentTaskid);
+       }
+       else if (counter == 3){
+        text.setText("4");
+       }
+       else if (counter == 4) {
+        text.setText("3");
+       }
+       else if (counter == 5) {
+        text.setText("2");
+       }
+       else if (counter == 6) {
+        text.setText("1");
+       }
+       else if (counter == 7){
+        this.countDownTime.stop();
+       text.destroy(); 
+       }
+    }, this)
 
   }
   

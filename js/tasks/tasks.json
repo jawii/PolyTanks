@@ -6,26 +6,18 @@
 		"crates":
 		[
 			 {
-		      "asset": "panel_light",
-		      "health": 55,
 		      "text": "x",
 		      "isCorrectValue": true
 		    },
 	    {
-		      "asset": "panel_light",
-		      "health": 55,
 		      "text": "-x",
 		      "isCorrectValue": false	
 		    },
 	    {
-		      "asset": "panel_light",
-		      "health": 55,
 		      "text": "5x",
 		      "isCorrectValue": false	
 		    },
 	    {
-		      "asset": "panel_light",
-		      "health": 55,
 		      "text": "-5x",
 		      "isCorrectValue": false	
 		    }
@@ -40,27 +32,70 @@
 		"crates":
 		[
 			 {
-		      "asset": "panel_light",
-		      "health": 55,
 		      "text": "4x",
 		      "isCorrectValue": true
 		    },
 	    	{
-		      "asset": "panel_light",
-		      "health": 55,
 		      "text": "4",
 		      "isCorrectValue": false	
 		    },
 	    	{
-		      "asset": "panel_light",
-		      "health": 55,
 		      "text": "3x",
 		      "isCorrectValue": false	
 		    },
 	    	{
-		      "asset": "panel_light",
-		      "health": 55,
 		      "text": "x^2",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+
+	"taskabb": 
+
+	{
+		"question": "x - x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "0",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "1",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "6x + 8",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": " 2x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	"taskbbb": 
+
+	{
+		"question": "7x - 6x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "13x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "- 13x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "- x",
 		      "isCorrectValue": false	
 		    }
 		]

@@ -4,7 +4,12 @@ PolyTank.PreloadState = {
 
 	preload: function(){
 		//background
-		this.load.image('blackbackground', 'assets/images/blackbackground.png');
+		this.load.image('background1', 'assets/images/background1.png');
+		this.load.image('background2', 'assets/images/background2.png');
+		this.load.image('background3', 'assets/images/background3.png');
+		this.load.image('background4', 'assets/images/background4.png');
+		this.load.image('background5', 'assets/images/background5.png');
+		this.load.image('background6', 'assets/images/background6.png');
 
 		//load tileset
 		this.load.image('gameTiles', 'assets/images/tiles_spritesheet.png');
@@ -13,14 +18,18 @@ PolyTank.PreloadState = {
 		//load tasks
 		this.load.text('taskData', 'js/tasks/tasks.json');
 		//panels
-		this.load.image('panel_blue', 'assets/images/panel_blue.png');
-		this.load.image('panel_red', 'assets/images/panel_red.png');
-		this.load.image('panel_wood', 'assets/images/panel_wood.png');
-		this.load.image('panel_brown', 'assets/images/panel_brown.png');
+		// this.load.image('panel_blue', 'assets/images/panel_blue.png');
+		this.load.image('shard_wood', 'assets/images/shard_wood.png');
+		this.load.image('shard_stone', 'assets/images/shard_stone.png');
+		this.load.image('shard_glass', 'assets/images/shard_glass.png');
+		// this.load.image('panel_red', 'assets/images/panel_red.png');
+		// this.load.image('panel_wood', 'assets/images/panel_wood.png');
+		// this.load.image('panel_brown', 'assets/images/panel_brown.png');
 		this.load.image('panel_lightblue', 'assets/images/panel_lightblue.png');
 		this.load.image('panel_light', 'assets/images/panel_light.png');
-		this.load.image('panel_beige', 'assets/images/panel_beige.png');
+		// this.load.image('panel_beige', 'assets/images/panel_beige.png');
 		this.load.image('panel_light_particles', 'assets/images/panel_light_particles.png');
+		this.load.image('panel_lightblue_particles', 'assets/images/panel_lightblue_particles.png');
 		//load turrets
 		this.load.image('turret1', 'assets/images/turret1.png');
 		this.load.image('turret2', 'assets/images/turret2.png');
