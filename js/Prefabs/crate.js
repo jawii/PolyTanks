@@ -151,7 +151,8 @@ PolyTank.Crate.prototype.kill = function(data, player){
         var scoreText = this.game.add.text(this.game.world.width/2, this.game.world.height/4, "", this.scoreTextStyle);
         
         //console.log(this.player);
-        this.player.score += 10;
+        this.player.score += 5;
+        PolyTank.GameState.updateScore(player);
         scoreText.anchor.setTo(0.5);
         scoreText.text = this.player.playerName + " scores";
         this.game.time.events.add(Phaser.Timer.SECOND * 2, function(){
@@ -162,9 +163,10 @@ PolyTank.Crate.prototype.kill = function(data, player){
         this.game.add.tween(scoreText).to({fontSize: 70}, 1000, null, true);
     }
     //IF CRATE IS PLAYERKILLED, REMOVE SCORE POINTS
-    else if(PolyTank.GameState.playerKill)
+    else if(PolyTank.GameState.playerKill) 
     {
-        this.player.score -= 2;
+        this.player.score -= 1;
+        PolyTank.GameState.updateScore(player);
     }
 
 };

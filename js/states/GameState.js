@@ -25,17 +25,17 @@ PolyTank.GameState = {
       score: 0,
       money: 20,
       angleSpeed: 0.5,
-      bulletSpeed: 200,
+      bulletSpeed: 400,
       fireRate: 500,
       bulletAmount: 20,
       turretLeftKey: Phaser.Keyboard.G,
       turretRightKey: Phaser.Keyboard.H,
       fireButton: Phaser.KeyCode.CONTROL,
-      bulletType: "bullet3",
+      bulletType: "bullet2",
       bulletScale: 0.2,
       turretType: 'turret1',
-      bulletDamage: 3,
-      guiTextPos: {x: 230, y: 530}
+      bulletDamage: 40,
+      guiTextPos: {x: 150, y: 530}
     }
     this.playerTwo = {
       playerName: "Helen",
@@ -51,8 +51,8 @@ PolyTank.GameState = {
       bulletType: "bullet5",
       bulletScale: 0.2,
       turretType: 'turret4',
-      bulletDamage: 3,
-      guiTextPos: {x: 400, y: 600}
+      bulletDamage: 40,
+      guiTextPos: {x: 650, y: 530}
     }
 
     //first is for weaponFlames and second for turret weapon position
@@ -143,8 +143,7 @@ PolyTank.GameState = {
     //load level
     this.loadLevel();
     //create GUI
-    this.createGui(this.playerOne);
-    this.createGui(this.playerTwo);
+    this.createGui();
 
     //let the playerkill be true, clearTask method kills players so there it's false
     this.playerKill = true;
@@ -226,15 +225,23 @@ PolyTank.GameState = {
 
     return weapon;
   },
-  createGui: function(player){
+  createGui: function(){
 
-    
-    //console.log(player);
-    //create GUI texture1
-
-    //money
-
-    //score
+    var nameTextStyle = {
+      boundsAlignV:"top",
+      fill: "black",
+      font: "bold 14px Arial",
+      maxLines: 0,
+      shadowBlur:0,
+      shadowColor: "rgba(0,0,0,0)",
+      shadowOffsetX: 0,
+      shadowOffsetY: 0,
+      stroke: "black",
+      strokeThickness: 0,
+      tabs: 0,
+      wordWrap:false,
+      wordWrapWidth:100
+    }
     var scoreTextStyle = {
       boundsAlignV:"top",
       fill: "black",
@@ -250,16 +257,47 @@ PolyTank.GameState = {
       wordWrap:false,
       wordWrapWidth:100
       }
-    var scoreText = this.game.add.text(player.guiTextPos.x, player.guiTextPos.y, "SCORE", scoreTextStyle);
-    scoreText.anchor.setTo(0.5);
-    //console.log(scoreText);
+
+    //name
+    this.playerOneNameText = this.game.add.text(this.playerOne.guiTextPos.x, this.playerOne.guiTextPos.y, this.playerOne.playerName, scoreTextStyle);
+    this.playerOneNameText.anchor.setTo(0.5);
+
+    //score
+    this.playerOneScoreText = this.game.add.text(this.playerOneNameText.x - 80, this.playerOneNameText.y + 20, "Score: " + this.playerOne.score, scoreTextStyle);
+    this.playerOneScoreText.anchor.setTo(0.5);
+
     //money
-    var moneyText = this.game.add.text(scoreText.x, scoreText.y, "Money")
+    this.playerOneMoneyText = this.game.add.text(this.playerOneNameText.x - 80, this.playerOneNameText.y + 40, "Money: " + this.playerOne.money, scoreTextStyle);
+    this.playerOneMoneyText.anchor.setTo(0.5);
+
+    //bullet damage
+    this.playerOneBulletDamageText = this.game.add.text(this.playerOneNameText.x + 80, this.playerOneNameText.y + 20, "DMG: " + this.playerOne.bulletDamage, scoreTextStyle);
+    this.playerOneBulletDamageText.anchor.setTo(0.5);
+    
+    //firerate
+    this.playerOnefireRateText = this.game.add.text(this.playerOneNameText.x + 80, this.playerOneNameText.y + 40, "Firerate: " + this.playerOne.fireRate, scoreTextStyle);
+    this.playerOnefireRateText.anchor.setTo(0.5);
 
 
-    //increase fireRate
+    //name
+    this.playerTwoNameText = this.game.add.text(this.playerTwo.guiTextPos.x, this.playerTwo.guiTextPos.y, this.playerTwo.playerName, scoreTextStyle);
+    this.playerTwoNameText.anchor.setTo(0.5);
 
-    //increase Damage and texture
+    //score
+    this.playerTwoScoreText = this.game.add.text(this.playerTwoNameText.x - 80, this.playerTwoNameText.y + 20, "Score: " + this.playerTwo.score, scoreTextStyle);
+    this.playerTwoScoreText.anchor.setTo(0.5);
+
+    //money
+    this.playerTwoMoneyText = this.game.add.text(this.playerTwoNameText.x - 80, this.playerTwoNameText.y + 40, "Money: " + this.playerTwo.money, scoreTextStyle);
+    this.playerTwoMoneyText.anchor.setTo(0.5);
+
+    //bullet damage
+    this.playerTwoBulletDamageText = this.game.add.text(this.playerTwoNameText.x + 80, this.playerTwoNameText.y + 20, "DMG: " + this.playerTwo.bulletDamage, scoreTextStyle);
+    this.playerTwoBulletDamageText.anchor.setTo(0.5);
+    
+    //firerate
+    this.playerTwofireRateText = this.game.add.text(this.playerTwoNameText.x +80, this.playerTwoNameText.y + 40, "Firerate: " + this.playerTwo.fireRate, scoreTextStyle);
+    this.playerTwofireRateText.anchor.setTo(0.5);
 
   },
   weaponFlames: function(bullet, weapon){
@@ -362,14 +400,8 @@ PolyTank.GameState = {
 
   createTask: function(timer, game, taskID){
 
-    //console.log("Task ID: " + taskID);
-    //this.game = this;
-    //console.log(arguments);
-    //reset defined yLocs
     game.yLocs = game.resetYlocations();
-    
-    //var tween = game.game.add.tween(game.questionText).to({scaleTo: 0.5}, 2000, Phaser.Easing.Linear.None, true, 0, 1000, false);
-    
+
     //create crates
     var crates = game.taskData[taskID].crates;
     //console.log(crates)
@@ -426,21 +458,23 @@ PolyTank.GameState = {
         wordWrap: false
     }
     var question = this.taskData[taskID].question;
-    this.questionText = this.game.add.text(this.game.width/2 - 50, 535, question, style);
+    this.questionText = this.game.add.text(this.game.width/2, 550, question, style);
     this.questionText.alpha = 0.1;
+    this.questionText.anchor.setTo(0.5);
     this.game.add.tween(this.questionText).from( { y: -200 }, 2000, Phaser.Easing.Bounce.Out, true);
     this.game.add.tween(this.questionText).to( { alpha: 1 }, 2000, "Linear", true);
   },
   
   clearTask: function(){
+    //no score for players
     this.playerKill = false;
     this.crates.killAll();
+    this.weaponTwo.bullets.killAll();
     this.playerKill = true;
 
     this.questionText.text = "";
   },
 
-  //IMPLENT THIS
   countDownTimer: function(){
     //this.game.time.create()
     //autodestroy
@@ -482,6 +516,37 @@ PolyTank.GameState = {
        }
     }, this)
 
+  },
+
+  updateScore: function(player){
+    var scoreText;
+
+    if (player == this.playerOne)
+    {
+      scoreText = this.playerOneScoreText;
+    }
+    else{
+      scoreText = this.playerTwoScoreText;
+    }
+
+    var tween = this.game.add.tween(scoreText).from({fontSize: 20}, 1000, null, true);
+    
+    tween.onComplete.add(function(){
+      scoreText.text = "Score: " + player.score;
+    }, this);
+  
+  },
+
+  updateStats: function(){
+    this.playerOneNameText.text = this.playerOne.playerName;
+    this.playerOneScoreText.text = "Score: " + this.playerOne.score;
+    this.playerOneBulletDamageText.text = "DMG: " + this.playerOne.bulletDamage;
+    this.playerOnefireRateText.text = "Firerate: " + this.playerOne.fireRate;
+
+    this.playerTwoNameText.text = this.playerTwo.playerName;
+    this.playerTwoScoreText.text = "Score: " + this.playerTwo.score;
+    this.playerTwoBulletDamageText.text = "DMG: " + this.playerTwo.bulletDamage;
+    this.playerTwofireRateText.text = "Firerate: " + this.playerTwo.fireRate;
   }
   
 
