@@ -25,33 +25,33 @@ PolyTank.GameState = {
       score: 0,
       money: 20,
       angleSpeed: 0.5,
-      bulletSpeed: 400,
-      fireRate: 500,
+      bulletSpeed: 200,
+      fireRate: 1000,
       bulletAmount: 20,
       turretLeftKey: Phaser.Keyboard.G,
       turretRightKey: Phaser.Keyboard.H,
       fireButton: Phaser.KeyCode.CONTROL,
-      bulletType: "bullet2",
+      bulletType: "bullet1",
       bulletScale: 0.2,
       turretType: 'turret1',
-      bulletDamage: 40,
+      bulletDamage: 1,
       guiTextPos: {x: 150, y: 530}
     }
     this.playerTwo = {
       playerName: "Helen",
       score: 0,
       money: 100,
-      angleSpeed: 1.0,
-      bulletSpeed: 400,
-      fireRate: 100,
+      angleSpeed: 0.5,
+      bulletSpeed: 200,
+      fireRate: 1000,
       bulletAmount: 50,
       turretLeftKey: Phaser.Keyboard.LEFT,
       turretRightKey: Phaser.Keyboard.RIGHT,
       fireButton: Phaser.KeyCode.SPACEBAR,
-      bulletType: "bullet5",
+      bulletType: "bullet1",
       bulletScale: 0.2,
-      turretType: 'turret4',
-      bulletDamage: 40,
+      turretType: 'turret1',
+      bulletDamage: 1,
       guiTextPos: {x: 650, y: 530}
     }
 
@@ -123,7 +123,7 @@ PolyTank.GameState = {
     //this.playerOneFireButton.onDown.add(this.fireWeapon, null, 1,  {'weapon': this.weaponOne});
     //this.playerTwoFireButton.onDown.add(this.fireWeapon, null, 1,  {'weapon': this.weaponTwo});
 
-    this.taskData = JSON.parse(this.game.cache.getText('taskData'));
+    
     
     //random yLocations for crates
     this.yLocs = []
@@ -131,12 +131,24 @@ PolyTank.GameState = {
     //crates group
     this.crates = this.add.group()
 
+
+    //TASKS
+    this.taskData = JSON.parse(this.game.cache.getText('taskData'));
+
     this.questionText = "";
-    this.tasksIDs = ["taskaab", "taskaaa", "taskabb", "taskbbb"];
+    this.tasksIDs = [];
     this.currentTaskid = ""
-    //console.log(this.crateAmountInTask);
     this.moveNextLevel = false;
+
+    //get the correct level questions
+    for (var object in this.taskData){
+      this.tasksIDs.push(object);
+    };
+
+    //randomize task array
+    this.tasksIDs = this.randomizeArray(this.tasksIDs);
     
+
     //timers 
     this.countDownTime = this.game.time.create(true);
 
@@ -417,23 +429,7 @@ PolyTank.GameState = {
     }
 
     //randomize order
-
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+    return this.randomizeArray(array)
   },
   scheduleNextTask: function(){
 
@@ -449,14 +445,14 @@ PolyTank.GameState = {
       //TODO GO TO GAME OVER SCREEN
     }
   },
-  updateTaskQuestion: function(taskID){
+  updateTaskQuestion: function(context, taskID){
     //create question
     var style = {
-        font: "34px Arial",
+        font: "36px Arial",
         fontWeight: 'normal',
         fill: '#ff0000',
         wordWrap: false
-    }
+    };
     var question = this.taskData[taskID].question;
     this.questionText = this.game.add.text(this.game.width/2, 550, question, style);
     this.questionText.alpha = 0.1;
@@ -496,7 +492,8 @@ PolyTank.GameState = {
        //text.setText(counter);
        if (counter == 2){
         text.setText("New Mission");
-        this.updateTaskQuestion(this.currentTaskid);
+        //console.log(this.currentTaskid);
+        this.updateTaskQuestion(this, this.currentTaskid);
        }
        else if (counter == 3){
         text.setText("4");
@@ -511,8 +508,8 @@ PolyTank.GameState = {
         text.setText("1");
        }
        else if (counter == 7){
-        this.countDownTime.stop();
-       text.destroy(); 
+         this.countDownTime.stop();
+         text.destroy(); 
        }
     }, this)
 
@@ -533,6 +530,7 @@ PolyTank.GameState = {
     
     tween.onComplete.add(function(){
       scoreText.text = "Score: " + player.score;
+      scoreText.text.fontSize = "14px";
     }, this);
   
   },
@@ -547,6 +545,27 @@ PolyTank.GameState = {
     this.playerTwoScoreText.text = "Score: " + this.playerTwo.score;
     this.playerTwoBulletDamageText.text = "DMG: " + this.playerTwo.bulletDamage;
     this.playerTwofireRateText.text = "Firerate: " + this.playerTwo.fireRate;
+  },
+  randomizeArray: function(array){
+    //randomize order
+
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+    }
+
+    return array
+
   }
   
 

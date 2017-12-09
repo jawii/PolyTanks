@@ -50,7 +50,7 @@
 		]
 	},
 
-	"taskabb": 
+	"taskaac": 
 
 	{
 		"question": "x - x",
@@ -75,7 +75,7 @@
 		    }
 		]
 	},
-	"taskbbb": 
+	"taskaad": 
 
 	{
 		"question": "7x - 6x",
@@ -96,6 +96,184 @@
 		    },
 	    	{
 		      "text": "- x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	"taskaae": 
+
+	{
+		"question": "9a - 6a",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "3a",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "15a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-3a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "96a",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+
+	"taskaaf": 
+
+	{
+		"question": "4x - 6x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "-2x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "2x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-2",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-10x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+
+	"taskaag": 
+
+	{
+		"question": "-2p + 3p",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "p",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "-p",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-5p",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-2p",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	"taskaah": 
+
+	{
+		"question": "-10x + x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "-9x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "11x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-11x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	"taskaai": 
+
+	{
+		"question": "5x + 3x + x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "9x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "10x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "11x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	"taskaaj": 
+
+	{
+		"question": "a + a + a",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "3a",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "aaa",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-3a",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaak": 
+
+	{
+		"question": "6a + (-2a)",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "4a",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "-4a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "7a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "8a",
 		      "isCorrectValue": false	
 		    }
 		]

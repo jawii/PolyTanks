@@ -6,7 +6,7 @@ PolyTank.Crate = function(state, x, y, data){
     this.randTextures = [
         { 
             asset: 'shard_wood',
-            health: 20
+            health: 15
         },
         { 
             asset: 'shard_glass',
@@ -14,7 +14,7 @@ PolyTank.Crate = function(state, x, y, data){
         },
         { 
             asset: 'shard_stone',
-            health: 100
+            health: 20
         }
         // { 
         //     asset: 'panel_lightblue',
