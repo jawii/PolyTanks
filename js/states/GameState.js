@@ -21,7 +21,7 @@ PolyTank.GameState = {
 
     //turrets spescifications
     this.playerOne = {
-      playerName: "Bob",
+      playerName: "Player 1",
       score: 0,
       money: 20,
       angleSpeed: 0.5,
@@ -38,7 +38,7 @@ PolyTank.GameState = {
       guiTextPos: {x: 150, y: 530}
     }
     this.playerTwo = {
-      playerName: "Helen",
+      playerName: "Player 2",
       score: 0,
       money: 100,
       angleSpeed: 0.5,
@@ -242,7 +242,7 @@ PolyTank.GameState = {
     var nameTextStyle = {
       boundsAlignV:"top",
       fill: "black",
-      font: "bold 14px Arial",
+      font: "bold 16px Arial Black",
       maxLines: 0,
       shadowBlur:0,
       shadowColor: "rgba(0,0,0,0)",
@@ -257,7 +257,7 @@ PolyTank.GameState = {
     var scoreTextStyle = {
       boundsAlignV:"top",
       fill: "black",
-      font: "bold 14px Arial",
+      font: "bold 22px Arial Black",
       maxLines: 0,
       shadowBlur:0,
       shadowColor: "rgba(0,0,0,0)",
@@ -269,11 +269,26 @@ PolyTank.GameState = {
       wordWrap:false,
       wordWrapWidth:100
       }
+    var style = {
+      boundsAlignV:"top",
+      fill: "black",
+      font: "bold 16px Arial",
+      maxLines: 0,
+      shadowBlur:0,
+      shadowColor: "rgba(0,0,0,0)",
+      shadowOffsetX: 0,
+      shadowOffsetY: 0,
+      stroke: "black",
+      strokeThickness: 0,
+      tabs: 0,
+      wordWrap:true,
+      wordWrapWidth:100
+    }
 
 
     //PLAYERONE
     //name
-    this.playerOneNameText = this.game.add.text(this.playerOne.guiTextPos.x, this.playerOne.guiTextPos.y, this.playerOne.playerName, scoreTextStyle);
+    this.playerOneNameText = this.game.add.text(this.playerOne.guiTextPos.x, this.playerOne.guiTextPos.y, this.playerOne.playerName, nameTextStyle);
     this.playerOneNameText.anchor.setTo(0.5);
 
     //score
@@ -287,66 +302,69 @@ PolyTank.GameState = {
     var playerOneBulletSpeedSprite = this.game.add.sprite(this.playerOneNameText.x - 110, this.playerOneNameText.y + 15, 'bulletSpeedIcon');
     playerOneBulletSpeedSprite.anchor.setTo(0.5);
     playerOneBulletSpeedSprite.scale.setTo(0.5);
-    this.playerBulletSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 19, this.playerOne.bulletSpeed, scoreTextStyle);
+    this.playerBulletSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 19, this.playerOne.bulletSpeed, style);
     this.playerBulletSpeedText.anchor.setTo(0.5);
 
     //anglespeed
     var playerOneAngleSpeedSprite = this.game.add.sprite(this.playerOneNameText.x - 110, this.playerOneNameText.y + 35, 'angleSpeedIcon');
     playerOneAngleSpeedSprite.anchor.setTo(0.5);
     playerOneAngleSpeedSprite.scale.setTo(0.5);
-    this.playerOneAngleSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 38, this.playerOne.angleSpeed, scoreTextStyle);
+    this.playerOneAngleSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 38, this.playerOne.angleSpeed, style);
     this.playerOneAngleSpeedText.anchor.setTo(0.5);
 
     //bullet damage
-    var playerOneBulletDamageSprite = this.game.add.sprite(this.playerOneNameText.x + 60, this.playerOneNameText.y + 15, 'bulletSpeedIcon');
+    var playerOneBulletDamageSprite = this.game.add.sprite(this.playerOneNameText.x + 60, this.playerOneNameText.y + 15, 'bulletDamageIcon');
     playerOneBulletDamageSprite.anchor.setTo(0.5);
     playerOneBulletDamageSprite.scale.setTo(0.5);
-    this.playerOneBulletDamageText = this.game.add.text(this.playerOneNameText.x + 90, this.playerOneNameText.y + 19, this.playerOne.bulletDamage, scoreTextStyle);
+    this.playerOneBulletDamageText = this.game.add.text(this.playerOneNameText.x + 90, this.playerOneNameText.y + 19, this.playerOne.bulletDamage, style);
     this.playerOneBulletDamageText.anchor.setTo(0.5);
     
     //firerate
     var playerOneFireRateSprite = this.game.add.sprite(this.playerOneNameText.x + 60, this.playerOneNameText.y + 35, 'fireRateIcon');
     playerOneFireRateSprite.anchor.setTo(0.5);
     playerOneFireRateSprite.scale.setTo(0.5);
-    this.playerOnefireRateText = this.game.add.text(this.playerOneNameText.x + 90, this.playerOneNameText.y + 38, this.playerOne.fireRate, scoreTextStyle);
+    this.playerOnefireRateText = this.game.add.text(this.playerOneNameText.x + 90, this.playerOneNameText.y + 38, this.playerOne.fireRate, style);
     this.playerOnefireRateText.anchor.setTo(0.5);
 
 
     //PLAYERTWO
+    //name
+    this.playerTwoNameText = this.game.add.text(this.playerTwo.guiTextPos.x, this.playerTwo.guiTextPos.y, this.playerTwo.playerName, nameTextStyle);
+    this.playerTwoNameText.anchor.setTo(0.5);
     //score
     //var playerOneScoreSprite = this.game.add.sprite(this.playerOneNameText.x, this.playerOneNameText.y + 30, 'panel_blue');
     //playerOneScoreSprite.anchor.setTo(0.5);
     //playerOneScoreSprite.scale.setTo(0.35);
-    this.playerOneScoreText = this.game.add.text(this.playerOneNameText.x, this.playerOneNameText.y + 30, this.playerOne.score, scoreTextStyle);
-    this.playerOneScoreText.anchor.setTo(0.5);
+    this.playerTwoScoreText = this.game.add.text(this.playerTwoNameText.x, this.playerTwoNameText.y + 30, this.playerTwo.score, scoreTextStyle);
+    this.playerTwoScoreText.anchor.setTo(0.5);
 
     //bulletSpeed
-    var playerOneBulletSpeedSprite = this.game.add.sprite(this.playerOneNameText.x - 110, this.playerOneNameText.y + 15, 'bulletSpeedIcon');
-    playerOneBulletSpeedSprite.anchor.setTo(0.5);
-    playerOneBulletSpeedSprite.scale.setTo(0.5);
-    this.playerBulletSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 19, this.playerOne.bulletSpeed, scoreTextStyle);
+    var playerTwoBulletSpeedSprite = this.game.add.sprite(this.playerTwoNameText.x - 110, this.playerTwoNameText.y + 15, 'bulletSpeedIcon');
+    playerTwoBulletSpeedSprite.anchor.setTo(0.5);
+    playerTwoBulletSpeedSprite.scale.setTo(0.5);
+    this.playerBulletSpeedText = this.game.add.text(this.playerTwoNameText.x - 75, this.playerTwoNameText.y + 19, this.playerTwo.bulletSpeed, style);
     this.playerBulletSpeedText.anchor.setTo(0.5);
 
     //anglespeed
-    var playerOneAngleSpeedSprite = this.game.add.sprite(this.playerOneNameText.x - 110, this.playerOneNameText.y + 35, 'angleSpeedIcon');
-    playerOneAngleSpeedSprite.anchor.setTo(0.5);
-    playerOneAngleSpeedSprite.scale.setTo(0.5);
-    this.playerOneAngleSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 38, this.playerOne.angleSpeed, scoreTextStyle);
-    this.playerOneAngleSpeedText.anchor.setTo(0.5);
+    var playerTwoAngleSpeedSprite = this.game.add.sprite(this.playerTwoNameText.x - 110, this.playerTwoNameText.y + 35, 'angleSpeedIcon');
+    playerTwoAngleSpeedSprite.anchor.setTo(0.5);
+    playerTwoAngleSpeedSprite.scale.setTo(0.5);
+    this.playerTwoAngleSpeedText = this.game.add.text(this.playerTwoNameText.x - 75, this.playerTwoNameText.y + 38, this.playerTwo.angleSpeed, style);
+    this.playerTwoAngleSpeedText.anchor.setTo(0.5);
 
     //bullet damage
-    var playerOneBulletDamageSprite = this.game.add.sprite(this.playerOneNameText.x + 60, this.playerOneNameText.y + 15, 'bulletSpeedIcon');
-    playerOneBulletDamageSprite.anchor.setTo(0.5);
-    playerOneBulletDamageSprite.scale.setTo(0.5);
-    this.playerOneBulletDamageText = this.game.add.text(this.playerOneNameText.x + 90, this.playerOneNameText.y + 19, this.playerOne.bulletDamage, scoreTextStyle);
-    this.playerOneBulletDamageText.anchor.setTo(0.5);
+    var playerTwoBulletDamageSprite = this.game.add.sprite(this.playerTwoNameText.x + 60, this.playerTwoNameText.y + 15, 'bulletDamageIcon');
+    playerTwoBulletDamageSprite.anchor.setTo(0.5);
+    playerTwoBulletDamageSprite.scale.setTo(0.6);
+    this.playerTwoBulletDamageText = this.game.add.text(this.playerTwoNameText.x + 90, this.playerTwoNameText.y + 19, this.playerTwo.bulletDamage, style);
+    this.playerTwoBulletDamageText.anchor.setTo(0.5);
     
     //firerate
-    var playerOneFireRateSprite = this.game.add.sprite(this.playerOneNameText.x + 60, this.playerOneNameText.y + 35, 'fireRateIcon');
-    playerOneFireRateSprite.anchor.setTo(0.5);
-    playerOneFireRateSprite.scale.setTo(0.5);
-    this.playerOnefireRateText = this.game.add.text(this.playerOneNameText.x + 90, this.playerOneNameText.y + 38, this.playerOne.fireRate, scoreTextStyle);
-    this.playerOnefireRateText.anchor.setTo(0.5);
+    var playerTwoFireRateSprite = this.game.add.sprite(this.playerTwoNameText.x + 60, this.playerTwoNameText.y + 35, 'fireRateIcon');
+    playerTwoFireRateSprite.anchor.setTo(0.5);
+    playerTwoFireRateSprite.scale.setTo(0.5);
+    this.playerTwofireRateText = this.game.add.text(this.playerTwoNameText.x + 90, this.playerTwoNameText.y + 38, this.playerTwo.fireRate, style);
+    this.playerTwofireRateText.anchor.setTo(0.5);
 
   },
   weaponFlames: function(bullet, weapon){
@@ -424,6 +442,21 @@ PolyTank.GameState = {
     }
   //sprite.damage(this.player.bulletDamage, this.player);
     bullet.kill();
+
+    //create tween
+    style = {
+      font: "16px Arial Black",
+      fill: "red"
+    }
+    var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+    var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+    console.log(this);
+    var damageText = PolyTank.GameState.game.add.text(sprite.x, sprite.y, this.player.bulletDamage, style);
+    damageText.anchor.setTo(0.5);
+    var tween = PolyTank.GameState.game.add.tween(damageText).to({x: sprite.x + randDirectionX, y: sprite.y + randDirectionY }, 1000, null, true);
+    tween.onComplete.add(function(){
+      damageText.destroy();
+    }, this);
   },
 
   createCrate: function(givenX, givenY, data){
@@ -514,7 +547,7 @@ PolyTank.GameState = {
     this.countDownTime = this.game.time.create(true);
 
     var style = { 
-      font: "64px Arial", 
+      font: "64px Arial Black", 
       fill: "#0037ff", 
       align: "center" 
     };
@@ -562,12 +595,21 @@ PolyTank.GameState = {
     else{
       scoreText = this.playerTwoScoreText;
     }
+    console.log(scoreText.text)
+    if (scoreText.text > player.score){
+      scoreText.fill = "red";
+    }
+    else{
+      scoreText.fill = "green";
+    }
 
-    var tween = this.game.add.tween(scoreText).from({fontSize: 20}, 1000, null, true);
+    scoreText.text = player.score;
     
-    tween.onComplete.add(function(){
-      scoreText.text = player.score;
-      scoreText.text.fontSize = "14px";
+    var tween = this.game.add.tween(scoreText).from({fontSize: 50}, 1500, null, true);
+    
+    tween.onComplete.add(function(){ 
+      scoreText.text.fontSize = "22px";
+      scoreText.fill = "black";
     }, this);
   
   },

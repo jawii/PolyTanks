@@ -73,6 +73,7 @@ PolyTank.PreloadState = {
 		this.load.image('angleSpeedIcon', 'assets/images/angleSpeedIcon.png');
 		this.load.image('bulletSpeedIcon', 'assets/images/bulletSpeedIcon.png');
 		this.load.image('fireRateIcon', 'assets/images/fireRateIcon.png');
+		this.load.image('bulletDamageIcon', 'assets/images/bulletDamageIcon.png');
 
 		//load sounds
 		this.load.audio('shoot_laser1', ['assets/audio/shoot_laser1.mp3', 'assets/audio/shoot_laser1.ogg']);
