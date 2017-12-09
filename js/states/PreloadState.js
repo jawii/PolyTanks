@@ -22,7 +22,8 @@ PolyTank.PreloadState = {
 		this.load.image('shard_wood', 'assets/images/shard_wood.png');
 		this.load.image('shard_stone', 'assets/images/shard_stone.png');
 		this.load.image('shard_glass', 'assets/images/shard_glass.png');
-		// this.load.image('panel_red', 'assets/images/panel_red.png');
+		this.load.image('panel_red', 'assets/images/panel_red.png');
+		this.load.image('panel_blue', 'assets/images/panel_Blue.png');
 		// this.load.image('panel_wood', 'assets/images/panel_wood.png');
 		// this.load.image('panel_brown', 'assets/images/panel_brown.png');
 		this.load.image('panel_lightblue', 'assets/images/panel_lightblue.png');
@@ -67,6 +68,11 @@ PolyTank.PreloadState = {
 
 		//healthbar
 		this.load.image('healthbar', 'assets/images/healthbar.png');
+
+		//icons
+		this.load.image('angleSpeedIcon', 'assets/images/angleSpeedIcon.png');
+		this.load.image('bulletSpeedIcon', 'assets/images/bulletSpeedIcon.png');
+		this.load.image('fireRateIcon', 'assets/images/fireRateIcon.png');
 
 		//load sounds
 		this.load.audio('shoot_laser1', ['assets/audio/shoot_laser1.mp3', 'assets/audio/shoot_laser1.ogg']);
