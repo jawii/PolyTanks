@@ -167,7 +167,23 @@ PolyTank.Crate.prototype.kill = function(data, player){
     {
         this.player.score -= 1;
         PolyTank.GameState.updateScore(player);
-    }
+        //tween to say that wrong crate
+
+        //create tween
+        style = {
+          font: "20px Arial Black",
+          fill: "red"
+        }
+        var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+        var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+        //console.log(this);
+        var damageText = PolyTank.GameState.game.add.text(this.x, this.y, "wrong", style);
+        damageText.anchor.setTo(0.5);
+        var tween = PolyTank.GameState.game.add.tween(damageText).to({x: this.x + randDirectionX, y: this.y + randDirectionY }, 1000, null, true);
+        tween.onComplete.add(function(){
+          damageText.destroy();
+        }, this);
+        }
 
 };
 

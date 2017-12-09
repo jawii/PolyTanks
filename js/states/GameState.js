@@ -25,9 +25,9 @@ PolyTank.GameState = {
       score: 0,
       money: 20,
       angleSpeed: 0.5,
-      bulletSpeed: 200,
-      fireRate: 200,
-      bulletAmount: 20,
+      bulletSpeed: 100,
+      fireRate: 500,
+      bulletAmount: 50,
       turretLeftKey: Phaser.Keyboard.G,
       turretRightKey: Phaser.Keyboard.H,
       fireButton: Phaser.KeyCode.CONTROL,
@@ -42,8 +42,8 @@ PolyTank.GameState = {
       score: 0,
       money: 100,
       angleSpeed: 0.5,
-      bulletSpeed: 200,
-      fireRate: 1000,
+      bulletSpeed: 100,
+      fireRate: 500,
       bulletAmount: 50,
       turretLeftKey: Phaser.Keyboard.LEFT,
       turretRightKey: Phaser.Keyboard.RIGHT,
@@ -126,10 +126,13 @@ PolyTank.GameState = {
     
     
     //random yLocations for crates
-    this.yLocs = []
+    this.yLocs = [];
 
     //crates group
-    this.crates = this.add.group()
+    this.crates = this.add.group();
+
+    //packs group
+    this.packs = this.add.group();
 
 
     //TASKS
@@ -161,12 +164,24 @@ PolyTank.GameState = {
     this.playerKill = true;
 
 
+    //hardcore first pack
+    var pack = this.createPack();
+    this.createPack();
+    this.createPack();
+    this.createPack();
+    this.createPack();
+    this.createPack();
+
+
 
   },
   update: function() {
     //this.game.physics.arcade.overlap(this.weaponOne.bullets, this.crates, this.damageCrate, null, this);
-    this.game.physics.arcade.overlap(this.weaponOne.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerOne});
+    this.game.physics.arcade.overlap(this.weaponOne.bullets, this.packs, this.collectPack, null, { this: this, 'player': this.playerOne});
+    this.game.physics.arcade.overlap(this.weaponTwo.bullets, this.packs, this.collectPack, null, { this: this, 'player': this.playerTwo});
+    
     this.game.physics.arcade.overlap(this.weaponTwo.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerTwo});
+    this.game.physics.arcade.overlap(this.weaponOne.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerOne});
 
 
     //this.game.physics.arcade.collide(sprite, sprite2, function, null, { this: this, var1: "Var1", var2: "Var2" }); 
@@ -302,14 +317,14 @@ PolyTank.GameState = {
     var playerOneBulletSpeedSprite = this.game.add.sprite(this.playerOneNameText.x - 110, this.playerOneNameText.y + 15, 'bulletSpeedIcon');
     playerOneBulletSpeedSprite.anchor.setTo(0.5);
     playerOneBulletSpeedSprite.scale.setTo(0.5);
-    this.playerBulletSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 19, this.playerOne.bulletSpeed, style);
-    this.playerBulletSpeedText.anchor.setTo(0.5);
+    this.playerOneBulletSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 19, this.playerOne.bulletSpeed, style);
+    this.playerOneBulletSpeedText.anchor.setTo(0.5);
 
-    //anglespeed
+    //anglespeed AngleSpeed * 5 is the Game AngleSpeed
     var playerOneAngleSpeedSprite = this.game.add.sprite(this.playerOneNameText.x - 110, this.playerOneNameText.y + 35, 'angleSpeedIcon');
     playerOneAngleSpeedSprite.anchor.setTo(0.5);
     playerOneAngleSpeedSprite.scale.setTo(0.5);
-    this.playerOneAngleSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 38, this.playerOne.angleSpeed, style);
+    this.playerOneAngleSpeedText = this.game.add.text(this.playerOneNameText.x - 75, this.playerOneNameText.y + 38, this.playerOne.angleSpeed * 10, style);
     this.playerOneAngleSpeedText.anchor.setTo(0.5);
 
     //bullet damage
@@ -319,11 +334,11 @@ PolyTank.GameState = {
     this.playerOneBulletDamageText = this.game.add.text(this.playerOneNameText.x + 90, this.playerOneNameText.y + 19, this.playerOne.bulletDamage, style);
     this.playerOneBulletDamageText.anchor.setTo(0.5);
     
-    //firerate
+    //firerate DIVIDE THE FIRERATE BY 1000 and round it
     var playerOneFireRateSprite = this.game.add.sprite(this.playerOneNameText.x + 60, this.playerOneNameText.y + 35, 'fireRateIcon');
     playerOneFireRateSprite.anchor.setTo(0.5);
     playerOneFireRateSprite.scale.setTo(0.5);
-    this.playerOnefireRateText = this.game.add.text(this.playerOneNameText.x + 90, this.playerOneNameText.y + 38, this.playerOne.fireRate, style);
+    this.playerOnefireRateText = this.game.add.text(this.playerOneNameText.x + 90, this.playerOneNameText.y + 38, this.playerOne.fireRate / 1000, style);
     this.playerOnefireRateText.anchor.setTo(0.5);
 
 
@@ -342,14 +357,14 @@ PolyTank.GameState = {
     var playerTwoBulletSpeedSprite = this.game.add.sprite(this.playerTwoNameText.x - 110, this.playerTwoNameText.y + 15, 'bulletSpeedIcon');
     playerTwoBulletSpeedSprite.anchor.setTo(0.5);
     playerTwoBulletSpeedSprite.scale.setTo(0.5);
-    this.playerBulletSpeedText = this.game.add.text(this.playerTwoNameText.x - 75, this.playerTwoNameText.y + 19, this.playerTwo.bulletSpeed, style);
-    this.playerBulletSpeedText.anchor.setTo(0.5);
+    this.playerTwoBulletSpeedText = this.game.add.text(this.playerTwoNameText.x - 75, this.playerTwoNameText.y + 19, this.playerTwo.bulletSpeed, style);
+    this.playerTwoBulletSpeedText.anchor.setTo(0.5);
 
     //anglespeed
     var playerTwoAngleSpeedSprite = this.game.add.sprite(this.playerTwoNameText.x - 110, this.playerTwoNameText.y + 35, 'angleSpeedIcon');
     playerTwoAngleSpeedSprite.anchor.setTo(0.5);
     playerTwoAngleSpeedSprite.scale.setTo(0.5);
-    this.playerTwoAngleSpeedText = this.game.add.text(this.playerTwoNameText.x - 75, this.playerTwoNameText.y + 38, this.playerTwo.angleSpeed, style);
+    this.playerTwoAngleSpeedText = this.game.add.text(this.playerTwoNameText.x - 75, this.playerTwoNameText.y + 38, this.playerTwo.angleSpeed * 10, style);
     this.playerTwoAngleSpeedText.anchor.setTo(0.5);
 
     //bullet damage
@@ -363,7 +378,7 @@ PolyTank.GameState = {
     var playerTwoFireRateSprite = this.game.add.sprite(this.playerTwoNameText.x + 60, this.playerTwoNameText.y + 35, 'fireRateIcon');
     playerTwoFireRateSprite.anchor.setTo(0.5);
     playerTwoFireRateSprite.scale.setTo(0.5);
-    this.playerTwofireRateText = this.game.add.text(this.playerTwoNameText.x + 90, this.playerTwoNameText.y + 38, this.playerTwo.fireRate, style);
+    this.playerTwofireRateText = this.game.add.text(this.playerTwoNameText.x + 90, this.playerTwoNameText.y + 38, this.playerTwo.fireRate / 1000, style);
     this.playerTwofireRateText.anchor.setTo(0.5);
 
   },
@@ -450,7 +465,7 @@ PolyTank.GameState = {
     }
     var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
     var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
-    console.log(this);
+    //console.log(this);
     var damageText = PolyTank.GameState.game.add.text(sprite.x, sprite.y, this.player.bulletDamage, style);
     damageText.anchor.setTo(0.5);
     var tween = PolyTank.GameState.game.add.tween(damageText).to({x: sprite.x + randDirectionX, y: sprite.y + randDirectionY }, 1000, null, true);
@@ -478,6 +493,38 @@ PolyTank.GameState = {
     }
 
     return newElement;
+  },
+
+  collectPack: function(bullet, pack, player){
+
+    //console.log(arguments);
+    //console.log(pack.data);
+    //console.log(this.player);
+
+    bullet.kill();
+    pack.kill(this, this.player);
+
+  },
+
+  createPack: function(){
+  //create random place in game area
+    var x = this.game.rnd.integerInRange(0, this.game.width);
+
+    var y = 0;
+
+    //look for dead element
+    var newElement = this.crates.getFirstDead();
+
+    if(!newElement || this.packs.children.length < 10){
+      newElement = new PolyTank.Pack(this, x, y);
+      this.packs.add(newElement);
+    }
+    else{
+      newElement.reset(x, y);
+    }
+
+    return newElement;
+
   },
 
   createTask: function(timer, game, taskID){
@@ -595,7 +642,7 @@ PolyTank.GameState = {
     else{
       scoreText = this.playerTwoScoreText;
     }
-    console.log(scoreText.text)
+    //console.log(scoreText.text)
     if (scoreText.text > player.score){
       scoreText.fill = "red";
     }
@@ -614,16 +661,32 @@ PolyTank.GameState = {
   
   },
 
-  updateStats: function(){
+  updateStats: function(player){
+
+    if (player == this.playerOne){
+      this.weaponOne.bulletSpeed = this.playerOne.bulletSpeed;
+      this.playerOneBulletSpeedText.text = this.playerOne.bulletSpeed;
+      this.weaponOne.fireRate = this.playerOne.fireRate;
+    }
+    else if(player == this.playerTwo){
+      this.weaponTwo.bulletSpeed = this.playerTwo.bulletSpeed;
+      this.playerTwoBulletSpeedText.text = this.playerTwo.bulletSpeed;
+      this.weaponTwo.fireRate = this.playerTwo.fireRate;
+    }
+
     this.playerOneNameText.text = this.playerOne.playerName;
-    this.playerOneScoreText.text = this.playerOne.score;
     this.playerOneBulletDamageText.text = this.playerOne.bulletDamage;
-    this.playerOnefireRateText.text = this.playerOne.fireRate;
+    this.playerOnefireRateText.text = this.playerOne.fireRate / 1000;
+    this.playerOneAngleSpeedText.text = Math.floor(this.playerOne.angleSpeed * 10);
+    
 
     this.playerTwoNameText.text = this.playerTwo.playerName;
-    this.playerTwoScoreText.text = this.playerTwo.score;
     this.playerTwoBulletDamageText.text = this.playerTwo.bulletDamage;
-    this.playerTwofireRateText.text = this.playerTwo.fireRate;
+    this.playerTwofireRateText.text = this.playerTwo.fireRate / 1000;
+    this.playerTwoAngleSpeedText.text = Math.floor(this.playerTwo.angleSpeed * 10);
+    
+
+
   },
   randomizeArray: function(array){
     //randomize order
