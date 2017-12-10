@@ -31,11 +31,12 @@ PolyTank.GameState = {
       turretLeftKey: Phaser.Keyboard.G,
       turretRightKey: Phaser.Keyboard.H,
       fireButton: Phaser.KeyCode.CONTROL,
-      bulletType: "bullet1",
+      bulletType: "bullet3",
       bulletScale: 0.2,
-      turretType: 'turret1',
+      turretType: 'turret2',
       bulletDamage: 1,
-      guiTextPos: {x: 150, y: 530}
+      guiTextPos: {x: 150, y: 530},
+      weaponFlames: "shotThin"
     }
     this.playerTwo = {
       playerName: "Player 2",
@@ -48,11 +49,12 @@ PolyTank.GameState = {
       turretLeftKey: Phaser.Keyboard.LEFT,
       turretRightKey: Phaser.Keyboard.RIGHT,
       fireButton: Phaser.KeyCode.SPACEBAR,
-      bulletType: "bullet1",
+      bulletType: "bullet4",
       bulletScale: 0.2,
-      turretType: 'turret1',
+      turretType: 'turret3',
       bulletDamage: 1,
-      guiTextPos: {x: 650, y: 530}
+      guiTextPos: {x: 650, y: 530},
+      weaponFlames: "shotThin"
     }
 
     //first is for weaponFlames and second for turret weapon position
@@ -154,6 +156,7 @@ PolyTank.GameState = {
 
     //timers 
     this.countDownTime = this.game.time.create(true);
+    this.packGeneratorTime = this.game.time.create(true);
 
     //load level
     this.loadLevel();
@@ -165,12 +168,12 @@ PolyTank.GameState = {
 
 
     //hardcore first pack
-    var pack = this.createPack();
-    this.createPack();
-    this.createPack();
-    this.createPack();
-    this.createPack();
-    this.createPack();
+    // var pack = this.createPack();
+    // this.createPack();
+    // this.createPack();
+    // this.createPack();
+    // this.createPack();
+    // this.createPack();
 
 
 
@@ -183,6 +186,9 @@ PolyTank.GameState = {
     this.game.physics.arcade.overlap(this.weaponTwo.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerTwo});
     this.game.physics.arcade.overlap(this.weaponOne.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerOne});
 
+    this.game.physics.arcade.collide(this.weaponOne.bullets, this.weaponTwo.bullets, this.bulletCollide, null, this);
+    //this.game.physics.arcade.collide(this.weaponOne.bullets, this.weaponOne.bullets, this.bulletCollide, null, this);
+    //this.game.physics.arcade.collide(this.weaponTwo.bullets, this.weaponTwo.bullets, this.bulletCollide, null, this);
 
     //this.game.physics.arcade.collide(sprite, sprite2, function, null, { this: this, var1: "Var1", var2: "Var2" }); 
     //PLAYER ONE CONTROLS
@@ -222,6 +228,10 @@ PolyTank.GameState = {
     
   },
 
+  bulletCollide: function(){
+    //console.log("BulletCollide");
+  },
+
 
   render: function(){
     //this.game.debug.spriteInfo(this.playerTwoTurret, 300, 32);
@@ -249,7 +259,6 @@ PolyTank.GameState = {
     weapon.bullets.enableBody = true;
     weapon.bulletGravity.y = 12;
     weapon.bulletRotateToVelocity = true;
-
     return weapon;
   },
   createGui: function(){
@@ -385,18 +394,26 @@ PolyTank.GameState = {
   weaponFlames: function(bullet, weapon){
 
     //var weapon = this.weapon
+    //console.log(arguments);
     //add bullet animation on fire
     //add a sprite for animate fire effect
+    var weaponFlameTexture;
+    if (weapon == this.weaponOne){
+      weaponFlameTexture = PolyTank.GameState.playerOne.weaponFlames;
+    }
+    else{
+      weaponFlameTexture = PolyTank.GameState.playerTwo.weaponFlames;
+    }
     var x = this.trackedSprite.position.x;
     var y = this.trackedSprite.position.y;
     var key = this.trackedSprite.key
     var offset = PolyTank.GameState.turretOffsets[this.trackedSprite.key][0];
-    var gunEffectSprite = this.game.add.sprite(x, y, 'shotThin');
+    var gunEffectSprite = this.game.add.sprite(x, y, weaponFlameTexture);
     gunEffectSprite.anchor.setTo(0.5, offset);
     gunEffectSprite.scale.setTo(1);
     gunEffectSprite.angle = bullet.angle - 90;
 
-    this.game.sound.play('gunshot1');
+    this.game.sound.play('gunshot3');
     //tween sprite and destroy it oncomplete
     tween = this.game.add.tween(gunEffectSprite).to( { alpha: 0 }, 200, "Linear", true);
 
@@ -439,6 +456,13 @@ PolyTank.GameState = {
     this.game.world.sendToBack(this.backgroundSprite);
 
     this.scheduleNextTask(this);
+
+    //start pack generation timer
+    this.packGeneratorTimer();
+
+    // *true* param enables looping
+    var music = new Phaser.Sound(this.game,'backgroundMusic',1,true);
+    music.play();
   },
   //there is too much arguments :)
   damageCrate: function(bullet, sprite, player){
@@ -446,6 +470,7 @@ PolyTank.GameState = {
     //console.log(sprite);
     //console.log(this.player);
     //PASS THE DAMAGE METHOD FOR SPRITE BECAUSE NOW YOU CAN PASS PLAYER TO KILL METHOD
+    PolyTank.GameState.game.sound.play('hit1');
     if (sprite.alive) {
       sprite.health -= this.player.bulletDamage;
       sprite.healthBar.setPercent((sprite.health / sprite.maxHealth) * 100);
@@ -513,9 +538,9 @@ PolyTank.GameState = {
     var y = 0;
 
     //look for dead element
-    var newElement = this.crates.getFirstDead();
+    var newElement = this.packs.getFirstDead();
 
-    if(!newElement || this.packs.children.length < 10){
+    if(!newElement){
       newElement = new PolyTank.Pack(this, x, y);
       this.packs.add(newElement);
     }
@@ -582,7 +607,6 @@ PolyTank.GameState = {
     //no score for players
     this.playerKill = false;
     this.crates.killAll();
-    this.weaponTwo.bullets.killAll();
     this.playerKill = true;
 
     this.questionText.text = "";
@@ -613,18 +637,21 @@ PolyTank.GameState = {
         this.updateTaskQuestion(this, this.currentTaskid);
        }
        else if (counter == 3){
-        text.setText("4");
+        text.setText("5");
        }
        else if (counter == 4) {
-        text.setText("3");
+        text.setText("4");
        }
        else if (counter == 5) {
-        text.setText("2");
+        text.setText("3");
        }
        else if (counter == 6) {
+        text.setText("2");
+       }
+       else if (counter == 7) {
         text.setText("1");
        }
-       else if (counter == 7){
+       else if (counter == 8){
          this.countDownTime.stop();
          text.destroy(); 
        }
@@ -661,29 +688,58 @@ PolyTank.GameState = {
   
   },
 
-  updateStats: function(player){
+  updateStats: function(player, improv, sprite){
 
     if (player == this.playerOne){
       this.weaponOne.bulletSpeed = this.playerOne.bulletSpeed;
       this.playerOneBulletSpeedText.text = this.playerOne.bulletSpeed;
       this.weaponOne.fireRate = this.playerOne.fireRate;
+      this.playerOneNameText.text = this.playerOne.playerName;
+      this.playerOneBulletDamageText.text = this.playerOne.bulletDamage;
+      this.playerOnefireRateText.text = this.playerOne.fireRate / 1000;
+      this.playerOneAngleSpeedText.text = Math.floor(this.playerOne.angleSpeed * 10)
     }
     else if(player == this.playerTwo){
       this.weaponTwo.bulletSpeed = this.playerTwo.bulletSpeed;
       this.playerTwoBulletSpeedText.text = this.playerTwo.bulletSpeed;
       this.weaponTwo.fireRate = this.playerTwo.fireRate;
+      this.playerTwoNameText.text = this.playerTwo.playerName;
+      this.playerTwoBulletDamageText.text = this.playerTwo.bulletDamage;
+      this.playerTwofireRateText.text = this.playerTwo.fireRate / 1000;
+      this.playerTwoAngleSpeedText.text = Math.floor(this.playerTwo.angleSpeed * 10);
     }
 
-    this.playerOneNameText.text = this.playerOne.playerName;
-    this.playerOneBulletDamageText.text = this.playerOne.bulletDamage;
-    this.playerOnefireRateText.text = this.playerOne.fireRate / 1000;
-    this.playerOneAngleSpeedText.text = Math.floor(this.playerOne.angleSpeed * 10);
-    
 
-    this.playerTwoNameText.text = this.playerTwo.playerName;
-    this.playerTwoBulletDamageText.text = this.playerTwo.bulletDamage;
-    this.playerTwofireRateText.text = this.playerTwo.fireRate / 1000;
-    this.playerTwoAngleSpeedText.text = Math.floor(this.playerTwo.angleSpeed * 10);
+    if (improv === "bulletDamage"){
+      improv = "++ DMG"
+    }
+    else if (improv === "fireRate"){
+      improv = "++ FireRate"
+    }
+    else if (improv === "bulletSpeed"){
+      improv = "++ bullet speed"
+    }
+    else if (improv === "angleSpeed"){
+      improv = "++ angle speed"
+    }
+
+    //create tween
+    style = {
+      font: "14px Arial Black",
+      fill: "green"
+    }
+    var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+    var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+    //console.log(this);
+    var improvText = PolyTank.GameState.game.add.text(sprite.x, sprite.y, improv +" increased", style);
+    improvText.anchor.setTo(0.5);
+    var tween = PolyTank.GameState.game.add.tween(improvText).to({x: sprite.x + randDirectionX, y: sprite.y + randDirectionY }, 1000, null, true);
+    tween.onComplete.add(function(){
+      improvText.destroy();
+    }, this);
+
+    //update bullets, turrets and shots
+
     
 
 
@@ -707,6 +763,36 @@ PolyTank.GameState = {
     }
 
     return array
+
+  },
+
+  packGeneratorTimer: function(){
+    this.packGeneratorTime.start();
+
+    var randNumber = this.game.rnd.frac()
+    
+    this.packGeneratorTime.loop(10000, function(){
+        if (randNumber > 0.7){
+
+          this.game.sound.play('packComing');
+          
+          style = {
+          font: "30px Arial",
+          fill: "blue"
+          }
+          var crateText = PolyTank.GameState.game.add.text(this.game.world.width/2, 0, "Crate Coming!", style);
+          crateText.anchor.setTo(0.5);
+          crateText.scale.setTo(0.7);
+          var tween = PolyTank.GameState.game.add.tween(crateText).to({x: this.game.world.width/2 ,y: this.game.world.height/11}, 2000, null, true);
+          tween.onComplete.add(function(){
+            crateText.destroy();
+            this.createPack();
+          }, this);
+          }
+          randNumber = this.game.rnd.frac();
+          console.log(randNumber);
+        
+    }, this);
 
   }
   

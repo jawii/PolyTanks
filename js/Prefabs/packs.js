@@ -3,29 +3,8 @@ var PolyTank = PolyTank || {};
 PolyTank.Pack = function(state, x, y, data){
     
 
-    this.texture = "crateAmmo"
-
-    var data = [
-        { 
-            improvement: 'bulletDamage',
-            amount: 1
-        },
-        { 
-            improvement: "fireRate",
-            amount: 50
-        },
-        { 
-            improvement: "bulletSpeed",
-            amount: 100
-        },
-        {
-            improvement: "angleSpeed",
-            amount: 0.1
-
-        }
-    ];
-
-    var randImprovement = data[Math.floor(Math.random() * data.length)];
+    this.texture = "crateWood"
+ 
 
     //console.log(this.data);
 
@@ -40,7 +19,7 @@ PolyTank.Pack = function(state, x, y, data){
 	this.game.physics.arcade.enable(this);
     this.enableBody = true;
 
-    this.reset(x, y, randImprovement);
+    this.reset(x, y);
 
     
 
@@ -49,16 +28,18 @@ PolyTank.Pack = function(state, x, y, data){
 PolyTank.Pack.prototype = Object.create(Phaser.Sprite.prototype);
 PolyTank.Pack.prototype.constructor = PolyTank.Pack;
 
-PolyTank.Pack.prototype.reset = function(x, y, data) {
+PolyTank.Pack.prototype.reset = function(x, y) {
 
 	Phaser.Sprite.prototype.reset.call(this, x, y);
 
-    this.data = data;
+    this.data = this.getRandomData();
+    //console.log(this.data);
 	//apply velocity
     var randomVelocity = Math.random();
 	this.body.velocity.y = Math.max(70 * Math.random(), 20);
     this.body.bounce.x = 1;
     //this.body.collideWorldBounds = true;
+
 };
 
 PolyTank.Pack.prototype.damage = function(amount, player){
@@ -70,14 +51,45 @@ PolyTank.Pack.prototype.kill = function(data, player){
 
 	Phaser.Sprite.prototype.kill.call(this);
 
-    //console.log(player);
+    //console.log(this.data);
+
     this.player = player;
+    this.game.sound.play('packPick1');
 
     //improve player stats
-    console.log(this.data["improvement"]);
+    //console.log(this.data["improvement"]);
+    if (this.data["improvement"] == "fireRate"){
+        this.player[this.data["improvement"]] -= this.data["amount"];
+    }
+    else{
     this.player[this.data["improvement"]] += this.data["amount"];
-    PolyTank.GameState.updateStats(this.player);
+    }
+    PolyTank.GameState.updateStats(this.player, this.data["improvement"], this);
     
+
+};
+
+PolyTank.Pack.prototype.getRandomData = function(){
+    var data = [
+        { 
+            improvement: 'bulletDamage',
+            amount: 1
+        },
+        { 
+            improvement: "fireRate",
+            amount: 100
+        },
+        { 
+            improvement: "bulletSpeed",
+            amount: 100
+        },
+        {
+            improvement: "angleSpeed",
+            amount: 0.1
+
+        }
+    ];
+    return data[Math.floor(Math.random() * data.length)];
 
 };
 

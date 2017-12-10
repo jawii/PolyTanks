@@ -9,4 +9,4 @@ PolyTank.game.state.add('PreloadState', PolyTank.PreloadState);
 PolyTank.game.state.add('BootState', PolyTank.BootState);
 PolyTank.game.state.add('HomeState', PolyTank.HomeState);
 
-PolyTank.game.state.start('PreloadState');    
+PolyTank.game.state.start('BootState');    

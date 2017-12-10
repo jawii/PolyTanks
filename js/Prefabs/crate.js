@@ -2,7 +2,7 @@ var PolyTank = PolyTank || {};
 
 PolyTank.Crate = function(state, x, y, data){
     
-
+    //TODO make this own function
     this.randTextures = [
         { 
             asset: 'shard_wood',
@@ -148,8 +148,25 @@ PolyTank.Crate.prototype.kill = function(data, player){
 
     //if(this.data.isCorrectValue && PolyTank.GameState.playerKill){
     if(this.data.isCorrectValue){
+        this.game.sound.play('success');
         var scoreText = this.game.add.text(this.game.world.width/2, this.game.world.height/4, "", this.scoreTextStyle);
         
+        //tween compliment
+        style = {
+          font: "16px Arial",
+          fill: "green"
+        }
+        var compliments = ["Stunning!", "Breathtaking!", "Elegant!", "Bold!", "Gracious!", "Charming!", "Majestic!", "Amazing!", "Goood!", "Sparky!"];
+        var compliment = compliments[Math.floor(Math.random() * this.randTextures.length)];
+        var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+        var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+        var complimentText = PolyTank.GameState.game.add.text(this.x, this.y, compliment, style);
+        complimentText.anchor.setTo(0.5);
+        var tween = PolyTank.GameState.game.add.tween(complimentText).to({x: this.x + randDirectionX, y: this.y + randDirectionY }, 2000, null, true);
+        tween.onComplete.add(function(){
+          complimentText.destroy();
+        }, this);
+
         //console.log(this.player);
         this.player.score += 5;
         PolyTank.GameState.updateScore(player);
@@ -165,6 +182,7 @@ PolyTank.Crate.prototype.kill = function(data, player){
     //IF CRATE IS PLAYERKILLED, REMOVE SCORE POINTS
     else if(PolyTank.GameState.playerKill) 
     {
+        this.game.sound.play('wrongCrate2');
         this.player.score -= 1;
         PolyTank.GameState.updateScore(player);
         //tween to say that wrong crate

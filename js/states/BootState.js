@@ -1,6 +1,17 @@
-var ClickMather = ClickMather || {};
+var PolyTank = PolyTank || {};
 
-ClickMather.BootState = {
+PolyTank.BootState = {
+
+
+	preload: function(){
+		this.load.image('preloadBar', 'assets/images/preloadBar.png');
+	},
+
+	create: function(){
+
+
+		PolyTank.game.state.start('PreloadState');  
+	}
 
 
 

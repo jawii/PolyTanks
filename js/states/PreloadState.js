@@ -2,6 +2,12 @@ var PolyTank = PolyTank || {};
 
 PolyTank.PreloadState = {
 
+	init: function(){
+		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+	    this.scale.pageAlignHorizontally = true;
+	    this.scale.pageAlignVertically = true;
+	},
+
 	preload: function(){
 		//background
 		this.load.image('background1', 'assets/images/background1.png');
@@ -76,12 +82,50 @@ PolyTank.PreloadState = {
 		this.load.image('bulletDamageIcon', 'assets/images/bulletDamageIcon.png');
 
 		//load sounds
-		this.load.audio('shoot_laser1', ['assets/audio/shoot_laser1.mp3', 'assets/audio/shoot_laser1.ogg']);
 		this.load.audio('gunshot1', ['assets/audio/gunshot1.mp3', 'assets/audio/gunshot1.ogg']);
+		this.load.audio('gunshot2', ['assets/audio/gunshot2.mp3', 'assets/audio/gunshot2.ogg']);
+		this.load.audio('gunshot3', ['assets/audio/gunshot3.mp3', 'assets/audio/gunshot3.ogg']);
+
+		this.load.audio('packComing', ['assets/audio/packComing.mp3', 'assets/audio/packComing.ogg']);
+
+		this.load.audio('packPick', ['assets/audio/packPick.mp3', 'assets/audio/PackPick.ogg']);
+		this.load.audio('packPick1', ['assets/audio/packPick1.mp3', 'assets/audio/PackPick1.ogg']);
+
+		this.load.audio('wrongCrate', ['assets/audio/wrongCrate.mp3', 'assets/audio/wrongCrate.ogg']);
+		this.load.audio('wrongCrate2', ['assets/audio/wrongCrate2.mp3', 'assets/audio/wrongCrate2.ogg']);
+
+		this.load.audio('hit1', ['assets/audio/hit1.mp3', 'assets/audio/hit1.ogg']);
+
+		this.load.audio('success', ['assets/audio/success.mp3', 'assets/audio/success.ogg']);
+
+		this.load.audio('backgroundMusic', ['assets/audio/backgroundMusic.mp3', 'assets/audio/backgroundMusic.ogg'])
+
+
+
+		//PROGRESS BAR
+		this.progress = this.game.add.text(this.game.world.centerX, this.game.world.width/3, '0%', {fill: 'white'});    
+		this.progress.anchor.setTo(0.5);        
+		//show progress bar    
+		var progressBar = this.game.add.sprite(this.game.world.centerX, this.game.world.width/2, 'preloadBar');     
+		progressBar.anchor.setTo(0.5);
+		progressBar.scale.setTo(0.5);     
+		this.game.load.setPreloadSprite(progressBar);    
+		this.game.load.onFileComplete.add(this.fileComplete, this);
 	},
 
 	create: function(){
+
+ 
+		
+		
+
+
 		PolyTank.game.state.start('GameState');  
+	},
+
+	fileComplete: function (progress, cacheKey, success, totalLoaded, totalFiles) {    
+		this.progress.text = progress+"%";
+
 	}
 
 
