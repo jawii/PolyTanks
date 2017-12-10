@@ -168,7 +168,7 @@ PolyTank.Crate.prototype.kill = function(data, player){
         }, this);
 
         //console.log(this.player);
-        this.player.score += 5;
+        this.player.score += 3;
         PolyTank.GameState.updateScore(player);
         scoreText.anchor.setTo(0.5);
         scoreText.text = this.player.playerName + " scores";

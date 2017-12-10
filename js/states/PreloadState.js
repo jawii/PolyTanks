@@ -9,6 +9,19 @@ PolyTank.PreloadState = {
 	},
 
 	preload: function(){
+
+		//levels
+		this.load.image('level1', 'assets/images/levels1.png');
+		this.load.image('level2', 'assets/images/levels2.png');
+		this.load.image('level3', 'assets/images/levels3.png');
+		this.load.image('level4', 'assets/images/levels4.png');
+		this.load.image('level5', 'assets/images/levels5.png');
+		this.load.image('level6', 'assets/images/levels6.png');
+		this.load.image('level7', 'assets/images/levels7.png');
+		this.load.image('level8', 'assets/images/levels8.png');
+		this.load.image('level9', 'assets/images/levels9.png');
+
+
 		//background
 		this.load.image('background1', 'assets/images/background1.png');
 		this.load.image('background2', 'assets/images/background2.png');
@@ -106,10 +119,10 @@ PolyTank.PreloadState = {
 		this.progress = this.game.add.text(this.game.world.centerX, this.game.world.width/3, '0%', {fill: 'white'});    
 		this.progress.anchor.setTo(0.5);        
 		//show progress bar    
-		var progressBar = this.game.add.sprite(this.game.world.centerX, this.game.world.width/2, 'preloadBar');     
-		progressBar.anchor.setTo(0.5);
-		progressBar.scale.setTo(0.5);     
-		this.game.load.setPreloadSprite(progressBar);    
+		//var progressBar = this.game.add.sprite(this.game.world.centerX, this.game.world.width/2, 'preloadBar');     
+		//progressBar.anchor.setTo(0.5);
+		//progressBar.scale.setTo(0.5);     
+		//this.game.load.setPreloadSprite(progressBar);    
 		this.game.load.onFileComplete.add(this.fileComplete, this);
 	},
 

@@ -64,6 +64,10 @@ PolyTank.Pack.prototype.kill = function(data, player){
     else{
     this.player[this.data["improvement"]] += this.data["amount"];
     }
+    //upgrade level 
+    var string = this.data["improvement"] + "Level"
+    this.player[string] += 1;
+
     PolyTank.GameState.updateStats(this.player, this.data["improvement"], this);
     
 
@@ -81,7 +85,7 @@ PolyTank.Pack.prototype.getRandomData = function(){
         },
         { 
             improvement: "bulletSpeed",
-            amount: 100
+            amount: 50
         },
         {
             improvement: "angleSpeed",
