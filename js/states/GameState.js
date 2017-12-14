@@ -6,6 +6,9 @@ PolyTank.GameState = {
   //initiate game settings
   init: function() {
 
+    //normal level
+    this.isNormalLevel = true;
+
     //use all the area, don't distort scale
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;    
     this.game.scale.pageAlignHorizontally = true;    

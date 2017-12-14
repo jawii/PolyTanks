@@ -277,5 +277,811 @@
 		      "isCorrectValue": false	
 		    }
 		]
+	},
+	
+	"taskaal": 
+
+	{
+		"question": "5x - 2x + 2x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "5x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "9x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "0",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-9x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaam": 
+
+	{
+		"question": "3x - 11x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "-8x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "8x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "10x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-10x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaan": 
+
+	{
+		"question": "-5y + 7y",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "2y",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "-2y",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-12y",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "230y + 1",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaao": 
+
+	{
+		"question": "a - 5a + 2a",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "-2a",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "7a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-7a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "2a",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaap": 
+
+	{
+		"question": "6a - 8a",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "-2a",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "7a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "3a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-2",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaaq": 
+
+	{
+		"question": "14a - 5a",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "9a",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "8a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "7a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "10a",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaar": 
+
+	{
+		"question": "x + 5x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "6x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "5x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "4x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-2",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaas": 
+
+	{
+		"question": "9x - 5x + 3x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "7x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "10x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "2x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "3p",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaat": 
+
+	{
+		"question": "s - s + s",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "s",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "3s",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "ss",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "sss",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaau": 
+
+	{
+		"question": "-2x + x",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "-x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "+2x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-2x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaav": 
+
+	{
+		"question": "-p - (+p)",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "-2p",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "0",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "p",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-p",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaax": 
+
+	{
+		"question": "i + 2i",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "3i",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "iii",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-i",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "xv",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaay": 
+
+	{
+		"question": "dog + dog",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "2 x dog",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "0",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-dog",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "+dog",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaaz": 
+
+	{
+		"question": "3 + (-3) + 3",
+		"level": "1",
+		"crates":
+		[
+			 {
+		      "text": "3",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "9",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-9",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-3",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskaba": 
+
+	{
+		"question": "4a + (2a + 1)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "6a + 1",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "7a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "6a - 1",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-7a",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabb": 
+
+	{
+		"question": "3a + (-a + 2)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "2a + 2",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "-2a + 2",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "5a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "5",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabc": 
+
+	{
+		"question": "+(2x + 2)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "2x + 2",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "4",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-2x - 2",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "5a",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabd": 
+
+	{
+		"question": "5x + 6x + (-x)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "10x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "11x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "9x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-10x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabe": 
+
+	{
+		"question": "5x + 2x + (x + x)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "9x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "9",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "10x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "8x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabf": 
+
+	{
+		"question": "(7a - 1) + (2a + 2)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "9a + 1",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "9a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "10a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "7a + 2",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabg": 
+
+	{
+		"question": "-(- 7x)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "7x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "-7x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "0",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "7",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabh": 
+
+	{
+		"question": "-(-(-7))",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "-7",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "+7",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "1",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-1",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabi": 
+
+	{
+		"question": "(x+y)+(x+y)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "2x + 2y",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "4x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "4y",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-2x - 2y",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabj": 
+
+	{
+		"question": "-(a + b - c)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "-a - b + c",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "a + b - c",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "a + b + c",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "- a - b - c",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabk": 
+
+	{
+		"question": "-(2a - 2y)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "-2a + 2y",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "2a + 2y",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-2a - 2y",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-2a + 2y",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabl": 
+
+	{
+		"question": "(x+y) + (x-y)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "2x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "4xy",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "2x + y",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "xyxy",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabm": 
+
+	{
+		"question": "-a + (-(-a))",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "0",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "1",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabn": 
+
+	{
+		"question": "5x + (4x + 2)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "9x + 2",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "11",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "-9x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "9x + x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabo": 
+
+	{
+		"question": "x + x - (-x) + x",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "4x",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "3x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "2x",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "x",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabp": 
+
+	{
+		"question": "8a + 8a + 8a + 8a",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "32a",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "24a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "36a",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "a8",
+		      "isCorrectValue": false	
+		    }
+		]
+	},
+	
+	"taskabq": 
+
+	{
+		"question": "- (x + 1)",
+		"level": "2",
+		"crates":
+		[
+			 {
+		      "text": "-x - 1",
+		      "isCorrectValue": true
+		    },
+	    	{
+		      "text": "+ x + 1",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "- x + 1",
+		      "isCorrectValue": false	
+		    },
+	    	{
+		      "text": "x - 1",
+		      "isCorrectValue": false	
+		    }
+		]
 	}
 }

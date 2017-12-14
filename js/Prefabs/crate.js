@@ -127,7 +127,7 @@ PolyTank.Crate.prototype.kill = function(data, player){
 
     //particles 
     var emitter = this.game.add.emitter(this.x, this.y, 300);
-    emitter.makeParticles('panel_lightblue_particles');
+    emitter.makeParticles('particles');
     emitter.gravity = 0;
     emitter.alpha = 1;
     //emitter.maxParticleSpeed = 600, 600;
