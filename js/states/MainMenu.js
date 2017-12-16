@@ -18,7 +18,9 @@ PolyTank.MainMenu = {
 			easy: false,
 			normal: false,
 			hard: false,
-			gameLength: "normal"
+			gameLength: "normal",
+			playerOneName: "",
+			playerTwoName: ""
 		};
 
 
@@ -60,18 +62,18 @@ PolyTank.MainMenu = {
         //guideText.setTextBounds(100, 0, 100, 100);
         
         startGameButton.events.onInputDown.add(function(){
-        	if (buttonLevelEasy.selected){
+        	if (this.buttonLevelEasy.selected){
         		this.levelData.easy = true
         	}
-        	if (buttonLevelNormal.selected){
+        	if (this.buttonLevelNormal.selected){
         		this.levelData.normal = true
         	}
-        	if (buttonLevelHard.selected){
+        	if (this.buttonLevelHard.selected){
         		this.levelData.hard = true
         	}
 
         	//if any isnt selected, select all
-        	if (!buttonLevelHard.selected && !buttonLevelHard.selected && !buttonLevelHard.selected)
+        	if (!this.buttonLevelEasy.selected && !this.buttonLevelNormal.selected && !this.buttonLevelHard.selected)
         	{
         		this.levelData.easy = true;
         		this.levelData.normal = true;
@@ -80,13 +82,13 @@ PolyTank.MainMenu = {
         	}
 
         	if(buttonLengthShort.selected){
-        		this.levelData.gameLength = "short"
+        		this.levelData.gameLength = "10"
         	}
         	else if(buttonLengthNormal.selected){
-        		this.levelData.gameLength = "normal"
+        		this.levelData.gameLength = "30"
         	}
         	else if(buttonLengthLong.selected){
-        		this.levelData.gameLength = "long"
+        		this.levelData.gameLength = "50"
         	}
 
             PolyTank.game.state.start('GameState', true, false, this.levelData);
@@ -99,31 +101,31 @@ PolyTank.MainMenu = {
         levelGuideText1.anchor.setTo(0.5);
         levelGuideText1.fontSize = "12px"
         //buttons for level
-        var buttonLevelEasy = this.game.add.button(310, 400, "button2", this.clickHandler);
-        buttonLevelEasy.anchor.setTo(0.5);
-        buttonLevelEasy.scale.setTo(0.4, 0.7);
-        var buttonLevelEasyText = this.game.add.text(buttonLevelEasy.position.x, buttonLevelEasy.position.y, "Easy", this.levelDifficultyTextstyle);
+        this.buttonLevelEasy = this.game.add.button(310, 400, "button2", this.clickHandler);
+        this.buttonLevelEasy.anchor.setTo(0.5);
+        this.buttonLevelEasy.scale.setTo(0.4, 0.7);
+        var buttonLevelEasyText = this.game.add.text(this.buttonLevelEasy.position.x, this.buttonLevelEasy.position.y, "Easy", this.levelDifficultyTextstyle);
         buttonLevelEasyText.anchor.setTo(0.5);
-        buttonLevelEasy.selected = false;
+        this.buttonLevelEasy.selected = false;
 
-        var buttonLevelNormal = this.game.add.button(400, 400, "button2", this.clickHandler);
-        buttonLevelNormal.anchor.setTo(0.5);
-        buttonLevelNormal.scale.setTo(0.4, 0.7);
-        var buttonLevelNormalText = this.game.add.text(buttonLevelNormal.position.x, buttonLevelNormal.position.y, "Normal", this.levelDifficultyTextstyle);
+        this.buttonLevelNormal = this.game.add.button(400, 400, "button2", this.clickHandler);
+        this.buttonLevelNormal.anchor.setTo(0.5);
+        this.buttonLevelNormal.scale.setTo(0.4, 0.7);
+        var buttonLevelNormalText = this.game.add.text(this.buttonLevelNormal.position.x, this.buttonLevelNormal.position.y, "Normal", this.levelDifficultyTextstyle);
         buttonLevelNormalText.anchor.setTo(0.5);
-        buttonLevelNormalText.selected = false;
+        this.buttonLevelNormal.selected = false;
 
-        var buttonLevelHard = this.game.add.button(490, 400, "button2", this.clickHandler);
-        buttonLevelHard.anchor.setTo(0.5);
-        buttonLevelHard.scale.setTo(0.4 , 0.7);
-        var buttonLevelHardText = this.game.add.text(buttonLevelHard.position.x, buttonLevelHard.position.y, "Hard", this.levelDifficultyTextstyle);
+        this.buttonLevelHard = this.game.add.button(490, 400, "button2", this.clickHandler);
+        this.buttonLevelHard.anchor.setTo(0.5);
+        this.buttonLevelHard.scale.setTo(0.4 , 0.7);
+        var buttonLevelHardText = this.game.add.text(this.buttonLevelHard.position.x, this.buttonLevelHard.position.y, "Hard", this.levelDifficultyTextstyle);
         buttonLevelHardText.anchor.setTo(0.5);
-        buttonLevelHardText.selected = false;
+        this.buttonLevelHard.selected = false;
 
 
 
         //excercise guide text
-        var levelGuideText = this.game.add.text(400, 470, "Select game length", guideTextStyle)
+        var levelGuideText = this.game.add.text(400, 470, "Score to Win", guideTextStyle)
         levelGuideText.anchor.setTo(0.5);
 
         //buttons for level length
@@ -143,13 +145,13 @@ PolyTank.MainMenu = {
         this.lengthButtons.add(buttonLengthNormal);
         this.lengthButtons.add(buttonLengthLong);
 
-        var buttonLengthLongText = this.game.add.text(buttonLengthLong.position.x, buttonLengthLong.position.y, "Long", this.levelDifficultyTextstyle);
+        var buttonLengthLongText = this.game.add.text(buttonLengthLong.position.x, buttonLengthLong.position.y, "50", this.levelDifficultyTextstyle);
         buttonLengthLongText.anchor.setTo(0.5);
         buttonLengthLongText.selected = false;
-        var buttonLengthNormalText = this.game.add.text(buttonLengthNormal.position.x, buttonLengthNormal.position.y, "Normal", this.levelDifficultyTextstyle);
+        var buttonLengthNormalText = this.game.add.text(buttonLengthNormal.position.x, buttonLengthNormal.position.y, "30", this.levelDifficultyTextstyle);
         buttonLengthNormalText.anchor.setTo(0.5);
         buttonLengthNormalText.selected = false;
-        var buttonLengthShortText = this.game.add.text(buttonLengthShort.position.x, buttonLengthShort.position.y, "Short", this.levelDifficultyTextstyle);
+        var buttonLengthShortText = this.game.add.text(buttonLengthShort.position.x, buttonLengthShort.position.y, "10", this.levelDifficultyTextstyle);
         buttonLengthShortText.anchor.setTo(0.5);
         buttonLengthShort.selected = false;
 	},
@@ -178,8 +180,9 @@ PolyTank.MainMenu = {
 		button.selected = true;
 		button.loadTexture('button1');
 		button.alpha = 1;
-		
 	}
+
+
 
 
 

@@ -169,6 +169,9 @@ PolyTank.Crate.prototype.kill = function(data, player){
 
         //console.log(this.player);
         this.player.score += 3;
+        this.player.correctKillAmount += 1;
+        this.player.killedAmount += 1;
+
         PolyTank.GameState.updateScore(player);
         scoreText.anchor.setTo(0.5);
         scoreText.text = this.player.playerName + " scores";
@@ -184,6 +187,7 @@ PolyTank.Crate.prototype.kill = function(data, player){
     {
         this.game.sound.play('wrongCrate2');
         this.player.score -= 1;
+        this.player.killedAmount += 1;
         PolyTank.GameState.updateScore(player);
         //tween to say that wrong crate
 

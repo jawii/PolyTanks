@@ -43,7 +43,12 @@ PolyTank.GameState = {
       bulletDamage: 1,
       bulletDamageLevel: 1,
       guiTextPos: {x: 60, y: 530},
-      weaponFlames: "shotThin"
+      weaponFlames: "shotThin",
+      shootAmount: 0,
+      hitAmount: 0,
+      correctKillAmount: 0,
+      killedAmount: 0,
+      packCollected : 0
     }
     this.playerTwo = {
       playerName: "Sinus",
@@ -65,7 +70,12 @@ PolyTank.GameState = {
       bulletDamage: 1,
       bulletDamageLevel: 1,
       guiTextPos: {x: 560, y: 530},
-      weaponFlames: "shotThin"
+      weaponFlames: "shotThin",
+      shootAmount: 0,
+      hitAmount: 0,
+      correctKillAmount: 0,
+      killedAmount: 0,
+      packCollected : 0
     }
 
     //first is for weaponFlames and second for turret weapon position
@@ -93,6 +103,8 @@ PolyTank.GameState = {
     this.playerOneTurret.anchor.setTo(0, 0.5);
     this.playerOneTurret.angle= -90;
     this.playerOneTurret.scale.setTo(0.6);
+    //this is need in weaponflames to detect which player shoots this is not in turret Two
+    this.playerOneTurret.data = "playerOne";
 
     this.playerTwoTurret = this.game.add.sprite(this.WIDTH - 150, this.HEIGHT - 122, this.playerTwo.turretType);
     this.playerTwoTurret.angle= -90;
@@ -194,7 +206,6 @@ PolyTank.GameState = {
     }
     else if(this.playerOneFireButton.isDown){
       this.weaponOne.fire();
-      //this.fireWeapon(this.weaponOne, this.playerOneTurret);
     }
 
     //PLAYER TWO CONTROLS
@@ -206,7 +217,6 @@ PolyTank.GameState = {
     }
     else if(this.playerTwoFireButton.isDown){
       this.weaponTwo.fire();
-      //this.fireWeapon(this.weaponTwo, this.playerTwoTurret);
     }  
 
     //check if all correct enemy destroyed
@@ -242,10 +252,6 @@ PolyTank.GameState = {
       }
 
     }
-    // console.log(easyLevels);
-    // console.log(normalLevels);
-    // console.log(hardLevels);
-    //console.log(tasksIDs);
 
     //get the correct level questions
     if(this.levelData.easy){
@@ -429,17 +435,21 @@ PolyTank.GameState = {
   },
   weaponFlames: function(bullet, weapon){
 
+
     //var weapon = this.weapon
     //console.log(arguments);
     //add bullet animation on fire
     //add a sprite for animate fire effect
     var weaponFlameTexture;
-    if (weapon == this.weaponOne){
+    if (this.trackedSprite.data == "playerOne"){
       weaponFlameTexture = PolyTank.GameState.playerOne.weaponFlames;
+      PolyTank.GameState.playerOne.shootAmount += 1;
     }
     else{
       weaponFlameTexture = PolyTank.GameState.playerTwo.weaponFlames;
+      PolyTank.GameState.playerTwo.shootAmount += 1;
     }
+    //console.log(this.trackedSprite);
     var x = this.trackedSprite.position.x;
     var y = this.trackedSprite.position.y;
     var key = this.trackedSprite.key
@@ -506,6 +516,7 @@ PolyTank.GameState = {
     //console.log(sprite);
     //console.log(this.player);
     //PASS THE DAMAGE METHOD FOR SPRITE BECAUSE NOW YOU CAN PASS PLAYER TO KILL METHOD
+    this.player.hitAmount += 1;
     PolyTank.GameState.game.sound.play('hit1');
     if (sprite.alive) {
       sprite.health -= this.player.bulletDamage;
@@ -621,6 +632,7 @@ PolyTank.GameState = {
     else{
       console.log("No Tasks");
       //TODO GO TO GAME OVER SCREEN
+      this.gameEnd();
     }
   },
   updateTaskQuestion: function(context, taskID){
@@ -722,7 +734,13 @@ PolyTank.GameState = {
       scoreText.text.fontSize = "30px";
       scoreText.fill = "black";
     }, this);
-  
+    scoreText.text.fontSize = "30px";
+    scoreText.fill = "black";
+
+    if(player.score >= this.levelData.gameLength){
+      this.gameEnd();
+    }
+
   },
 
   updateStats: function(player, improv, sprite){
@@ -817,8 +835,6 @@ PolyTank.GameState = {
 
     //update bullets, turrets and shots
 
-    
-
 
   },
   randomizeArray: function(array){
@@ -871,6 +887,11 @@ PolyTank.GameState = {
         
     }, this);
 
+  },
+
+  gameEnd: function(){
+    //console.log("GAME END");
+    PolyTank.game.state.start('GameEnd', true, false, this.levelData, this.playerOne, this.playerTwo);
   }
   
 

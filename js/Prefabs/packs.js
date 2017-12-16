@@ -54,6 +54,7 @@ PolyTank.Pack.prototype.kill = function(data, player){
     //console.log(this.data);
 
     this.player = player;
+    this.player.packCollected += 1;
     this.game.sound.play('packPick1');
 
     //improve player stats

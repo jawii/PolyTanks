@@ -30,9 +30,13 @@ PolyTank.PreloadState = {
 		// this.load.image('background5', 'assets/images/background5.png');
 		this.load.image('background6', 'assets/images/background6.png');
 
-		//load tileset
+		//load tileset for gameState
 		this.load.image('gameTiles', 'assets/images/tiles_spritesheet.png');
 		this.load.tilemap('level', 'assets/images/tilemap.json', null, Phaser.Tilemap.TILED_JSON);
+
+		//load tileset for endState
+		this.load.image('endTiles', 'assets/images/tiles_spritesheet.png');
+		this.load.tilemap('level2', 'assets/images/endMap.json', null, Phaser.Tilemap.TILED_JSON);
 		
 		//load tasks
 		this.load.text('taskData', 'js/tasks/tasks.json');
