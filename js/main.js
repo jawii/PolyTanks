@@ -8,5 +8,6 @@ PolyTank.game.state.add('GameState', PolyTank.GameState);
 PolyTank.game.state.add('PreloadState', PolyTank.PreloadState);
 PolyTank.game.state.add('BootState', PolyTank.BootState);
 PolyTank.game.state.add('HomeState', PolyTank.HomeState);
+PolyTank.game.state.add('MainMenu', PolyTank.MainMenu);
 
 PolyTank.game.state.start('BootState');    

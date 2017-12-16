@@ -4,10 +4,10 @@ var PolyTank = PolyTank || {};
 PolyTank.GameState = {
 
   //initiate game settings
-  init: function() {
+  init: function(levelData) {
 
-    //normal level
-    this.isNormalLevel = true;
+    console.log(levelData);
+    this.levelData = levelData;
 
     //use all the area, don't distort scale
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;    
@@ -24,7 +24,7 @@ PolyTank.GameState = {
 
     //turrets spescifications
     this.playerOne = {
-      playerName: "Player 1",
+      playerName: "Cosin",
       score: 0,
       money: 20,
       angleSpeed: 0.5,
@@ -34,8 +34,8 @@ PolyTank.GameState = {
       fireRate: 600,
       fireRateLevel: 1,
       bulletAmount: 50,
-      turretLeftKey: Phaser.Keyboard.G,
-      turretRightKey: Phaser.Keyboard.H,
+      turretLeftKey: Phaser.Keyboard.X,
+      turretRightKey: Phaser.Keyboard.C,
       fireButton: Phaser.KeyCode.CONTROL,
       bulletType: "bullet3",
       bulletScale: 0.2,
@@ -46,7 +46,7 @@ PolyTank.GameState = {
       weaponFlames: "shotThin"
     }
     this.playerTwo = {
-      playerName: "Player 2",
+      playerName: "Sinus",
       score: 0,
       money: 20,
       angleSpeed: 0.5,
@@ -58,7 +58,7 @@ PolyTank.GameState = {
       bulletAmount: 50,
       turretLeftKey: Phaser.Keyboard.LEFT,
       turretRightKey: Phaser.Keyboard.RIGHT,
-      fireButton: Phaser.KeyCode.SPACEBAR,
+      fireButton: Phaser.KeyCode.PERIOD,
       bulletType: "bullet4",
       bulletScale: 0.2,
       turretType: 'turret3',
@@ -152,18 +152,10 @@ PolyTank.GameState = {
     this.taskData = JSON.parse(this.game.cache.getText('taskData'));
 
     this.questionText = "";
-    this.tasksIDs = [];
     this.currentTaskid = ""
     this.moveNextLevel = false;
 
-    //get the correct level questions
-    for (var object in this.taskData){
-      this.tasksIDs.push(object);
-    };
-
-    //randomize task array
-    this.tasksIDs = this.randomizeArray(this.tasksIDs);
-    
+    this.tasksIDs = this.taskInit();
 
     //timers 
     this.countDownTime = this.game.time.create(true);
@@ -176,15 +168,6 @@ PolyTank.GameState = {
 
     //let the playerkill be true, clearTask method kills players so there it's false
     this.playerKill = true;
-
-
-    //hardcore first pack
-    // var pack = this.createPack();
-    // this.createPack();
-    // this.createPack();
-    // this.createPack();
-    // this.createPack();
-    // this.createPack();
 
 
 
@@ -237,6 +220,54 @@ PolyTank.GameState = {
     }
 
     
+  },
+
+  taskInit: function(){
+
+    var tasksIDs = [];
+
+    var easyLevels = [];
+    var normalLevels = [];
+    var hardLevels = [];
+    
+    for (const key of Object.keys(this.taskData)) {
+      if (this.taskData[key]["level"] == 1){
+        easyLevels.push(key);
+      }
+      else if (this.taskData[key]["level"] == 2){
+        normalLevels.push(key);
+      }
+      else if (this.taskData[key]["level"] == 3){
+        hardLevels.push(key);
+      }
+
+    }
+    // console.log(easyLevels);
+    // console.log(normalLevels);
+    // console.log(hardLevels);
+    //console.log(tasksIDs);
+
+    //get the correct level questions
+    if(this.levelData.easy){
+      // console.log("Searching for easy levels") 
+      tasksIDs.push(...easyLevels);
+    }
+    if(this.levelData.normal)
+    {
+      // console.log("Searching for normal levels")
+      tasksIDs.push(...normalLevels);
+    }
+    if(this.levelData.hard)
+    {
+      // console.log("Searching for hard levels")
+      tasksIDs.push(...hardLevels);
+    }
+
+    //randomize task array
+    tasksIDs = this.randomizeArray(tasksIDs);
+
+    return tasksIDs
+
   },
 
   bulletCollide: function(){
@@ -601,7 +632,8 @@ PolyTank.GameState = {
         wordWrap: false
     };
     var question = this.taskData[taskID].question;
-    this.questionText = this.game.add.text(this.game.width/2, 550, question, style);
+    this.questionText = this.game.add.text(this.game.width/2, 555, question, style);
+    this.questionText.width = Math.min(this.questionText.width, 180);
     this.questionText.alpha = 0.1;
     this.questionText.anchor.setTo(0.5);
     this.game.add.tween(this.questionText).from( { y: -200 }, 2000, Phaser.Easing.Bounce.Out, true);

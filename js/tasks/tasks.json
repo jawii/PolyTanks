@@ -206,7 +206,7 @@
 
 	{
 		"question": "5x + 3x + x",
-		"level": "1",
+		"level": "2",
 		"crates":
 		[
 			 {
@@ -231,7 +231,7 @@
 
 	{
 		"question": "a + a + a",
-		"level": "1",
+		"level": "2",
 		"crates":
 		[
 			 {
@@ -257,7 +257,7 @@
 
 	{
 		"question": "6a + (-2a)",
-		"level": "1",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -283,7 +283,7 @@
 
 	{
 		"question": "5x - 2x + 2x",
-		"level": "1",
+		"level": "2",
 		"crates":
 		[
 			 {
@@ -309,7 +309,7 @@
 
 	{
 		"question": "3x - 11x",
-		"level": "1",
+		"level": "2",
 		"crates":
 		[
 			 {
@@ -335,7 +335,7 @@
 
 	{
 		"question": "-5y + 7y",
-		"level": "1",
+		"level": "2",
 		"crates":
 		[
 			 {
@@ -465,7 +465,7 @@
 
 	{
 		"question": "9x - 5x + 3x",
-		"level": "1",
+		"level": "2",
 		"crates":
 		[
 			 {
@@ -491,7 +491,7 @@
 
 	{
 		"question": "s - s + s",
-		"level": "1",
+		"level": "2",
 		"crates":
 		[
 			 {
@@ -543,7 +543,7 @@
 
 	{
 		"question": "-p - (+p)",
-		"level": "1",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -595,7 +595,7 @@
 
 	{
 		"question": "dog + dog",
-		"level": "1",
+		"level": "2",
 		"crates":
 		[
 			 {
@@ -621,7 +621,7 @@
 
 	{
 		"question": "3 + (-3) + 3",
-		"level": "1",
+		"level": "2",
 		"crates":
 		[
 			 {
@@ -647,7 +647,7 @@
 
 	{
 		"question": "4a + (2a + 1)",
-		"level": "2",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -673,7 +673,7 @@
 
 	{
 		"question": "3a + (-a + 2)",
-		"level": "2",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -725,7 +725,7 @@
 
 	{
 		"question": "5x + 6x + (-x)",
-		"level": "2",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -777,7 +777,7 @@
 
 	{
 		"question": "(7a - 1) + (2a + 2)",
-		"level": "2",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -855,7 +855,7 @@
 
 	{
 		"question": "(x+y)+(x+y)",
-		"level": "2",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -881,7 +881,7 @@
 
 	{
 		"question": "-(a + b - c)",
-		"level": "2",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -907,7 +907,7 @@
 
 	{
 		"question": "-(2a - 2y)",
-		"level": "2",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -959,7 +959,7 @@
 
 	{
 		"question": "-a + (-(-a))",
-		"level": "2",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -1011,7 +1011,7 @@
 
 	{
 		"question": "x + x - (-x) + x",
-		"level": "2",
+		"level": "3",
 		"crates":
 		[
 			 {
@@ -1036,12 +1036,12 @@
 	"taskabp": 
 
 	{
-		"question": "8a + 8a + 8a + 8a",
-		"level": "2",
+		"question": "8a + 8a",
+		"level": "1",
 		"crates":
 		[
 			 {
-		      "text": "32a",
+		      "text": "16a",
 		      "isCorrectValue": true
 		    },
 	    	{

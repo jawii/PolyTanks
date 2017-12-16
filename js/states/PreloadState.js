@@ -86,6 +86,10 @@ PolyTank.PreloadState = {
 		this.load.image('shotThin', 'assets/images/shotThin.png');
 
 
+		//buttons
+		this.load.image("button1", 'assets/images/button_green.png');
+		this.load.image("button2", 'assets/images/button_gray.png');
+
 		//icons
 		// this.load.image('angleSpeedIcon', 'assets/images/angleSpeedIcon.png');
 		// this.load.image('bulletSpeedIcon', 'assets/images/bulletSpeedIcon.png');
@@ -131,7 +135,7 @@ PolyTank.PreloadState = {
 		
 
 
-		PolyTank.game.state.start('GameState');  
+		PolyTank.game.state.start('MainMenu');  
 	},
 
 	fileComplete: function (progress, cacheKey, success, totalLoaded, totalFiles) {    

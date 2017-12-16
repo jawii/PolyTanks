@@ -4,7 +4,7 @@ PolyTank.BootState = {
 
 
 	preload: function(){
-		this.load.image('preloadBar', 'assets/images/preloadBar.png');
+		//this.load.image('preloadBar', 'assets/images/preloadBar.png');
 	},
 
 	create: function(){
