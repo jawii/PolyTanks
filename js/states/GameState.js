@@ -172,6 +172,7 @@ PolyTank.GameState = {
     //timers 
     this.countDownTime = this.game.time.create(true);
     this.packGeneratorTime = this.game.time.create(true);
+    this.endGameTime = this.game.time.create(true);
 
     //load level
     this.loadLevel();
@@ -890,8 +891,15 @@ PolyTank.GameState = {
   },
 
   gameEnd: function(){
-    //console.log("GAME END");
-    PolyTank.game.state.start('GameEnd', true, false, this.levelData, this.playerOne, this.playerTwo);
+
+    var timer = this.game.time.create(true);
+    timer.add(Phaser.Timer.SECOND * 2, function(){
+      PolyTank.game.state.start('GameEnd', true, false, this.levelData, this.playerOne, this.playerTwo);
+    }, this);
+    timer.start();
+      
+
+    
   }
   
 

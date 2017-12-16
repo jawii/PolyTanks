@@ -26,26 +26,34 @@ PolyTank.GameEnd = {
 
 		if(this.playerOne.score > this.playerTwo.score){
 			this.winner = this.playerOne;
+			this.winnerPos = {
+				x: 345,
+				y: 190
+			}
 		}
 		else{
 			this.winner = this.playerTwo
+			this.winnerPos = {
+				x: 470,
+				y: 190
+			}
 		}
 
 		//winner text
 		var winnerStyle = {
             font: '60px Arial',
-            fill: '#000000'
+            fill: 'green'
         };
-        var winneNameStyle = {
-        	font: '40px Arial',
-        	fill: 'green'
-        }
-		var winnerText = this.game.add.text(this.game.width/2, 50, "Game End", winnerStyle);
+        var winnerNameStyle = {
+        	font: '20px Arial',
+        	fill: 'red'
+        };
+		var winnerText = this.game.add.text(this.game.width/2, 100, "Game End", winnerStyle);
 		winnerText.anchor.setTo(0.5);
-		var winnerNameText = this.game.add.text(this.game.width/2, 140, this.winner.playerName + " is the winner", winnerStyle);
+		var winnerNameText = this.game.add.text(this.winnerPos.x, this.winnerPos.y, "WINNER", winnerNameStyle);
 		winnerNameText.anchor.setTo(0.5);
 		//TODO tween winner text
-		this.game.add.tween(winnerNameText).from({fontSize: 50}, 1500, null, true);
+		this.game.add.tween(winnerNameText).to({fontSize: 25}, 2500, null, true);
 
 
 		
@@ -53,7 +61,7 @@ PolyTank.GameEnd = {
 	      boundsAlignH:'center',
 	      boundsAlignV:"top",
 	      fill: "black",
-	      font: "bold 20px Arial",
+	      font: "bold 18px Arial",
 	      maxLines: 0,
 	      shadowBlur:0,
 	      shadowColor: "rgba(0,0,0,0)",
@@ -68,85 +76,91 @@ PolyTank.GameEnd = {
 
 	    //PLAYERONE
 		//shoot amount
-		var playerText = this.game.add.text(200, 220, this.playerOne.playerName + " stats", style);
-		playerText.anchor.setTo(0.5);
-		var shootAmountTextPlayerOne = this.game.add.text(200, 280, "Shoots", style);
-		shootAmountTextPlayerOne.anchor.setTo(0.5);
-		shootAmountTextPlayerOne.setTextBounds(0, 0, 100, 60)
-		this.playerOneShootAmountText = this.game.add.text(shootAmountTextPlayerOne.x + 100, shootAmountTextPlayerOne.y, this.playerOne.shootAmount, style)
+		var playerOneText = this.game.add.text(345, 210, this.playerOne.playerName, style);
+		playerOneText.anchor.setTo(0.5);
+		var playerTwoText = this.game.add.text(470, 210, this.playerTwo.playerName, style);
+		playerTwoText.anchor.setTo(0.5);
+		
+		var shootAmountText = this.game.add.text(235, 245, "Shoots", style);
+		shootAmountText.anchor.setTo(0.5);
+		shootAmountText.setTextBounds(0, 0, 100, 60);
+		
+		var accuracyText = this.game.add.text(shootAmountText.x, shootAmountText.y + 27, "Accuracy (%)", style)
+		accuracyText.anchor.setTo(0.5);
+		accuracyText.setTextBounds(0, 0, 100, 60)
+		
+		var rightAnswersText = this.game.add.text(shootAmountText.x, shootAmountText.y + 54, "Right Answers", style);
+		rightAnswersText.anchor.setTo(0.5);
+		rightAnswersText.setTextBounds(0, 0, 100, 60)
+		
+		var wrongAnswersText = this.game.add.text(shootAmountText.x, shootAmountText.y + 81, "Wrong Answers", style);
+		wrongAnswersText.anchor.setTo(0.5);
+		wrongAnswersText.setTextBounds(0, 0, 100, 60)
+		
+		var packsCollectedText = this.game.add.text(shootAmountText.x, shootAmountText.y + 108, "Packs collected", style);
+		packsCollectedText.anchor.setTo(0.5);
+		packsCollectedText.setTextBounds(0, 0, 100, 60)
+
+		var scoreText = this.game.add.text(shootAmountText.x, shootAmountText.y + 135, "Score", style);
+		scoreText.anchor.setTo(0.5);
+		scoreText.setTextBounds(0, 0, 100, 60);
+
+		this.playerOneShootAmountText = this.game.add.text(shootAmountText.x + 110, shootAmountText.y, this.playerOne.shootAmount, style)
 		this.playerOneShootAmountText.anchor.setTo(0.5);
-
-		//accuracy
 		this.playerOneAccuracy = Math.floor(this.playerOne.hitAmount / this.playerOne.shootAmount * 100);
-		var accuracyPlayerOne = this.game.add.text(shootAmountTextPlayerOne.x, shootAmountTextPlayerOne.y + 30, "Accuracy (%)", style)
-		accuracyPlayerOne.anchor.setTo(0.5);
-		accuracyPlayerOne.setTextBounds(0, 0, 100, 60)
-		this.playerOneAccuracyText = this.game.add.text(accuracyPlayerOne.x + 100, accuracyPlayerOne.y, this.playerOneAccuracy, style)
+		this.playerOneAccuracyText = this.game.add.text(accuracyText.x + 110, accuracyText.y, this.playerOneAccuracy, style)
 		this.playerOneAccuracyText.anchor.setTo(0.5);
-
-		//killed correct crates
-		var rightAnswersPlayerOne = this.game.add.text(shootAmountTextPlayerOne.x, shootAmountTextPlayerOne.y + 60, "Right Answers", style);
-		rightAnswersPlayerOne.anchor.setTo(0.5);
-		rightAnswersPlayerOne.setTextBounds(0, 0, 100, 60)
-		this.playerOneCorrectKillText  = this.game.add.text(rightAnswersPlayerOne.x + 100, rightAnswersPlayerOne.y, this.playerOne.correctKillAmount, style)
+		this.playerOneCorrectKillText  = this.game.add.text(rightAnswersText.x + 110, rightAnswersText.y, this.playerOne.correctKillAmount, style)
 		this.playerOneCorrectKillText.anchor.setTo(0.5);
-
-		//killed wrong crates
 		var wrongAnswers = this.playerOne.killedAmount - this.playerOne.correctKillAmount
-		var wrongAnswersPlayerOne = this.game.add.text(shootAmountTextPlayerOne.x, shootAmountTextPlayerOne.y + 90, "Wrong Answers", style);
-		wrongAnswersPlayerOne.anchor.setTo(0.5);
-		wrongAnswersPlayerOne.setTextBounds(0, 0, 100, 60)
-		this.playerOneWrongAnswersText= this.game.add.text(wrongAnswersPlayerOne.x + 100, wrongAnswersPlayerOne.y, wrongAnswers, style)
+		this.playerOneWrongAnswersText= this.game.add.text(wrongAnswersText.x + 110, wrongAnswersText.y, wrongAnswers, style)
 		this.playerOneWrongAnswersText.anchor.setTo(0.5);
-
-		//pack collected
-		var packsCollectedPlayerOne = this.game.add.text(shootAmountTextPlayerOne.x, shootAmountTextPlayerOne.y + 120, "Packs collected", style);
-		packsCollectedPlayerOne.anchor.setTo(0.5);
-		packsCollectedPlayerOne.setTextBounds(0, 0, 100, 60)
-		this.playerOnePacksCollectedText = this.game.add.text(packsCollectedPlayerOne.x + 100, packsCollectedPlayerOne.y, this.playerOne.packCollected, style)
+		this.playerOnePacksCollectedText = this.game.add.text(packsCollectedText.x + 110, packsCollectedText.y, this.playerOne.packCollected, style)
 		this.playerOnePacksCollectedText.anchor.setTo(0.5);
 
+		this.playerOneScoreText = this.game.add.text(scoreText.x + 110, scoreText.y, this.playerOne.score, style)
+		this.playerOneScoreText.anchor.setTo(0.5);
+
+
+
 		//PLAYERTWO
-		//shoot amount
-		var playerText = this.game.add.text(600, 220, this.playerTwo.playerName + " stats", style);
-		playerText.anchor.setTo(0.5);
-		var shootAmountTextPlayerTwo = this.game.add.text(600, 280, "Shoots", style);
-		shootAmountTextPlayerTwo.anchor.setTo(0.5);
-		shootAmountTextPlayerTwo.setTextBounds(0, 0, 100, 60)
-		this.playerTwoShootAmountText = this.game.add.text(shootAmountTextPlayerTwo.x + 100, shootAmountTextPlayerTwo.y, this.playerTwo.shootAmount, style)
+		this.playerTwoShootAmountText = this.game.add.text(shootAmountText.x + 235, shootAmountText.y, this.playerTwo.shootAmount, style)
 		this.playerTwoShootAmountText.anchor.setTo(0.5);
-
-		//accuracy
 		this.playerTwoAccuracy = Math.floor(this.playerTwo.hitAmount / this.playerTwo.shootAmount * 100);
-		var accuracyPlayerTwo = this.game.add.text(shootAmountTextPlayerTwo.x, shootAmountTextPlayerTwo.y + 30, "Accuracy (%)", style)
-		accuracyPlayerTwo.anchor.setTo(0.5);
-		accuracyPlayerTwo.setTextBounds(0, 0, 100, 60)
-		this.playerTwoAccuracyText = this.game.add.text(accuracyPlayerTwo.x + 100, accuracyPlayerTwo.y, this.playerTwoAccuracy, style)
+		this.playerTwoAccuracyText = this.game.add.text(accuracyText.x + 235, accuracyText.y, this.playerTwoAccuracy, style)
 		this.playerTwoAccuracyText.anchor.setTo(0.5);
-
-		//killed correct crates
-		var rightAnswersPlayerTwo = this.game.add.text(shootAmountTextPlayerTwo.x, shootAmountTextPlayerTwo.y + 60, "Right Answers", style);
-		rightAnswersPlayerTwo.anchor.setTo(0.5);
-		rightAnswersPlayerTwo.setTextBounds(0, 0, 100, 60)
-		this.playerTwoCorrectKillText  = this.game.add.text(rightAnswersPlayerTwo.x + 100, rightAnswersPlayerTwo.y, this.playerTwo.correctKillAmount, style)
+		this.playerTwoCorrectKillText  = this.game.add.text(rightAnswersText.x + 235, rightAnswersText.y, this.playerTwo.correctKillAmount, style)
 		this.playerTwoCorrectKillText.anchor.setTo(0.5);
-
-		//killed wrong crates
 		var wrongAnswers = this.playerTwo.killedAmount - this.playerTwo.correctKillAmount
-		var wrongAnswersPlayerTwo = this.game.add.text(shootAmountTextPlayerTwo.x, shootAmountTextPlayerTwo.y + 90, "Wrong Answers", style);
-		wrongAnswersPlayerTwo.anchor.setTo(0.5);
-		wrongAnswersPlayerTwo.setTextBounds(0, 0, 100, 60)
-		this.playerTwoWrongAnswersText= this.game.add.text(wrongAnswersPlayerTwo.x + 100, wrongAnswersPlayerTwo.y, wrongAnswers, style)
+		this.playerTwoWrongAnswersText= this.game.add.text(wrongAnswersText.x + 235, wrongAnswersText.y, wrongAnswers, style)
 		this.playerTwoWrongAnswersText.anchor.setTo(0.5);
-
-		//pack collected
-		var packsCollectedPlayerTwo = this.game.add.text(shootAmountTextPlayerTwo.x, shootAmountTextPlayerTwo.y + 120, "Packs collected", style);
-		packsCollectedPlayerTwo.anchor.setTo(0.5);
-		packsCollectedPlayerTwo.setTextBounds(0, 0, 100, 60)
-		this.playerTwoPacksCollectedText = this.game.add.text(packsCollectedPlayerTwo.x + 100, packsCollectedPlayerTwo.y, this.playerTwo.packCollected, style)
+		this.playerTwoPacksCollectedText = this.game.add.text(packsCollectedText.x + 235, packsCollectedText.y, this.playerTwo.packCollected, style)
 		this.playerTwoPacksCollectedText.anchor.setTo(0.5);
 
+		this.playerTwoScoreText = this.game.add.text(scoreText.x + 235, scoreText.y, this.playerTwo.score, style)
+		this.playerTwoScoreText.anchor.setTo(0.5);
+
 		this.statsDecoder();
+
+		this.startGameTextstyle = {
+            font: '30px Arial',
+            fill: '#000000'
+        };
+
+		var startGameButton = this.game.add.button(400, 500, 'button1');
+        startGameButton.anchor.setTo(0.5);
+        startGameButton.scale.setTo(1.5);
+        var startGameText =this.game.add.text(startGameButton.position.x, startGameButton.position.y, 'New Game', this.startGameTextstyle);
+        startGameText.anchor.setTo(0.5);
+
+        //var guideTextText = 'You have 60 seconds \n\n to place as many points you can in the Cartesian coordinate grid.';
+        //var guideText = this.game.add.text(this.game.world.width/2.5, this.game.world.height/2, guideTextText, guideTextStyle);
+        //guideText.anchor.setTo(0.5);
+        //guideText.setTextBounds(100, 0, 100, 100);
+        
+        startGameButton.events.onInputDown.add(function(){
+            PolyTank.game.state.start('MainMenu', true, false);
+        }, this);
 	},
 
 	statsDecoder: function(){
@@ -172,16 +186,26 @@ PolyTank.GameEnd = {
 
 
 		if(this.playerOne.correctKillAmount > this.playerTwo.correctKillAmount){
-			this.playerTwoCorrectKillText.fill = "green";
+			this.playerOneCorrectKillText.fill = "green";
 		}
 		else if (this.playerOne.correctKillAmount < this.playerTwo.correctKillAmount){
-			this.playerOneCorrectKillText.fill = "green";
+			this.playerTwoCorrectKillText.fill = "green";
 		}
 		else{
 			this.playerTwoCorrectKillText.fill = "green";
 			this.playerOneCorrectKillText.fill = "green";
 		}
 
+		if(this.playerOne.score > this.playerTwo.score){
+			this.playerOneScoreText.fill = "green";
+		}
+		else if (this.playerOne.score < this.playerTwo.score){
+			this.playerTwoScoreText.fill = "green";
+		}
+		else{
+			this.playerOneScoreText.fill = "green";
+			this.playerTwoScoreText.fill = "green";
+		}
 
 
 
@@ -199,7 +223,7 @@ PolyTank.GameEnd = {
 	    //create tile layers
 	    this.backgroundLayer = this.map.createLayer('backgroundLayer');
 	    // this.collisionLayer = this.map.createLayer('collisionLayer');
-	    // this.collisionLayer.alpha = 0.7;
+	    this.backgroundLayer.alpha = 0.5;
 
 	    //resize the world to fit the layer
 	    // this.collisionLayer.resizeWorld();
@@ -210,7 +234,7 @@ PolyTank.GameEnd = {
 	    this.backgroundSprite.scale.y = 0.8;
 	    //this.backgroundSprite.width = this.game.world.width;
 	    //this.backgroundSprite.height = this.game.world.height;
-	    this.backgroundSprite.autoScroll(4, 0);
+	    this.backgroundSprite.autoScroll(7, 0);
 
 	    //send background to the back
 	    this.game.world.sendToBack(this.backgroundSprite);

@@ -37,29 +37,31 @@ PolyTank.MainMenu = {
             fill: '#ff32c3'
         };
         var guideTextStyle = {
-            font: '20px Arial',
+            font: 'bold 18px Arial',
             fill: '#000000',
-            align: 'center'
+            align: 'center',
+            wordWrap: true,
+            wordWrapWidth: 650
         }
         //GAMENAME AND INSTRUCTION TEXT
         var gameNameText = this.game.add.text(this.game.world.width/2, 80, 'PolyTank', gameTextStyle);
         gameNameText.anchor.setTo(0.5);
         gameNameText.setShadow(5, 5, 'rgba(0,0,0,0.5)', 10);
 
-        var guideText = this.game.add.text(gameNameText.x, gameNameText.y + 70, "Two player Math game!", guideTextStyle);
+        var guideText = this.game.add.text(gameNameText.x, gameNameText.y + 50, "Two player Math game!", guideTextStyle);
         guideText.anchor.setTo(0.5);
 
 
-        var startGameButton = this.game.add.button(400, 300, 'button1');
+        var startGameButton = this.game.add.button(400, 470, 'button1');
         startGameButton.anchor.setTo(0.5);
         startGameButton.scale.setTo(1.5);
         var startGameText =this.game.add.text(startGameButton.position.x, startGameButton.position.y, 'Start Game', this.startGameTextstyle);
         startGameText.anchor.setTo(0.5);
 
-        //var guideTextText = 'You have 60 seconds \n\n to place as many points you can in the Cartesian coordinate grid.';
-        //var guideText = this.game.add.text(this.game.world.width/2.5, this.game.world.height/2, guideTextText, guideTextStyle);
-        //guideText.anchor.setTo(0.5);
-        //guideText.setTextBounds(100, 0, 100, 100);
+        var guideTextText = 'Shoot right answer to get points. Collect crates to upgrade your turret. Player one controls: X, C and Ctrl. Player two controls are arrow keys and period - button.';
+        var guideText = this.game.add.text(400, 200, guideTextText, guideTextStyle);
+        guideText.anchor.setTo(0.5);
+        //guideText.setTextBounds(0, 0, 300, 200);
         
         startGameButton.events.onInputDown.add(function(){
         	if (this.buttonLevelEasy.selected){
@@ -85,37 +87,37 @@ PolyTank.MainMenu = {
         		this.levelData.gameLength = "10"
         	}
         	else if(buttonLengthNormal.selected){
-        		this.levelData.gameLength = "30"
+        		this.levelData.gameLength = "20"
         	}
         	else if(buttonLengthLong.selected){
-        		this.levelData.gameLength = "50"
+        		this.levelData.gameLength = "30"
         	}
 
             PolyTank.game.state.start('GameState', true, false, this.levelData);
         }, this);
 
         //excercise guide text
-        var levelGuideText = this.game.add.text(400, 370, "Select excercise levels", guideTextStyle)
+        var levelGuideText = this.game.add.text(400, 270, "Select excercise levels", guideTextStyle)
         levelGuideText.anchor.setTo(0.5);
-        var levelGuideText1 = this.game.add.text(400, 430, "You can select multiple levels", guideTextStyle)
+        var levelGuideText1 = this.game.add.text(400, 330, "You can select multiple levels", guideTextStyle)
         levelGuideText1.anchor.setTo(0.5);
         levelGuideText1.fontSize = "12px"
         //buttons for level
-        this.buttonLevelEasy = this.game.add.button(310, 400, "button2", this.clickHandler);
+        this.buttonLevelEasy = this.game.add.button(310, 300, "button2", this.clickHandler);
         this.buttonLevelEasy.anchor.setTo(0.5);
         this.buttonLevelEasy.scale.setTo(0.4, 0.7);
         var buttonLevelEasyText = this.game.add.text(this.buttonLevelEasy.position.x, this.buttonLevelEasy.position.y, "Easy", this.levelDifficultyTextstyle);
         buttonLevelEasyText.anchor.setTo(0.5);
         this.buttonLevelEasy.selected = false;
 
-        this.buttonLevelNormal = this.game.add.button(400, 400, "button2", this.clickHandler);
+        this.buttonLevelNormal = this.game.add.button(400, 300, "button2", this.clickHandler);
         this.buttonLevelNormal.anchor.setTo(0.5);
         this.buttonLevelNormal.scale.setTo(0.4, 0.7);
         var buttonLevelNormalText = this.game.add.text(this.buttonLevelNormal.position.x, this.buttonLevelNormal.position.y, "Normal", this.levelDifficultyTextstyle);
         buttonLevelNormalText.anchor.setTo(0.5);
         this.buttonLevelNormal.selected = false;
 
-        this.buttonLevelHard = this.game.add.button(490, 400, "button2", this.clickHandler);
+        this.buttonLevelHard = this.game.add.button(490, 300, "button2", this.clickHandler);
         this.buttonLevelHard.anchor.setTo(0.5);
         this.buttonLevelHard.scale.setTo(0.4 , 0.7);
         var buttonLevelHardText = this.game.add.text(this.buttonLevelHard.position.x, this.buttonLevelHard.position.y, "Hard", this.levelDifficultyTextstyle);
@@ -125,17 +127,17 @@ PolyTank.MainMenu = {
 
 
         //excercise guide text
-        var levelGuideText = this.game.add.text(400, 470, "Score to Win", guideTextStyle)
+        var levelGuideText = this.game.add.text(400, 360, "Select score to Win", guideTextStyle)
         levelGuideText.anchor.setTo(0.5);
 
         //buttons for level length
-        var buttonLengthShort = this.game.add.button(310, 500, "button2", this.clickHandler2);
+        var buttonLengthShort = this.game.add.button(310, 390, "button2", this.clickHandler2);
         buttonLengthShort.anchor.setTo(0.5);
         buttonLengthShort.scale.setTo(0.4, 0.7);
-        var buttonLengthNormal = this.game.add.button(400, 500, "button2", this.clickHandler2);
+        var buttonLengthNormal = this.game.add.button(400, 390, "button2", this.clickHandler2);
         buttonLengthNormal.anchor.setTo(0.5);
         buttonLengthNormal.scale.setTo(0.4, 0.7);
-        var buttonLengthLong = this.game.add.button(490, 500, "button2", this.clickHandler2);
+        var buttonLengthLong = this.game.add.button(490, 390, "button2", this.clickHandler2);
         buttonLengthLong.anchor.setTo(0.5);
         buttonLengthLong.scale.setTo(0.4 , 0.7);
         
@@ -145,15 +147,17 @@ PolyTank.MainMenu = {
         this.lengthButtons.add(buttonLengthNormal);
         this.lengthButtons.add(buttonLengthLong);
 
-        var buttonLengthLongText = this.game.add.text(buttonLengthLong.position.x, buttonLengthLong.position.y, "50", this.levelDifficultyTextstyle);
+        var buttonLengthLongText = this.game.add.text(buttonLengthLong.position.x, buttonLengthLong.position.y, "30", this.levelDifficultyTextstyle);
         buttonLengthLongText.anchor.setTo(0.5);
         buttonLengthLongText.selected = false;
-        var buttonLengthNormalText = this.game.add.text(buttonLengthNormal.position.x, buttonLengthNormal.position.y, "30", this.levelDifficultyTextstyle);
+        var buttonLengthNormalText = this.game.add.text(buttonLengthNormal.position.x, buttonLengthNormal.position.y, "20", this.levelDifficultyTextstyle);
         buttonLengthNormalText.anchor.setTo(0.5);
         buttonLengthNormalText.selected = false;
         var buttonLengthShortText = this.game.add.text(buttonLengthShort.position.x, buttonLengthShort.position.y, "10", this.levelDifficultyTextstyle);
         buttonLengthShortText.anchor.setTo(0.5);
         buttonLengthShort.selected = false;
+
+        this.loadControlGuide();
 	},
 	clickHandler: function(button, pointer){
 		//console.log(arguments);
@@ -180,7 +184,29 @@ PolyTank.MainMenu = {
 		button.selected = true;
 		button.loadTexture('button1');
 		button.alpha = 1;
-	}
+	},
+    loadControlGuide: function(){
+
+        var style = {
+            font: 'bold 16px Arial',
+            fill: '#000000'
+            // align: 'left'
+        }
+        //playerTwoControls
+        var text = this.game.add.text(100, 520, "Player one controls", style);
+        text.anchor.setTo(0.5);
+        text = this.game.add.text(100, 540, "Move turret: X and C", style);
+        text.anchor.setTo(0.5);
+        text = this.game.add.text(100, 560, "Shoot: Ctrl", style)
+        text.anchor.setTo(0.5);
+
+        var text = this.game.add.text(700, 520, "Player two controls", style);
+        text.anchor.setTo(0.5);
+        text = this.game.add.text(700, 540, "Move turret: Arrow keys", style);
+        text.anchor.setTo(0.5);
+        text = this.game.add.text(700, 560, "Shoot: . (period/piste)", style)
+        text.anchor.setTo(0.5);
+    }
 
 
 
