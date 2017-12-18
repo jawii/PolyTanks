@@ -58,7 +58,7 @@ PolyTank.MainMenu = {
         var startGameText =this.game.add.text(startGameButton.position.x, startGameButton.position.y, 'Start Game', this.startGameTextstyle);
         startGameText.anchor.setTo(0.5);
 
-        var guideTextText = 'Shoot right answer to get points. Collect crates to upgrade your turret. Player one controls: X, C and Ctrl. Player two controls are arrow keys and period - button.';
+        var guideTextText = 'Shoot right answer to get points. Collect crates to upgrade your turret. Player one controls: B, V and Z. Player two controls are arrow keys and period - button.';
         var guideText = this.game.add.text(400, 200, guideTextText, guideTextStyle);
         guideText.anchor.setTo(0.5);
         //guideText.setTextBounds(0, 0, 300, 200);
@@ -195,9 +195,9 @@ PolyTank.MainMenu = {
         //playerTwoControls
         var text = this.game.add.text(100, 520, "Player one controls", style);
         text.anchor.setTo(0.5);
-        text = this.game.add.text(100, 540, "Move turret: X and C", style);
+        text = this.game.add.text(100, 540, "Move turret: B and V", style);
         text.anchor.setTo(0.5);
-        text = this.game.add.text(100, 560, "Shoot: Ctrl", style)
+        text = this.game.add.text(100, 560, "Shoot: Z", style)
         text.anchor.setTo(0.5);
 
         var text = this.game.add.text(700, 520, "Player two controls", style);

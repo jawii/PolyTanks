@@ -34,9 +34,9 @@ PolyTank.GameState = {
       fireRate: 600,
       fireRateLevel: 1,
       bulletAmount: 50,
-      turretLeftKey: Phaser.Keyboard.X,
-      turretRightKey: Phaser.Keyboard.C,
-      fireButton: Phaser.KeyCode.CONTROL,
+      turretLeftKey: Phaser.Keyboard.V,
+      turretRightKey: Phaser.Keyboard.B,
+      fireButton: Phaser.KeyCode.Z,
       bulletType: "bullet3",
       bulletScale: 0.2,
       turretType: 'turret3',
@@ -241,7 +241,7 @@ PolyTank.GameState = {
     var normalLevels = [];
     var hardLevels = [];
     
-    for (const key of Object.keys(this.taskData)) {
+    for (var key of Object.keys(this.taskData)) {
       if (this.taskData[key]["level"] == 1){
         easyLevels.push(key);
       }
@@ -253,6 +253,10 @@ PolyTank.GameState = {
       }
 
     }
+
+    console.log(easyLevels.length);
+    console.log(normalLevels.length);
+    console.log(hardLevels.length);
 
     //get the correct level questions
     if(this.levelData.easy){
@@ -508,8 +512,8 @@ PolyTank.GameState = {
     this.packGeneratorTimer();
 
     // *true* param enables looping
-    var music = new Phaser.Sound(this.game,'backgroundMusic',1,true);
-    music.play();
+    this.gameMusic = new Phaser.Sound(this.game,'backgroundMusic',1,true);
+    this.gameMusic.play();
   },
   //there is too much arguments :)
   damageCrate: function(bullet, sprite, player){
@@ -894,6 +898,7 @@ PolyTank.GameState = {
 
     var timer = this.game.time.create(true);
     timer.add(Phaser.Timer.SECOND * 2, function(){
+      this.gameMusic.stop();
       PolyTank.game.state.start('GameEnd', true, false, this.levelData, this.playerOne, this.playerTwo);
     }, this);
     timer.start();

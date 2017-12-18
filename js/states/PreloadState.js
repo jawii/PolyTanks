@@ -101,8 +101,8 @@ PolyTank.PreloadState = {
 		// this.load.image('bulletDamageIcon', 'assets/images/bulletDamageIcon.png');
 
 		//load sounds
-		this.load.audio('gunshot1', ['assets/audio/gunshot1.mp3', 'assets/audio/gunshot1.ogg']);
-		this.load.audio('gunshot2', ['assets/audio/gunshot2.mp3', 'assets/audio/gunshot2.ogg']);
+		// this.load.audio('gunshot1', ['assets/audio/gunshot1.mp3', 'assets/audio/gunshot1.ogg']);
+		// this.load.audio('gunshot2', ['assets/audio/gunshot2.mp3', 'assets/audio/gunshot2.ogg']);
 		this.load.audio('gunshot3', ['assets/audio/gunshot3.mp3', 'assets/audio/gunshot3.ogg']);
 
 		this.load.audio('packComing', ['assets/audio/packComing.mp3', 'assets/audio/packComing.ogg']);
@@ -110,7 +110,7 @@ PolyTank.PreloadState = {
 		this.load.audio('packPick', ['assets/audio/packPick.mp3', 'assets/audio/PackPick.ogg']);
 		this.load.audio('packPick1', ['assets/audio/packPick1.mp3', 'assets/audio/PackPick1.ogg']);
 
-		this.load.audio('wrongCrate', ['assets/audio/wrongCrate.mp3', 'assets/audio/wrongCrate.ogg']);
+		// this.load.audio('wrongCrate', ['assets/audio/wrongCrate.mp3', 'assets/audio/wrongCrate.ogg']);
 		this.load.audio('wrongCrate2', ['assets/audio/wrongCrate2.mp3', 'assets/audio/wrongCrate2.ogg']);
 
 		this.load.audio('hit1', ['assets/audio/hit1.mp3', 'assets/audio/hit1.ogg']);
