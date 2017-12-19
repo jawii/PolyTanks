@@ -29,7 +29,7 @@ PolyTank.MainMenu = {
             fill: '#000000'
         };
         this.levelDifficultyTextstyle = {
-            font: '20px Arial',
+            font: 'bold 20px Arial',
             fill: '#000000'
         };
         var gameTextStyle = {
@@ -61,6 +61,12 @@ PolyTank.MainMenu = {
         var guideTextText = 'Shoot right answer to get points. Collect crates to upgrade your turret. Player one controls: B, V and Z. Player two controls are arrow keys and period - button.';
         var guideText = this.game.add.text(400, 200, guideTextText, guideTextStyle);
         guideText.anchor.setTo(0.5);
+        guideText.addColor('red', 93);
+        guideText.addColor('black', 104);
+        guideText.addColor('red', 130);
+        guideText.addColor('black', 160);
+
+   
         //guideText.setTextBounds(0, 0, 300, 200);
         
         startGameButton.events.onInputDown.add(function(){
@@ -165,7 +171,7 @@ PolyTank.MainMenu = {
 		button.selected = !button.selected;
 		if(button.selected){
 			button.loadTexture('button1');
-			button.alpha = 0.5;
+			button.alpha = 0.8;
 		}
 		else{
 			button.loadTexture('button2');
@@ -193,19 +199,19 @@ PolyTank.MainMenu = {
             // align: 'left'
         }
         //playerTwoControls
-        var text = this.game.add.text(100, 520, "Player one controls", style);
-        text.anchor.setTo(0.5);
-        text = this.game.add.text(100, 540, "Move turret: B and V", style);
-        text.anchor.setTo(0.5);
-        text = this.game.add.text(100, 560, "Shoot: Z", style)
-        text.anchor.setTo(0.5);
+        // var text = this.game.add.text(100, 520, "Player one controls", style);
+        // text.anchor.setTo(0.5);
+        // text = this.game.add.text(100, 540, "Move turret: B and V", style);
+        // text.anchor.setTo(0.5);
+        // text = this.game.add.text(100, 560, "Shoot: Z", style)
+        // text.anchor.setTo(0.5);
 
-        var text = this.game.add.text(700, 520, "Player two controls", style);
-        text.anchor.setTo(0.5);
-        text = this.game.add.text(700, 540, "Move turret: Arrow keys", style);
-        text.anchor.setTo(0.5);
-        text = this.game.add.text(700, 560, "Shoot: . (period/piste)", style)
-        text.anchor.setTo(0.5);
+        // var text = this.game.add.text(700, 520, "Player two controls", style);
+        // text.anchor.setTo(0.5);
+        // text = this.game.add.text(700, 540, "Move turret: Arrow keys", style);
+        // text.anchor.setTo(0.5);
+        // text = this.game.add.text(700, 560, "Shoot: . (period/piste)", style)
+        // text.anchor.setTo(0.5);
     }
 
 

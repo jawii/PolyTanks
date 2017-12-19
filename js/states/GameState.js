@@ -183,6 +183,29 @@ PolyTank.GameState = {
     this.playerKill = true;
 
 
+    //pause menu
+    this.pause_label = this.game.add.text(690, 20, 'Pause', {font: '24px Bungee', fill: 'black'});
+    this.pause_label.inputEnabled = true;
+    this.pause_label.events.onInputUp.add(function () {
+        // When the paus button is pressed, we pause the game
+        if (!this.game.paused == true){
+        this.game.paused = true;
+        this.pause_label.text = "Paused";
+        this.pause_label.fill = "red";
+        }
+        else{
+          this.game.paused = false;
+          this.pause_label.text = "Pause";
+          this.pause_label.fill = "black";
+        }
+
+        // Then add the menu
+        // var menu = game.add.sprite(w/2, h/2, );
+        // menu.anchor.setTo(0.5, 0.5);
+      }, this);
+
+
+
 
   },
   update: function() {
