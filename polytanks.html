@@ -11,10 +11,27 @@
 		    margin: 0px;
 		    background-color: black;
 		  }
+		  @font-face {
+		    font-family: 'Bungee';
+		    src: url('assets/fonts/bungee-regular-webfont.woff2') format('woff2'),
+		         url('assets/fonts/bungee-regular-webfont.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;	
+		}
+		@font-face {
+    		font-family: 'alegreyaregular';
+    		src: url('assets/fonts/alegreya-regular-webfont.woff2') format('woff2'),
+         	url('assets/fonts/alegreya-regular-webfont.woff') format('woff');
+    		font-weight: normal;
+    		font-style: normal;
+		}
+
 		  </style>
 	</head>
 
 	<body>  
+		<div style="font-family:Bungee; position:absolute; left:-10000px">Font Loaded</div>
+		<div style="font-family:alegreyaregular; position:absolute; left:-10000px">Font Loaded</div>
 		<!-- include the main game file -->
 		<script src="js/states/GameState.js"></script>		
 		<script src="js/states/BootState.js"></script>		
