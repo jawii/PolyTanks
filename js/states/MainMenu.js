@@ -25,7 +25,7 @@ PolyTank.MainMenu = {
 
 
 		this.startGameTextstyle = {
-            font: '30px Arial',
+            font: '30px Bungee',
             fill: '#000000'
         };
         this.levelDifficultyTextstyle = {
@@ -33,8 +33,8 @@ PolyTank.MainMenu = {
             fill: '#000000'
         };
         var gameTextStyle = {
-            font: '80px Arial',
-            fill: '#ff32c3'
+            font: '80px Bungee',
+            fill: '#black'
         };
         var guideTextStyle = {
             font: 'bold 18px Arial',
@@ -44,7 +44,7 @@ PolyTank.MainMenu = {
             wordWrapWidth: 650
         }
         //GAMENAME AND INSTRUCTION TEXT
-        var gameNameText = this.game.add.text(this.game.world.width/2, 80, 'PolyTank', gameTextStyle);
+        var gameNameText = this.game.add.text(this.game.world.width/2, 50, 'PolyTank', gameTextStyle);
         gameNameText.anchor.setTo(0.5);
         gameNameText.setShadow(5, 5, 'rgba(0,0,0,0.5)', 10);
 
