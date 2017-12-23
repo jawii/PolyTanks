@@ -3,9 +3,8 @@ var PolyTank = PolyTank || {};
 PolyTank.PreloadState = {
 
 	init: function(){
-		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-	    this.scale.pageAlignHorizontally = true;
-	    this.scale.pageAlignVertically = true;
+		//this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+	    
 	},
 
 	preload: function(){

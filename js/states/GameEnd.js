@@ -32,7 +32,7 @@ PolyTank.GameEnd = {
 			}
 		}
 		else{
-			this.winner = this.playerTwo
+			this.winner = this.playerTwo;
 			this.winnerPos = {
 				x: 470,
 				y: 190
@@ -72,7 +72,7 @@ PolyTank.GameEnd = {
 	      tabs: 0
 	      //wordWrap:true,
 	      //wordWrapWidth:100
-	    }
+	    };
 
 	    //PLAYERONE
 		//shoot amount
@@ -105,39 +105,39 @@ PolyTank.GameEnd = {
 		scoreText.anchor.setTo(0.5);
 		scoreText.setTextBounds(0, 0, 100, 60);
 
-		this.playerOneShootAmountText = this.game.add.text(shootAmountText.x + 110, shootAmountText.y, this.playerOne.shootAmount, style)
+		this.playerOneShootAmountText = this.game.add.text(shootAmountText.x + 110, shootAmountText.y, this.playerOne.shootAmount, style);
 		this.playerOneShootAmountText.anchor.setTo(0.5);
 		this.playerOneAccuracy = Math.floor(this.playerOne.hitAmount / this.playerOne.shootAmount * 100);
-		this.playerOneAccuracyText = this.game.add.text(accuracyText.x + 110, accuracyText.y, this.playerOneAccuracy, style)
+		this.playerOneAccuracyText = this.game.add.text(accuracyText.x + 110, accuracyText.y, this.playerOneAccuracy, style);
 		this.playerOneAccuracyText.anchor.setTo(0.5);
 		this.playerOneCorrectKillText  = this.game.add.text(rightAnswersText.x + 110, rightAnswersText.y, this.playerOne.correctKillAmount, style)
 		this.playerOneCorrectKillText.anchor.setTo(0.5);
-		var wrongAnswers = this.playerOne.killedAmount - this.playerOne.correctKillAmount
-		this.playerOneWrongAnswersText= this.game.add.text(wrongAnswersText.x + 110, wrongAnswersText.y, wrongAnswers, style)
+		var wrongAnswers = this.playerOne.killedAmount - this.playerOne.correctKillAmount;
+		this.playerOneWrongAnswersText= this.game.add.text(wrongAnswersText.x + 110, wrongAnswersText.y, wrongAnswers, style);
 		this.playerOneWrongAnswersText.anchor.setTo(0.5);
 		this.playerOnePacksCollectedText = this.game.add.text(packsCollectedText.x + 110, packsCollectedText.y, this.playerOne.packCollected, style)
 		this.playerOnePacksCollectedText.anchor.setTo(0.5);
 
-		this.playerOneScoreText = this.game.add.text(scoreText.x + 110, scoreText.y, this.playerOne.score, style)
+		this.playerOneScoreText = this.game.add.text(scoreText.x + 110, scoreText.y, this.playerOne.score, style);
 		this.playerOneScoreText.anchor.setTo(0.5);
 
 
 
 		//PLAYERTWO
-		this.playerTwoShootAmountText = this.game.add.text(shootAmountText.x + 235, shootAmountText.y, this.playerTwo.shootAmount, style)
+		this.playerTwoShootAmountText = this.game.add.text(shootAmountText.x + 235, shootAmountText.y, this.playerTwo.shootAmount, style);
 		this.playerTwoShootAmountText.anchor.setTo(0.5);
 		this.playerTwoAccuracy = Math.floor(this.playerTwo.hitAmount / this.playerTwo.shootAmount * 100);
-		this.playerTwoAccuracyText = this.game.add.text(accuracyText.x + 235, accuracyText.y, this.playerTwoAccuracy, style)
+		this.playerTwoAccuracyText = this.game.add.text(accuracyText.x + 235, accuracyText.y, this.playerTwoAccuracy, style);
 		this.playerTwoAccuracyText.anchor.setTo(0.5);
 		this.playerTwoCorrectKillText  = this.game.add.text(rightAnswersText.x + 235, rightAnswersText.y, this.playerTwo.correctKillAmount, style)
 		this.playerTwoCorrectKillText.anchor.setTo(0.5);
-		var wrongAnswers = this.playerTwo.killedAmount - this.playerTwo.correctKillAmount
-		this.playerTwoWrongAnswersText= this.game.add.text(wrongAnswersText.x + 235, wrongAnswersText.y, wrongAnswers, style)
+		var wrongAnswers = this.playerTwo.killedAmount - this.playerTwo.correctKillAmount;
+		this.playerTwoWrongAnswersText= this.game.add.text(wrongAnswersText.x + 235, wrongAnswersText.y, wrongAnswers, style);
 		this.playerTwoWrongAnswersText.anchor.setTo(0.5);
 		this.playerTwoPacksCollectedText = this.game.add.text(packsCollectedText.x + 235, packsCollectedText.y, this.playerTwo.packCollected, style)
 		this.playerTwoPacksCollectedText.anchor.setTo(0.5);
 
-		this.playerTwoScoreText = this.game.add.text(scoreText.x + 235, scoreText.y, this.playerTwo.score, style)
+		this.playerTwoScoreText = this.game.add.text(scoreText.x + 235, scoreText.y, this.playerTwo.score, style);
 		this.playerTwoScoreText.anchor.setTo(0.5);
 
 		this.statsDecoder();

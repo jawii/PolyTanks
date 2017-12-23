@@ -155,11 +155,11 @@ PolyTank.Crate.prototype.kill = function(data, player){
         style = {
           font: "16px Arial",
           fill: "green"
-        }
+        };
         var compliments = ["Stunning!", "Breathtaking!", "Elegant!", "Bold!", "Gracious!", "Charming!", "Majestic!", "Amazing!", "Goood!", "Sparky!"];
         var compliment = compliments[Math.floor(Math.random() * this.randTextures.length)];
-        var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
-        var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+        var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);
+        var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);
         var complimentText = PolyTank.GameState.game.add.text(this.x, this.y, compliment, style);
         complimentText.anchor.setTo(0.5);
         var tween = PolyTank.GameState.game.add.tween(complimentText).to({x: this.x + randDirectionX, y: this.y + randDirectionY }, 2000, null, true);
@@ -196,8 +196,8 @@ PolyTank.Crate.prototype.kill = function(data, player){
           font: "20px Arial Black",
           fill: "red"
         }
-        var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
-        var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+        var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);
+        var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);
         //console.log(this);
         var damageText = PolyTank.GameState.game.add.text(this.x, this.y, "wrong", style);
         damageText.anchor.setTo(0.5);

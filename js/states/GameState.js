@@ -9,12 +9,6 @@ PolyTank.GameState = {
     console.log(levelData);
     this.levelData = levelData;
 
-    //use all the area, don't distort scale
-    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;    
-    this.game.scale.pageAlignHorizontally = true;    
-    this.game.scale.pageAlignVeritcally = true;    
-    this.game.scale.refresh();
-    
     //initiate physics system
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -353,7 +347,7 @@ PolyTank.GameState = {
       tabs: 0,
       wordWrap:false,
       wordWrapWidth:100
-    }
+    };
     var scoreTextStyle = {
       boundsAlignV:"top",
       fill: "black",
@@ -368,7 +362,7 @@ PolyTank.GameState = {
       tabs: 0,
       wordWrap:false,
       wordWrapWidth:100
-      }
+      };
     var style = {
       boundsAlignH:'right',
       boundsAlignV:"top",
@@ -384,7 +378,7 @@ PolyTank.GameState = {
       tabs: 0
       //wordWrap:true,
       //wordWrapWidth:100
-    }
+    };
 
 
     //PLAYERONE
@@ -397,31 +391,31 @@ PolyTank.GameState = {
 
     //bulletSpeed
     this.playerOneBulletSpeedText = this.game.add.text(this.playerOneNameText.x + 60, this.playerOneNameText.y - 15, "Bullet Speed", style);
-    this.playerOneBulletSpeedText.setTextBounds(0, 0, 65, 60)
+    this.playerOneBulletSpeedText.setTextBounds(0, 0, 65, 60);
     this.playerOneBulletSpeedSprite = this.game.add.sprite(this.playerOneBulletSpeedText.x + 120,this.playerOneBulletSpeedText.y + 6, "level1");
     this.playerOneBulletSpeedSprite.anchor.setTo(0.5);
     this.playerOneBulletSpeedSprite.scale.setTo(0.7);
 
     //anglespeed
     this.playerOneAngleSpeedText = this.game.add.text(this.playerOneNameText.x + 60, this.playerOneNameText.y + 5, "Turret Speed", style);
-    this.playerOneAngleSpeedText.setTextBounds(0, 0, 65, 60)
+    this.playerOneAngleSpeedText.setTextBounds(0, 0, 65, 60);
     this.playerOneAngleSpeedSprite = this.game.add.sprite(this.playerOneAngleSpeedText.x + 120,this.playerOneAngleSpeedText.y + 6, "level1");
     this.playerOneAngleSpeedSprite.anchor.setTo(0.5);
-    this.playerOneAngleSpeedSprite.scale.setTo(0.7)
+    this.playerOneAngleSpeedSprite.scale.setTo(0.7);
 
     // //bullet damage
     this.playerOneBulletDamageText = this.game.add.text(this.playerOneNameText.x + 60, this.playerOneNameText.y + 25, "Bullet Damage", style);
-    this.playerOneBulletDamageText.setTextBounds(0, 0, 65, 60)
+    this.playerOneBulletDamageText.setTextBounds(0, 0, 65, 60);
     this.playerOneBulletDamageSprite = this.game.add.sprite(this.playerOneBulletDamageText.x + 120,this.playerOneBulletDamageText.y + 6, "level1");
     this.playerOneBulletDamageSprite.anchor.setTo(0.5);
-    this.playerOneBulletDamageSprite.scale.setTo(0.7)
+    this.playerOneBulletDamageSprite.scale.setTo(0.7);
     
     // //firerate
     this.playerOnefireRateText = this.game.add.text(this.playerOneNameText.x + 60, this.playerOneNameText.y + 45, "Fire Rate", style);
-    this.playerOnefireRateText.setTextBounds(0, 0, 65, 60)
+    this.playerOnefireRateText.setTextBounds(0, 0, 65, 60);
     this.playerOnefireRateSprite = this.game.add.sprite(this.playerOnefireRateText.x + 120,this.playerOnefireRateText.y + 6, "level1");
     this.playerOnefireRateSprite.anchor.setTo(0.5);
-    this.playerOnefireRateSprite.scale.setTo(0.7)
+    this.playerOnefireRateSprite.scale.setTo(0.7);
 
 
     //PLAYERTWO
@@ -434,28 +428,28 @@ PolyTank.GameState = {
 
     //bulletSpeed
     this.playerTwoBulletSpeedText = this.game.add.text(this.playerTwoNameText.x + 60, this.playerTwoNameText.y - 15, "Bullet Speed", style);
-    this.playerTwoBulletSpeedText.setTextBounds(0, 0, 65, 60)
+    this.playerTwoBulletSpeedText.setTextBounds(0, 0, 65, 60);
     this.playerTwoBulletSpeedSprite = this.game.add.sprite(this.playerTwoBulletSpeedText.x + 120,this.playerTwoBulletSpeedText.y + 6, "level1");
     this.playerTwoBulletSpeedSprite.anchor.setTo(0.5);
     this.playerTwoBulletSpeedSprite.scale.setTo(0.7);
 
     //anglespeed
     this.playerTwoAngleSpeedText = this.game.add.text(this.playerTwoNameText.x + 60, this.playerTwoNameText.y + 5, "Turret Speed", style);
-    this.playerTwoAngleSpeedText.setTextBounds(0, 0, 65, 60)
+    this.playerTwoAngleSpeedText.setTextBounds(0, 0, 65, 60);
     this.playerTwoAngleSpeedSprite = this.game.add.sprite(this.playerTwoAngleSpeedText.x + 120,this.playerTwoAngleSpeedText.y + 6, "level1");
     this.playerTwoAngleSpeedSprite.anchor.setTo(0.5);
-    this.playerTwoAngleSpeedSprite.scale.setTo(0.7)
+    this.playerTwoAngleSpeedSprite.scale.setTo(0.7);
 
     // //bullet damage
     this.playerTwoBulletDamageText = this.game.add.text(this.playerTwoNameText.x + 60, this.playerTwoNameText.y + 25, "Bullet Damage", style);
-    this.playerTwoBulletDamageText.setTextBounds(0, 0, 65, 60)
+    this.playerTwoBulletDamageText.setTextBounds(0, 0, 65, 60);
     this.playerTwoBulletDamageSprite = this.game.add.sprite(this.playerTwoBulletDamageText.x + 120,this.playerTwoBulletDamageText.y + 6, "level1");
     this.playerTwoBulletDamageSprite.anchor.setTo(0.5);
-    this.playerTwoBulletDamageSprite.scale.setTo(0.7)
+    this.playerTwoBulletDamageSprite.scale.setTo(0.7);
     
     // //firerate
     this.playerTwofireRateText = this.game.add.text(this.playerTwoNameText.x + 60, this.playerTwoNameText.y + 45, "Fire Rate", style);
-    this.playerTwofireRateText.setTextBounds(0, 0, 65, 60)
+    this.playerTwofireRateText.setTextBounds(0, 0, 65, 60);
     this.playerTwofireRateSprite = this.game.add.sprite(this.playerTwofireRateText.x + 120,this.playerTwofireRateText.y + 6, "level1");
     this.playerTwofireRateSprite.anchor.setTo(0.5);
     this.playerTwofireRateSprite.scale.setTo(0.7)
@@ -480,7 +474,7 @@ PolyTank.GameState = {
     //console.log(this.trackedSprite);
     var x = this.trackedSprite.position.x;
     var y = this.trackedSprite.position.y;
-    var key = this.trackedSprite.key
+    var key = this.trackedSprite.key;
     var offset = PolyTank.GameState.turretOffsets[this.trackedSprite.key][0];
     var gunEffectSprite = this.game.add.sprite(x, y, weaponFlameTexture);
     gunEffectSprite.anchor.setTo(0.5, offset);
@@ -563,8 +557,8 @@ PolyTank.GameState = {
       font: "16px Arial Black",
       fill: "red"
     }
-    var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
-    var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);;
+    var randDirectionX = PolyTank.GameState.game.rnd.integerInRange(-20, 20);
+    var randDirectionY = PolyTank.GameState.game.rnd.integerInRange(-20, 20);
     //console.log(this);
     var damageText = PolyTank.GameState.game.add.text(sprite.x, sprite.y, this.player.bulletDamage, style);
     damageText.anchor.setTo(0.5);
@@ -890,7 +884,7 @@ PolyTank.GameState = {
   packGeneratorTimer: function(){
     this.packGeneratorTime.start();
 
-    var randNumber = this.game.rnd.frac()
+    var randNumber = this.game.rnd.frac();
     
     this.packGeneratorTime.loop(12000, function(){
         if (randNumber > 0.7){
