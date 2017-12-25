@@ -210,7 +210,7 @@ PolyTank.GameState = {
     this.game.physics.arcade.overlap(this.weaponTwo.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerTwo});
     this.game.physics.arcade.overlap(this.weaponOne.bullets, this.crates, this.damageCrate, null, { this: this, 'player': this.playerOne});
 
-    this.game.physics.arcade.collide(this.weaponOne.bullets, this.weaponTwo.bullets, this.bulletCollide, null, this);
+    // this.game.physics.arcade.collide(this.weaponOne.bullets, this.weaponTwo.bullets, this.bulletCollide, null, this);
     //this.game.physics.arcade.collide(this.weaponOne.bullets, this.weaponOne.bullets, this.bulletCollide, null, this);
     //this.game.physics.arcade.collide(this.weaponTwo.bullets, this.weaponTwo.bullets, this.bulletCollide, null, this);
 
