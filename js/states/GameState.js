@@ -529,7 +529,7 @@ PolyTank.GameState = {
     this.packGeneratorTimer();
 
     // *true* param enables looping
-    this.gameMusic = new Phaser.Sound(this.game,'backgroundMusic',1,true);
+    this.gameMusic = new Phaser.Sound(this.game,'backgroundMusic', 0.5 ,true);
     this.gameMusic.play();
   },
   //there is too much arguments :)
