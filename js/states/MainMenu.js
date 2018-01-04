@@ -66,6 +66,13 @@ PolyTank.MainMenu = {
         guideText.addColor('red', 130);
         guideText.addColor('black', 160);
 
+        var copyRigthTextStyle = {
+          font: "14px aldrichregular",
+          fill: "black"
+        }
+        var copyRightText = this.game.add.text(this.game.world.width - 80, this.game.world.height - 20, '\u00A9' + "Jaakko Kenttä", copyRigthTextStyle);          
+        copyRightText.anchor.setTo(0.5);
+
    
         //guideText.setTextBounds(0, 0, 300, 200);
         

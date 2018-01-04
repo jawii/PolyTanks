@@ -56,6 +56,14 @@ PolyTank.GameEnd = {
 		this.game.add.tween(winnerNameText).to({fontSize: 25}, 2500, null, true);
 
 
+		var copyRigthTextStyle = {
+          font: "14px aldrichregular",
+          fill: "black"
+        }
+        var copyRightText = this.game.add.text(this.game.world.width - 80, this.game.world.height - 20, '\u00A9' + "Jaakko Kenttä", copyRigthTextStyle);          
+        copyRightText.anchor.setTo(0.5);
+
+
 		
 		var style = {
 	      boundsAlignH:'center',

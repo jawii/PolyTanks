@@ -507,7 +507,7 @@ PolyTank.GameState = {
     this.collisionLayer.alpha = 0.7;
 
     //collision layer should be collisionlayer
-    this.map.setCollisionBetween(1, 160, true, 'collisionLayer');
+    // this.map.setCollisionBetween(1, 160, true, 'collisionLayer');
 
     //resize the world to fit the layer
     this.collisionLayer.resizeWorld();
@@ -652,7 +652,6 @@ PolyTank.GameState = {
       this.countDownTime.onComplete.add(this.createTask, null, 0, this, taskID)
     }
     else{
-      console.log("No Tasks");
       //TODO GO TO GAME OVER SCREEN
       this.gameEnd();
     }
@@ -856,8 +855,6 @@ PolyTank.GameState = {
     }, this);
 
     //update bullets, turrets and shots
-
-
   },
   randomizeArray: function(array){
     //randomize order
@@ -886,7 +883,7 @@ PolyTank.GameState = {
 
     var randNumber = this.game.rnd.frac();
     
-    this.packGeneratorTime.loop(12000, function(){
+    this.packGeneratorTime.loop(8000, function(){
         if (randNumber > 0.7){
 
           this.game.sound.play('packComing');

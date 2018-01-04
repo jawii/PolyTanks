@@ -132,12 +132,6 @@ PolyTank.PreloadState = {
 	},
 
 	create: function(){
-
- 
-		
-		
-
-
 		PolyTank.game.state.start('MainMenu');  
 	},
 
