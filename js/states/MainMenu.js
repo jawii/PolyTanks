@@ -29,7 +29,7 @@ PolyTank.MainMenu = {
             fill: '#000000'
         };
         this.levelDifficultyTextstyle = {
-            font: 'bold 20px Arial',
+            font: 'bold 16px Arial',
             fill: '#000000'
         };
         var gameTextStyle = {
@@ -48,23 +48,27 @@ PolyTank.MainMenu = {
         gameNameText.anchor.setTo(0.5);
         gameNameText.setShadow(5, 5, 'rgba(0,0,0,0.5)', 10);
 
-        var guideText = this.game.add.text(gameNameText.x, gameNameText.y + 50, "Two player Math game!", guideTextStyle);
+        var guideText = this.game.add.text(gameNameText.x, gameNameText.y + 50, "Kahden pelaajan polynomipeli", guideTextStyle);
         guideText.anchor.setTo(0.5);
 
 
         var startGameButton = this.game.add.button(400, 470, 'button1');
         startGameButton.anchor.setTo(0.5);
         startGameButton.scale.setTo(1.5);
-        var startGameText =this.game.add.text(startGameButton.position.x, startGameButton.position.y, 'Start Game', this.startGameTextstyle);
+        var startGameText =this.game.add.text(startGameButton.position.x, startGameButton.position.y, 'Aloita!', this.startGameTextstyle);
         startGameText.anchor.setTo(0.5);
 
-        var guideTextText = 'Shoot right answer to get points. Collect crates to upgrade your turret. Player one controls: B, V and Z. Player two controls are arrow keys and period - button.';
+        // var guideTextText = 'Shoot right answer to get points. Collect crates to upgrade your turret. Player one controls: B, V and Z. Player two controls are arrow keys and period - button.';
+        var guideTextText = 'Ammu oikeita vastauksia ja kehitä asettasi keräämällä kehityslaatikoita. Pelaajan yksi näppäimet ovat B, V ja Z. Pelaaja kaksi ohjaa tykkiä nuolinäppäimistä ja ampuu piste - näppäimestä.';
         var guideText = this.game.add.text(400, 200, guideTextText, guideTextStyle);
         guideText.anchor.setTo(0.5);
-        guideText.addColor('red', 93);
-        guideText.addColor('black', 104);
-        guideText.addColor('red', 130);
-        guideText.addColor('black', 160);
+        guideText.addColor('red', 93+9);
+        guideText.addColor('black', 104 +9);
+        guideText.addColor('red', 130 + 9);
+        guideText.addColor('black', 156);
+        guideText.addColor('red', 165);
+        guideText.addColor('black', 171);
+
 
         var copyRigthTextStyle = {
           font: "14px aldrichregular",
@@ -110,37 +114,37 @@ PolyTank.MainMenu = {
         }, this);
 
         //excercise guide text
-        var levelGuideText = this.game.add.text(400, 270, "Select excercise levels", guideTextStyle)
+        var levelGuideText = this.game.add.text(400, 270, "Valitse tehtävien vaikeustaso.", guideTextStyle)
         levelGuideText.anchor.setTo(0.5);
-        var levelGuideText1 = this.game.add.text(400, 330, "You can select multiple levels", guideTextStyle)
+        var levelGuideText1 = this.game.add.text(400, 330, "Voit valita useita tasoja.", guideTextStyle)
         levelGuideText1.anchor.setTo(0.5);
         levelGuideText1.fontSize = "12px"
         //buttons for level
         this.buttonLevelEasy = this.game.add.button(310, 300, "button2", this.clickHandler);
         this.buttonLevelEasy.anchor.setTo(0.5);
         this.buttonLevelEasy.scale.setTo(0.4, 0.7);
-        var buttonLevelEasyText = this.game.add.text(this.buttonLevelEasy.position.x, this.buttonLevelEasy.position.y, "Easy", this.levelDifficultyTextstyle);
+        var buttonLevelEasyText = this.game.add.text(this.buttonLevelEasy.position.x, this.buttonLevelEasy.position.y, "Helppo", this.levelDifficultyTextstyle);
         buttonLevelEasyText.anchor.setTo(0.5);
         this.buttonLevelEasy.selected = false;
 
         this.buttonLevelNormal = this.game.add.button(400, 300, "button2", this.clickHandler);
         this.buttonLevelNormal.anchor.setTo(0.5);
         this.buttonLevelNormal.scale.setTo(0.4, 0.7);
-        var buttonLevelNormalText = this.game.add.text(this.buttonLevelNormal.position.x, this.buttonLevelNormal.position.y, "Normal", this.levelDifficultyTextstyle);
+        var buttonLevelNormalText = this.game.add.text(this.buttonLevelNormal.position.x, this.buttonLevelNormal.position.y, "Normaali", this.levelDifficultyTextstyle);
         buttonLevelNormalText.anchor.setTo(0.5);
         this.buttonLevelNormal.selected = false;
 
         this.buttonLevelHard = this.game.add.button(490, 300, "button2", this.clickHandler);
         this.buttonLevelHard.anchor.setTo(0.5);
         this.buttonLevelHard.scale.setTo(0.4 , 0.7);
-        var buttonLevelHardText = this.game.add.text(this.buttonLevelHard.position.x, this.buttonLevelHard.position.y, "Hard", this.levelDifficultyTextstyle);
+        var buttonLevelHardText = this.game.add.text(this.buttonLevelHard.position.x, this.buttonLevelHard.position.y, "Vaikea", this.levelDifficultyTextstyle);
         buttonLevelHardText.anchor.setTo(0.5);
         this.buttonLevelHard.selected = false;
 
 
 
         //excercise guide text
-        var levelGuideText = this.game.add.text(400, 360, "Select score to Win", guideTextStyle)
+        var levelGuideText = this.game.add.text(400, 360, "Valitse voittamiseen tarvittava pistemäärä.", guideTextStyle)
         levelGuideText.anchor.setTo(0.5);
 
         //buttons for level length

@@ -93,23 +93,23 @@ PolyTank.GameEnd = {
 		shootAmountText.anchor.setTo(0.5);
 		shootAmountText.setTextBounds(0, 0, 100, 60);
 		
-		var accuracyText = this.game.add.text(shootAmountText.x, shootAmountText.y + 27, "Accuracy (%)", style)
+		var accuracyText = this.game.add.text(shootAmountText.x, shootAmountText.y + 27, "Tarkkuus (%)", style)
 		accuracyText.anchor.setTo(0.5);
 		accuracyText.setTextBounds(0, 0, 100, 60)
 		
-		var rightAnswersText = this.game.add.text(shootAmountText.x, shootAmountText.y + 54, "Right Answers", style);
+		var rightAnswersText = this.game.add.text(shootAmountText.x, shootAmountText.y + 54, "Oikein", style);
 		rightAnswersText.anchor.setTo(0.5);
 		rightAnswersText.setTextBounds(0, 0, 100, 60)
 		
-		var wrongAnswersText = this.game.add.text(shootAmountText.x, shootAmountText.y + 81, "Wrong Answers", style);
+		var wrongAnswersText = this.game.add.text(shootAmountText.x, shootAmountText.y + 81, "Väärin", style);
 		wrongAnswersText.anchor.setTo(0.5);
 		wrongAnswersText.setTextBounds(0, 0, 100, 60)
 		
-		var packsCollectedText = this.game.add.text(shootAmountText.x, shootAmountText.y + 108, "Packs collected", style);
+		var packsCollectedText = this.game.add.text(shootAmountText.x, shootAmountText.y + 108, "Laatikoita kerätty", style);
 		packsCollectedText.anchor.setTo(0.5);
 		packsCollectedText.setTextBounds(0, 0, 100, 60)
 
-		var scoreText = this.game.add.text(shootAmountText.x, shootAmountText.y + 135, "Score", style);
+		var scoreText = this.game.add.text(shootAmountText.x, shootAmountText.y + 135, "Pisteet", style);
 		scoreText.anchor.setTo(0.5);
 		scoreText.setTextBounds(0, 0, 100, 60);
 
@@ -158,7 +158,7 @@ PolyTank.GameEnd = {
 		var startGameButton = this.game.add.button(400, 500, 'button1');
         startGameButton.anchor.setTo(0.5);
         startGameButton.scale.setTo(1.5);
-        var startGameText =this.game.add.text(startGameButton.position.x, startGameButton.position.y, 'New Game', this.startGameTextstyle);
+        var startGameText =this.game.add.text(startGameButton.position.x, startGameButton.position.y, 'Uusi peli', this.startGameTextstyle);
         startGameText.anchor.setTo(0.5);
 
         //var guideTextText = 'You have 60 seconds \n\n to place as many points you can in the Cartesian coordinate grid.';
